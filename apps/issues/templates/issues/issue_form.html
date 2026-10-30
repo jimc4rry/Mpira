@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% if is_new %}{% trans "Create issue" %}{% else %}{% trans "Edit" %} {{ issue.key }}{% endif %}{% endblock %}
+{% block content %}
+<div class="breadcrumbs"><a href="{% url 'issues:list' project.key %}">{% trans "Issues" %}</a>{% if issue %} / <a href="{{ issue.get_absolute_url }}">{{ issue.key }}</a>{% endif %}</div>
+<div class="page-head"><h1>{% if is_new %}{% trans "Create issue" %}{% else %}{% trans "Edit" %} {{ issue.key }}{% endif %}</h1></div>
+<form method="post" novalidate>{% csrf_token %}
+{% if form.non_field_errors %}<ul class="messages"><li class="error">{{ form.non_field_errors|join:" " }}</li></ul>{% endif %}
+<div class="detail-layout">
+  <div class="card">
+    {% with field=form.issue_type %}{% include "_field.html" %}{% endwith %}
+    {% with field=form.title %}{% include "_field.html" %}{% endwith %}
+    {% with field=form.description %}{% include "_field.html" %}{% endwith %}
+    {% if form.custom_bound_fields %}
+      <h3 style="margin-top:1.2rem">{% trans "Custom fields" %}</h3>
+      {% for field in form.custom_bound_fields %}{% include "_field.html" %}{% endfor %}
+    {% endif %}
+    <div class="form-actions">
+      <button class="btn btn-primary">{% if is_new %}{% trans "Create" %}{% else %}{% trans "Save" %}{% endif %}</button>
+      {% if is_new %}<button class="btn" name="create_another" value="1">{% trans "Create & add another" %}</button>{% endif %}
+      <a class="btn btn-ghost" href="{% if issue %}{{ issue.get_absolute_url }}{% else %}{% url 'issues:list' project.key %}{% endif %}">{% trans "Cancel" %}</a>
+    </div>
+  </div>
+  <div class="card">
+    {% with field=form.priority %}{% include "_field.html" %}{% endwith %}
+    {% with field=form.assignee %}{% include "_field.html" %}{% endwith %}
+    {% with field=form.parent %}{% include "_field.html" %}{% endwith %}
+    {% with field=form.epic %}{% include "_field.html" %}{% endwith %}
+    {% with field=form.sprint %}{% include "_field.html" %}{% endwith %}
+    {% with field=form.story_points %}{% include "_field.html" %}{% endwith %}
+    {% with field=form.due_date %}{% include "_field.html" %}{% endwith %}
+    {% if form.labels.field.queryset.exists %}{% with field=form.labels %}{% include "_field.html" %}{% endwith %}{% endif %}
+    {% if form.components.field.queryset.exists %}{% with field=form.components %}{% include "_field.html" %}{% endwith %}{% endif %}
+    {% if form.fix_versions.field.queryset.exists %}{% with field=form.fix_versions %}{% include "_field.html" %}{% endwith %}{% endif %}
+  </div>
+</div>
+</form>
+{% endblock %}

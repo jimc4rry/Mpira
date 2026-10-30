@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load i18n mpira %}
+{% block title %}{% trans "Issues" %} · {{ project.key }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>{% trans "Issues" %}</h1>
+  <div class="row">
+    {% if caps.edit_issues %}<a class="btn" href="{% url 'issues:import' project.key %}">⭳ {% trans "Import CSV" %}</a>{% endif %}
+    {% if caps.edit_issues %}<a class="btn btn-primary" href="{% url 'issues:create' project.key %}">+ {% trans "Create issue" %}</a>{% endif %}
+  </div>
+</div>
+<form class="filters" method="get">
+  <input type="search" name="q" value="{{ filters.q|default:'' }}" placeholder="{% trans 'Search…' %}">
+  <input type="search" name="jql" value="{{ filters.jql|default:'' }}" placeholder="{% trans 'Query, e.g. type = bug AND assignee = currentUser() ORDER BY updated DESC' %}" class="grow">
+  <select name="type"><option value="">{% trans "All types" %}</option>{% for v, l in type_choices %}<option value="{{ v }}" {% if filters.type == v %}selected{% endif %}>{{ l }}</option>{% endfor %}</select>
+  <select name="status">
+    <option value="">{% trans "Any status" %}</option>
+    <option value="open" {% if filters.status == "open" %}selected{% endif %}>{% trans "Open (not done)" %}</option>
+    {% for v, l in status_choices %}<option value="{{ v }}" {% if filters.status == v %}selected{% endif %}>{{ l }}</option>{% endfor %}
+  </select>
+  <select name="priority"><option value="">{% trans "Any priority" %}</option>{% for v, l in priority_choices %}<option value="{{ v }}" {% if filters.priority == v %}selected{% endif %}>{{ l }}</option>{% endfor %}</select>
+  <select name="assignee">
+    <option value="">{% trans "Anyone" %}</option>
+    <option value="me" {% if filters.assignee == "me" %}selected{% endif %}>{% trans "Assigned to me" %}</option>
+    <option value="none" {% if filters.assignee == "none" %}selected{% endif %}>{% trans "Unassigned" %}</option>
+    {% for m in members %}<option value="{{ m.pk }}" {% if filters.assignee == m.pk|stringformat:"s" %}selected{% endif %}>{{ m.display_name }}</option>{% endfor %}
+  </select>
+  {% if labels %}<select name="label"><option value="">{% trans "Any label" %}</option>{% for l in labels %}<option value="{{ l.pk }}" {% if filters.label == l.pk|stringformat:"s" %}selected{% endif %}>{{ l.name }}</option>{% endfor %}</select>{% endif %}
+  {% if components %}<select name="component"><option value="">{% trans "Any component" %}</option>{% for c in components %}<option value="{{ c.pk }}" {% if filters.component == c.pk|stringformat:"s" %}selected{% endif %}>{{ c.name }}</option>{% endfor %}</select>{% endif %}
+  {% if versions %}<select name="version"><option value="">{% trans "Any version" %}</option>{% for v in versions %}<option value="{{ v.pk }}" {% if filters.version == v.pk|stringformat:"s" %}selected{% endif %}>{{ v.name }}</option>{% endfor %}</select>{% endif %}
+  {% if epics %}<select name="epic"><option value="">{% trans "Any epic" %}</option>{% for e in epics %}<option value="{{ e.number }}" {% if filters.epic == e.number|stringformat:"s" %}selected{% endif %}>{{ e.key }} {{ e.title|truncatechars:30 }}</option>{% endfor %}</select>{% endif %}
+  <select name="sort">
+    <option value="updated">{% trans "Recently updated" %}</option>
+    <option value="created" {% if filters.sort == "created" %}selected{% endif %}>{% trans "Recently created" %}</option>
+    <option value="key" {% if filters.sort == "key" %}selected{% endif %}>{% trans "Key" %}</option>
+    <option value="status" {% if filters.sort == "status" %}selected{% endif %}>{% trans "Status" %}</option>
+  </select>
+  <button class="btn">{% trans "Filter" %}</button>
+  <a class="btn btn-ghost" href="{% url 'issues:list' project.key %}">{% trans "Reset" %}</a>
+  <a class="btn btn-ghost" href="{% url 'issues:export' project.key %}?{{ filter_query }}">⭳ {% trans "Export CSV" %}</a>
+</form>
+<form id="bulk-form" method="post" action="{% url 'issues:bulk' project.key %}" class="row" style="margin-bottom:12px">{% csrf_token %}
+  <input type="hidden" name="query" value="{{ filter_query }}">
+  <select name="action" aria-label="{% trans 'Bulk action' %}">
+    <option value="">{% trans "Bulk action…" %}</option>
+    <option value="transition">{% trans "Move to status" %}</option>
+    <option value="assign">{% trans "Assign to" %}</option>
+    <option value="priority">{% trans "Set priority" %}</option>
+    {% if caps.delete_issues %}<option value="delete">{% trans "Delete" %}</option>{% endif %}
+  </select>
+  <select name="value" aria-label="{% trans 'Value' %}">
+    <option value="">—</option>
+    {% for v, l in status_choices %}<option value="{{ v }}">{% trans "Status:" %} {{ l }}</option>{% endfor %}
+    <option value="none">{% trans "Nobody" %}</option>
+    {% for m in members %}<option value="{{ m.pk }}">{% trans "Member:" %} {{ m.display_name }}</option>{% endfor %}
+    {% for v, l in priority_choices %}<option value="{{ v }}">{% trans "Priority:" %} {{ l }}</option>{% endfor %}
+  </select>
+  <button class="btn btn-sm">{% trans "Apply to selected" %}</button>
+</form>
+<div class="row" style="margin-bottom:12px">
+  <form method="get" class="row">
+    <select name="saved" onchange="this.form.submit()">
+      <option value="">{% trans "Saved filters" %}</option>
+      {% for s in saved_filters %}<option value="{{ s.pk }}" {% if request.GET.saved == s.pk|stringformat:"s" %}selected{% endif %}>{{ s.name }}{% if s.shared %} ({% trans "shared" %}){% endif %}</option>{% endfor %}
+    </select>
+  </form>
+  <form method="post" action="{% url 'issues:filter_save' project.key %}" class="row">{% csrf_token %}
+    <input type="hidden" name="query" value="{{ filter_query }}">
+    <input type="text" name="name" maxlength="80" placeholder="{% trans 'Name this filter' %}" required>
+    <label class="small"><input type="checkbox" name="shared"> {% trans "Shared" %}</label>
+    <button class="btn btn-sm">{% trans "Save filter" %}</button>
+  </form>
+  {% for s in saved_filters %}{% if s.owner_id == request.user.pk %}
+    <form method="post" action="{% url 'issues:filter_delete' project.key s.pk %}">{% csrf_token %}<button class="btn btn-sm btn-ghost" title="{% trans 'Delete' %} {{ s.name }}">✕ {{ s.name }}</button></form>
+  {% endif %}{% endfor %}
+</div>
+<div class="card flush">
+  {% with issues=page.object_list show_points=True bulk=caps.edit_issues %}{% include "_issue_table.html" %}{% endwith %}
+</div>
+{% if page.has_other_pages %}
+<div class="row" style="justify-content:center">
+  {% if page.has_previous %}<a class="btn btn-sm" href="?{% query_replace page=page.previous_page_number %}">← {% trans "Previous" %}</a>{% endif %}
+  <span class="muted small">{% blocktrans with n=page.number total=page.paginator.num_pages %}Page {{ n }} of {{ total }}{% endblocktrans %}</span>
+  {% if page.has_next %}<a class="btn btn-sm" href="?{% query_replace page=page.next_page_number %}">{% trans "Next" %} →</a>{% endif %}
+</div>
+{% endif %}
+<script>
+document.querySelectorAll('select.inline').forEach(function (sel) {
+  sel.addEventListener('change', async function () {
+    const token = document.querySelector('input[name=csrfmiddlewaretoken]').value;
+    const body = new URLSearchParams({field: sel.dataset.field, value: sel.value, csrfmiddlewaretoken: token});
+    const response = await fetch(sel.dataset.url, {method: 'POST', body: body, credentials: 'same-origin'});
+    if (!response.ok) {
+      const data = await response.json().catch(function () { return {}; });
+      alert(data.error || '{% trans "The change was refused." %}');
+      location.reload();
+    }
+  });
+});
+</script>
+{% endblock %}

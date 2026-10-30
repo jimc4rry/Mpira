@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{{ sprint.name }}{% endblock %}
+{% block content %}
+<div class="breadcrumbs"><a href="{% url 'agile:backlog' project.key %}">{% trans "Backlog" %}</a></div>
+<div class="page-head"><h1>{% trans "Edit sprint" %}</h1><span class="pill sprint-{{ sprint.state }}">{{ sprint.get_state_display }}</span></div>
+<div class="card" style="max-width:600px">
+  <form method="post" novalidate>{% csrf_token %}
+    {% include "_form.html" %}
+    <div class="form-actions">
+      <button class="btn btn-primary">{% trans "Save" %}</button>
+      <a class="btn btn-ghost" href="{% url 'agile:backlog' project.key %}">{% trans "Cancel" %}</a>
+    </div>
+  </form>
+  {% if sprint.state == "future" %}
+  <hr>
+  <form method="post" data-confirm="{% trans 'Delete this sprint? Its issues go back to the backlog.' %}">{% csrf_token %}<input type="hidden" name="delete" value="1"><button class="btn btn-danger btn-sm">{% trans "Delete sprint" %}</button></form>
+  {% endif %}
+</div>
+{% endblock %}

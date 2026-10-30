@@ -1,0 +1,11 @@
+{% load mpira %}
+<div class="issue-row" data-number="{{ issue.number }}" data-points="{{ issue.story_points|default:0 }}">
+  {% type_badge issue %}
+  <a class="issue-key small" href="{{ issue.get_absolute_url }}" draggable="false">{{ issue.key }}</a>
+  <span class="t {% if issue.is_done %}is-done-text{% endif %}">{{ issue.title }}</span>
+  {% if issue.epic %}<span class="epic-tag">{{ issue.epic.title }}</span>{% endif %}
+  {% status_pill issue.status issue.get_status_display %}
+  <span title="{{ issue.get_priority_display }}">{{ issue.priority|priority_icon }}</span>
+  {% avatar issue.assignee %}
+  <span class="points">{{ issue.story_points|default:"–" }}</span>
+</div>

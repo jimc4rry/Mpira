@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Test executions" %} · {{ project.key }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>{% trans "Test executions" %}</h1>
+  {% if caps.manage_tests %}<a class="btn btn-primary" href="{% url 'testmgmt:execution_create' project.key %}">▶ {% trans "New execution" %}</a>{% endif %}
+</div>
+<div class="card flush">
+  <div class="table-wrap"><table class="data-table">
+    <thead><tr><th>{% trans "Name" %}</th><th>{% trans "Plan" %}</th><th>{% trans "Environment" %}</th><th style="width:30%">{% trans "Progress" %}</th><th>{% trans "Created" %}</th></tr></thead>
+    <tbody>
+    {% for e, s in executions %}
+      <tr>
+        <td><a href="{{ e.get_absolute_url }}"><strong>{{ e.name }}</strong></a>{% if e.fix_version %} <span class="muted small">· {{ e.fix_version }}</span>{% endif %}</td>
+        <td>{% if e.plan %}<a href="{{ e.plan.get_absolute_url }}">{{ e.plan.name }}</a>{% else %}—{% endif %}</td>
+        <td>{{ e.environment|default:"—" }}</td>
+        <td>
+          <div class="progress">{% if s.total %}<span class="p-pass" style="width:{% widthratio s.pass s.total 100 %}%"></span><span class="p-fail" style="width:{% widthratio s.fail s.total 100 %}%"></span><span class="p-blocked" style="width:{% widthratio s.blocked s.total 100 %}%"></span>{% endif %}</div>
+          <div class="muted small">{{ s.executed }}/{{ s.total }} {% trans "executed" %} · {{ s.percent_pass }}% {% trans "pass" %}</div>
+        </td>
+        <td class="muted small">{{ e.created_at|date:"d/m/Y" }}<br>{{ e.created_by.display_name }}</td>
+      </tr>
+    {% empty %}<tr><td colspan="5" class="empty">{% trans "No test executions yet." %}</td></tr>{% endfor %}
+    </tbody>
+  </table></div>
+</div>
+{% endblock %}

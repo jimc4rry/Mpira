@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% if is_new %}{% trans "Add user" %}{% else %}{{ target.display_name }}{% endif %}{% endblock %}
+{% block content %}
+<div class="breadcrumbs"><a href="{% url 'accounts:user_list' %}">{% trans "Users" %}</a></div>
+<div class="page-head"><h1>{% if is_new %}{% trans "Add user" %}{% else %}{{ target.display_name }} <span class="muted small">{{ target.email }}</span>{% endif %}</h1></div>
+<div class="grid grid-2">
+  <div class="card">
+    <form method="post" novalidate>{% csrf_token %}
+      {% include "_form.html" %}
+      <div class="form-actions">
+        <button class="btn btn-primary">{% trans "Save" %}</button>
+        <a class="btn btn-ghost" href="{% url 'accounts:user_list' %}">{% trans "Cancel" %}</a>
+      </div>
+    </form>
+  </div>
+  {% if not is_new %}
+  <div class="card">
+    <h2>{% trans "Set a new password" %}</h2>
+    <p class="muted small">{% trans "Use this when someone forgets their password. Share it privately." %}</p>
+    <form method="post" novalidate>{% csrf_token %}
+      <input type="hidden" name="set_password" value="1">
+      {% with form=password_form %}{% include "_form.html" %}{% endwith %}
+      <div class="form-actions"><button class="btn">{% trans "Set password" %}</button></div>
+    </form>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

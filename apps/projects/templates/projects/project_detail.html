@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load i18n mpira %}
+{% block title %}{{ project.name }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>{{ project.name }}</h1>
+    <div class="muted">{{ project.key }}{% if project.lead %} · {% trans "Lead" %}: {{ project.lead.display_name }}{% endif %}</div>
+  </div>
+  <div class="row">
+    {% if caps.edit_issues %}<a class="btn btn-primary" href="{% url 'issues:create' project.key %}">+ {% trans "Create issue" %}</a>{% endif %}
+    <a class="btn" href="{% url 'agile:board' project.key %}">{% trans "Open board" %}</a>
+  </div>
+</div>
+{% if project.description %}<div class="card prose">{% markdown project.description %}</div>{% endif %}
+
+<div class="grid grid-4" style="margin-bottom:1rem">
+  {% for s, label, n in status_counts %}
+    <div class="stat-tile"><div class="label">{{ label }}</div><div class="value">{{ n }}</div></div>
+  {% endfor %}
+</div>
+
+<div class="grid grid-2">
+  <div>
+    <div class="card">
+      <div class="card-head"><h2>{% trans "Active sprint" %}</h2><a class="small" href="{% url 'agile:backlog' project.key %}">{% trans "Backlog" %}</a></div>
+      {% if active_sprint %}
+        <div class="row-between"><strong>{{ active_sprint.name }}</strong><span class="muted small">{{ active_sprint.start_date|date:"d/m" }} – {{ active_sprint.end_date|date:"d/m/Y" }}</span></div>
+        {% if active_sprint.goal %}<p class="muted">{{ active_sprint.goal }}</p>{% endif %}
+        <div class="progress" style="margin:0.6rem 0 0.3rem">{% if sprint_stats.total %}<span class="p-done" style="width:{% widthratio sprint_stats.done sprint_stats.total 100 %}%"></span>{% endif %}</div>
+        <div class="muted small">{% blocktrans with d=sprint_stats.done t=sprint_stats.total %}{{ d }} of {{ t }} story points done{% endblocktrans %} · <a href="{% url 'agile:reports' project.key %}">{% trans "Burndown" %}</a></div>
+      {% else %}
+        <p class="muted">{% trans "No active sprint." %}</p>
+      {% endif %}
+    </div>
+    <div class="card">
+      <h2>{% trans "Epics" %}</h2>
+      {% for e in epics %}
+        <div style="margin-bottom:0.8rem">
+          <div class="row-between"><a href="{{ e.epic.get_absolute_url }}">{% type_badge e.epic %} {{ e.epic.key }} {{ e.epic.title }}</a><span class="muted small">{{ e.done }}/{{ e.total }}</span></div>
+          <div class="progress" style="margin-top:0.3rem"><span class="p-done" style="width:{{ e.percent }}%"></span></div>
+        </div>
+      {% empty %}
+        <p class="muted">{% trans "No epics yet." %}</p>
+      {% endfor %}
+    </div>
+  </div>
+  <div>
+    <div class="card">
+      <h2>{% trans "Issues by type" %}</h2>
+      <ul class="list-plain">
+      {% for t, label, n in type_counts %}
+        <li class="row-between"><a href="{% url 'issues:list' project.key %}?type={{ t }}">{{ t|type_icon }} {{ label }}</a><strong>{{ n }}</strong></li>
+      {% endfor %}
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-head"><h2>{% trans "Team" %}</h2>{% if caps.manage_project %}<a class="small" href="{% url 'projects:settings' project.key %}?tab=members">{% trans "Manage" %}</a>{% endif %}</div>
+      <ul class="list-plain">
+      {% for m in members %}
+        <li class="row-between"><span class="user-inline">{% avatar m.user %} {{ m.user.display_name }}</span><span class="muted small">{{ m.get_role_display }}</span></li>
+      {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card flush">
+  <div class="card-head"><h2>{% trans "Recently updated" %}</h2><a class="small" href="{% url 'issues:list' project.key %}">{% trans "All issues" %}</a></div>
+  {% with issues=recent %}{% include "_issue_table.html" %}{% endwith %}
+</div>
+{% endblock %}

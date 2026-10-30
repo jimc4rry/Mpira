@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load i18n mpira %}
+{% block title %}{% trans "Users" %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>{% trans "Users" %}</h1>
+    <div class="muted">{% blocktrans %}{{ active_count }} of {{ max_users }} active seats used{% endblocktrans %}</div>
+  </div>
+  {% if active_count < max_users %}<a class="btn btn-primary" href="{% url 'accounts:user_create' %}">+ {% trans "Add user" %}</a>{% endif %}
+</div>
+<div class="card flush">
+  <div class="table-wrap">
+  <table class="data-table">
+    <thead><tr><th>{% trans "Name" %}</th><th>{% trans "Email" %}</th><th>{% trans "Handle" %}</th><th>{% trans "Role" %}</th><th>{% trans "Status" %}</th><th>{% trans "Last login" %}</th><th></th></tr></thead>
+    <tbody>
+    {% for u in users %}
+      <tr>
+        <td><span class="user-inline">{% avatar u %} {{ u.display_name }}</span></td>
+        <td>{{ u.email }}</td>
+        <td class="muted">@{{ u.username }}</td>
+        <td>{{ u.get_role_display }}</td>
+        <td>{% if u.is_active %}<span class="pill status-done">{% trans "Active" %}</span>{% else %}<span class="pill">{% trans "Inactive" %}</span>{% endif %}</td>
+        <td class="muted small">{{ u.last_login|date:"d/m/Y H:i"|default:"—" }}</td>
+        <td class="right"><a class="btn btn-sm" href="{% url 'accounts:user_edit' u.pk %}">{% trans "Edit" %}</a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "wiki/_layout.html" %}
+{% load i18n mpira %}
+{% block title %}v{{ ver.version }} · {{ page.title }}{% endblock %}
+{% block wiki_content %}
+<div class="breadcrumbs"><a href="{{ page.get_absolute_url }}">{{ page.title }}</a> / <a href="{% url 'wiki:page_history' project.key page.pk %}">{% trans "History" %}</a></div>
+<div class="page-head">
+  <div><h1>{{ ver.title }} <span class="muted">v{{ ver.version }}</span></h1>
+  <div class="muted small">{{ ver.author.display_name|default:"—" }} · {{ ver.created_at|date:"d/m/Y H:i" }}{% if ver.change_note %} · {{ ver.change_note }}{% endif %}</div></div>
+  {% if caps.edit_wiki and ver.version != page.version %}
+  <form method="post" action="{% url 'wiki:page_restore' project.key page.pk ver.version %}">{% csrf_token %}<button class="btn btn-primary btn-sm">{% trans "Restore this version" %}</button></form>
+  {% endif %}
+</div>
+<div class="card">
+  <h3>{% if prev %}{% blocktrans with a=prev.version b=ver.version %}Changes from v{{ a }} to v{{ b }}{% endblocktrans %}{% else %}{% trans "Initial version" %}{% endif %}</h3>
+  {% if diff %}
+  <div class="diff">{% for kind, line in diff %}<div class="{% if kind == '+' %}d-add{% elif kind == '-' %}d-del{% elif kind == '@' %}d-hunk{% endif %}">{{ line }}</div>{% endfor %}</div>
+  {% else %}<p class="muted">{% trans "No content changes (title or location only)." %}</p>{% endif %}
+</div>
+<details class="card disclosure"><summary>{% trans "Rendered content of this version" %}</summary><div class="prose" style="margin-top:0.6rem">{% markdown ver.body %}</div></details>
+{% endblock %}

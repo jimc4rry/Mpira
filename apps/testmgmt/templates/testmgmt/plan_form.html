@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% if plan.pk %}{{ plan.name }}{% else %}{% trans "New test plan" %}{% endif %}{% endblock %}
+{% block content %}
+<div class="breadcrumbs"><a href="{% url 'testmgmt:plan_list' project.key %}">{% trans "Test plans" %}</a></div>
+<div class="page-head"><h1>{% if plan.pk %}{% trans "Edit test plan" %}{% else %}{% trans "New test plan" %}{% endif %}</h1></div>
+<div class="card" style="max-width:760px">
+  <form method="post" novalidate>{% csrf_token %}
+    {% include "_form.html" %}
+    {% if not form.tests.field.queryset.exists %}<p class="muted small">{% trans "There are no Test issues yet - create some first." %}</p>{% endif %}
+    <div class="form-actions"><button class="btn btn-primary">{% trans "Save" %}</button><a class="btn btn-ghost" href="{% url 'testmgmt:plan_list' project.key %}">{% trans "Cancel" %}</a></div>
+  </form>
+  {% if plan.pk %}<hr><form method="post" data-confirm="{% trans 'Delete this test plan? Executions are kept.' %}">{% csrf_token %}<input type="hidden" name="delete" value="1"><button class="btn btn-sm btn-danger">{% trans "Delete plan" %}</button></form>{% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load i18n mpira %}
+{% block title %}{% trans "Project settings" %}{% endblock %}
+{% block content %}
+<div class="page-head"><h1>{% trans "Project settings" %}</h1></div>
+<nav class="tabs">
+  <a href="?tab=general" class="{% if tab == 'general' %}active{% endif %}">{% trans "General" %}</a>
+  <a href="?tab=members" class="{% if tab == 'members' %}active{% endif %}">{% trans "Members" %}</a>
+  <a href="?tab=components" class="{% if tab == 'components' %}active{% endif %}">{% trans "Components" %}</a>
+  <a href="?tab=versions" class="{% if tab == 'versions' %}active{% endif %}">{% trans "Versions" %}</a>
+  <a href="?tab=labels" class="{% if tab == 'labels' %}active{% endif %}">{% trans "Labels" %}</a>
+  <a href="?tab=fields" class="{% if tab == 'fields' %}active{% endif %}">{% trans "Custom fields" %}</a>
+</nav>
+
+{% if tab == "general" %}
+<div class="card" style="max-width:640px">
+  <form method="post" novalidate>{% csrf_token %}
+    <div class="form-field"><label>{% trans "Key" %}</label><input type="text" value="{{ project.key }}" disabled></div>
+    {% include "_form.html" %}
+    <div class="form-actions"><button class="btn btn-primary">{% trans "Save" %}</button></div>
+  </form>
+</div>
+
+  {% if request.user.is_workspace_admin %}
+  <div class="card" style="max-width:640px;border-color:var(--danger)">
+    <h2 style="color:var(--danger)">{% trans "Delete project" %}</h2>
+    <p class="muted">{% trans "This permanently deletes the project with its issues, sprints, wiki, tests, attachments and history. It can't be undone." %}</p>
+    <form method="post" action="{% url 'projects:delete' project.key %}" data-confirm="{% trans 'Delete this project permanently?' %}">{% csrf_token %}
+      <div class="form-field">
+        <label for="confirm-key">{% trans "Type the project key to confirm" %}: <code>{{ project.key }}</code></label>
+        <input id="confirm-key" type="text" name="confirm" autocomplete="off" required>
+      </div>
+      <button class="btn btn-danger">{% trans "Delete project permanently" %}</button>
+    </form>
+  </div>
+  {% endif %}
+{% elif tab == "members" %}
+<div class="split">
+  <div class="card flush">
+    <div class="table-wrap"><table class="data-table">
+      <thead><tr><th>{% trans "User" %}</th><th>{% trans "Workspace role" %}</th><th>{% trans "Project role" %}</th><th></th></tr></thead>
+      <tbody>
+      {% for m in members %}
+        <tr>
+          <td><span class="user-inline">{% avatar m.user %} {{ m.user.display_name }}</span> <span class="muted small">{{ m.user.email }}</span></td>
+          <td class="muted">{{ m.user.get_role_display }}</td>
+          <td>
+            <form method="post" action="{% url 'projects:member_update' project.key m.pk %}" class="row">{% csrf_token %}
+              <select name="role" onchange="this.form.submit()" style="width:auto">
+                {% for v, l in role_choices %}<option value="{{ v }}" {% if v == m.role %}selected{% endif %}>{{ l }}</option>{% endfor %}
+              </select>
+            </form>
+          </td>
+          <td class="right">
+            <form method="post" action="{% url 'projects:member_update' project.key m.pk %}" data-confirm="{% trans 'Remove this member?' %}">{% csrf_token %}<input type="hidden" name="remove" value="1"><button class="btn btn-sm btn-danger">{% trans "Remove" %}</button></form>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table></div>
+  </div>
+  <div class="card">
+    <h3>{% trans "Add member" %}</h3>
+    <form method="post" action="{% url 'projects:member_add' project.key %}">{% csrf_token %}
+      {% with form=member_form %}{% include "_form.html" %}{% endwith %}
+      <button class="btn btn-primary">{% trans "Add" %}</button>
+    </form>
+    <p class="muted small" style="margin-top:1rem">{% trans "Workspace admins can see every project without being members." %}</p>
+  </div>
+</div>
+
+{% else %}
+{% if tab == "components" %}{% with items=components form=component_form kind="component" %}{% include "projects/_settings_list.html" %}{% endwith %}
+{% elif tab == "versions" %}{% with items=versions form=version_form kind="version" %}{% include "projects/_settings_list.html" %}{% endwith %}
+{% elif tab == "labels" %}{% with items=labels form=label_form kind="label" %}{% include "projects/_settings_list.html" %}{% endwith %}
+{% elif tab == "fields" %}{% with items=custom_fields form=custom_field_form kind="customfield" %}{% include "projects/_settings_list.html" %}{% endwith %}
+{% endif %}
+{% endif %}
+{% endblock %}

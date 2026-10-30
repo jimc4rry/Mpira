@@ -1,0 +1,4009 @@
+# Mpira - Greek translations.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Mpira\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-27 19:50+0200\n"
+"PO-Revision-Date: 2026-10-20 16:45+0300\n"
+"Last-Translator: Mpira team\n"
+"Language-Team: Greek\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\apps\accounts\admin.py:16
+msgid "Personal info"
+msgstr "Προσωπικά στοιχεία"
+
+#: .\apps\accounts\admin.py:17
+msgid "Workspace"
+msgstr "Χώρος εργασίας"
+
+#: .\apps\accounts\admin.py:18
+msgid "Important dates"
+msgstr "Σημαντικές ημερομηνίες"
+
+#: .\apps\accounts\apps.py:8
+msgid "Accounts"
+msgstr "Λογαριασμοί"
+
+#: .\apps\accounts\forms.py:12 .\apps\accounts\models.py:87
+#, python-format
+msgid "The workspace is limited to %(n)s active users."
+msgstr "Ο χώρος εργασίας επιτρέπει έως %(n)s ενεργούς χρήστες."
+
+#: .\apps\accounts\forms.py:18
+#: .\apps\accounts\templates\accounts\user_list.html:15
+msgid "Email"
+msgstr "Email"
+
+#: .\apps\accounts\forms.py:23
+msgid "Wrong email or password."
+msgstr "Λάθος email ή κωδικός."
+
+#: .\apps\accounts\forms.py:24
+msgid "This account is inactive."
+msgstr "Αυτός ο λογαριασμός είναι ανενεργός."
+
+#: .\apps\accounts\forms.py:35 .\apps\accounts\forms.py:48
+#: .\apps\accounts\forms.py:81
+msgid "Handle (for @mentions)"
+msgstr "Ψευδώνυμο (για @αναφορές)"
+
+#: .\apps\accounts\forms.py:40
+msgid "Initial password"
+msgstr "Αρχικός κωδικός"
+
+#: .\apps\accounts\forms.py:42
+msgid ""
+"Share it with the user privately; they can change it from their profile."
+msgstr ""
+"Στείλτε τον ιδιωτικά στον χρήστη· μπορεί να τον αλλάξει από το προφίλ του."
+
+#: .\apps\accounts\forms.py:53
+msgid "A user with that email already exists."
+msgstr "Υπάρχει ήδη χρήστης με αυτό το email."
+
+#: .\apps\accounts\forms.py:81
+#: .\apps\accounts\templates\accounts\profile.html:62
+#: .\apps\accounts\templates\accounts\user_list.html:23
+#: .\apps\agile\models.py:10 .\apps\issues\models.py:391
+msgid "Active"
+msgstr "Ενεργός"
+
+#: .\apps\accounts\forms.py:93
+msgid "New password"
+msgstr "Νέος κωδικός"
+
+#: .\apps\accounts\forms.py:107 .\apps\accounts\models.py:103
+#: .\apps\accounts\templates\accounts\profile.html:53
+#: .\apps\accounts\templates\accounts\user_list.html:15
+#: .\apps\agile\models.py:14 .\apps\agile\models.py:60
+#: .\apps\agile\templates\agile\board_settings.html:19
+#: .\apps\issues\models.py:53 .\apps\issues\models.py:104
+#: .\apps\issues\models.py:366 .\apps\issues\models.py:423
+#: .\apps\issues\templates\issues\automation.html:11
+#: .\apps\issues\templates\issues\automation.html:24
+#: .\apps\issues\templates\issues\workflow.html:17
+#: .\apps\issues\templates\issues\workflow.html:59 .\apps\projects\models.py:29
+#: .\apps\projects\models.py:86 .\apps\projects\models.py:104
+#: .\apps\projects\models.py:123
+#: .\apps\projects\templates\projects\_settings_list.html:5
+#: .\apps\testmgmt\models.py:34 .\apps\testmgmt\models.py:88
+#: .\apps\testmgmt\templates\testmgmt\execution_list.html:11
+#: .\apps\testmgmt\templates\testmgmt\plan_list.html:14
+#: .\apps\wiki\models.py:14
+msgid "Name"
+msgstr "Όνομα"
+
+#: .\apps\accounts\forms.py:107
+msgid "What will use this key, e.g. Claude Desktop"
+msgstr "Τι θα χρησιμοποιεί αυτό το κλειδί, π.χ. Claude Desktop"
+
+#: .\apps\accounts\forms.py:108 .\apps\accounts\models.py:106
+#: .\apps\accounts\templates\accounts\profile.html:59
+msgid "Read only"
+msgstr "Μόνο ανάγνωση"
+
+#: .\apps\accounts\forms.py:108
+msgid "Can read tickets but never change them."
+msgstr "Μπορεί να διαβάζει tickets, αλλά ποτέ να τα αλλάζει."
+
+#: .\apps\accounts\forms.py:109
+msgid "Expires after (days)"
+msgstr "Λήγει μετά από (ημέρες)"
+
+#: .\apps\accounts\models.py:15
+msgid "Admin"
+msgstr "Διαχειριστής"
+
+#: .\apps\accounts\models.py:16 .\apps\projects\models.py:10
+msgid "Project Manager"
+msgstr "Project Manager"
+
+#: .\apps\accounts\models.py:17 .\apps\projects\models.py:11
+msgid "Developer"
+msgstr "Developer"
+
+#: .\apps\accounts\models.py:18 .\apps\projects\models.py:12
+msgid "Tester"
+msgstr "Tester"
+
+#: .\apps\accounts\models.py:19 .\apps\projects\models.py:13
+msgid "Viewer"
+msgstr "Αναγνώστης"
+
+#: .\apps\accounts\models.py:42
+msgid "email address"
+msgstr "διεύθυνση email"
+
+#: .\apps\accounts\models.py:43
+#: .\apps\accounts\templates\accounts\user_list.html:15
+#: .\apps\projects\models.py:73
+msgid "Role"
+msgstr "Ρόλος"
+
+#: .\apps\accounts\models.py:45
+msgid "Language"
+msgstr "Γλώσσα"
+
+#: .\apps\accounts\models.py:107
+#: .\apps\accounts\templates\accounts\profile.html:53
+msgid "Expires"
+msgstr "Λήξη"
+
+#: .\apps\accounts\templates\accounts\login.html:3
+#: .\apps\accounts\templates\accounts\login.html:14
+msgid "Log in"
+msgstr "Σύνδεση"
+
+#: .\apps\accounts\templates\accounts\login.html:9
+msgid "Log in to your workspace"
+msgstr "Συνδεθείτε στον χώρο εργασίας σας"
+
+#: .\apps\accounts\templates\accounts\login.html:17
+msgid "Accounts are created by a workspace admin."
+msgstr "Τους λογαριασμούς τους δημιουργεί ο διαχειριστής."
+
+#: .\apps\accounts\templates\accounts\profile.html:3
+#: .\apps\accounts\templates\accounts\profile.html:10
+msgid "Profile"
+msgstr "Προφίλ"
+
+#: .\apps\accounts\templates\accounts\profile.html:13
+#: .\apps\accounts\templates\accounts\user_form.html:12
+#: .\apps\agile\templates\agile\board_settings.html:34
+#: .\apps\agile\templates\agile\sprint_form.html:11
+#: .\apps\issues\templates\issues\issue_form.html:19
+#: .\apps\issues\templates\issues\workflow.html:27
+#: .\apps\projects\templates\projects\settings.html:20
+#: .\apps\projects\templates\projects\settings_item.html:10
+#: .\apps\testmgmt\templates\testmgmt\plan_form.html:11
+msgid "Save"
+msgstr "Αποθήκευση"
+
+#: .\apps\accounts\templates\accounts\profile.html:17
+#: .\apps\accounts\templates\accounts\profile.html:21
+msgid "Change password"
+msgstr "Αλλαγή κωδικού"
+
+#: .\apps\accounts\templates\accounts\profile.html:27
+#: .\apps\core\templates\core\help.html:19
+#: .\apps\core\templates\core\help.html:81
+msgid "API keys"
+msgstr "Κλειδιά API"
+
+#: .\apps\accounts\templates\accounts\profile.html:28
+msgid ""
+"Use a key to read and write tickets from scripts, or to connect an AI "
+"assistant such as Claude. A key has the same project access as you. Keys are "
+"shown only once."
+msgstr ""
+"Χρησιμοποιήστε ένα κλειδί για να διαβάζετε και να γράφετε tickets από "
+"σενάρια, ή για να συνδέσετε έναν βοηθό AI όπως το Claude. Ένα κλειδί έχει "
+"την ίδια πρόσβαση σε projects με εσάς. Τα κλειδιά εμφανίζονται μόνο μία φορά."
+
+#: .\apps\accounts\templates\accounts\profile.html:32
+msgid "Your new API key"
+msgstr "Το νέο σας κλειδί API"
+
+#: .\apps\accounts\templates\accounts\profile.html:33
+msgid "Copy it now. You won't be able to see it again."
+msgstr "Αντιγράψτε το τώρα. Δεν θα μπορείτε να το ξαναδείτε."
+
+#: .\apps\accounts\templates\accounts\profile.html:35
+msgid "Header"
+msgstr "Κεφαλίδα"
+
+#: .\apps\accounts\templates\accounts\profile.html:48
+msgid "Create key"
+msgstr "Δημιουργία κλειδιού"
+
+#: .\apps\accounts\templates\accounts\profile.html:53
+#: .\apps\issues\models.py:105
+#: .\apps\issues\templates\issues\issue_list.html:35
+#: .\apps\projects\models.py:18
+#: .\apps\projects\templates\projects\settings.html:18
+#: .\templates\_issue_table.html:8
+msgid "Key"
+msgstr "Κλειδί"
+
+#: .\apps\accounts\templates\accounts\profile.html:53
+msgid "Access"
+msgstr "Πρόσβαση"
+
+#: .\apps\accounts\templates\accounts\profile.html:53
+msgid "Last used"
+msgstr "Τελευταία χρήση"
+
+#: .\apps\accounts\templates\accounts\profile.html:53
+#: .\apps\accounts\templates\accounts\user_list.html:15
+#: .\apps\agile\templates\agile\board_settings.html:77
+#: .\apps\core\templatetags\mpira.py:41 .\apps\issues\models.py:134
+#: .\apps\issues\templates\issues\issue_detail.html:169
+#: .\apps\issues\templates\issues\issue_list.html:36
+#: .\apps\issues\templates\issues\releases.html:9 .\apps\projects\models.py:108
+#: .\apps\testmgmt\models.py:126
+#: .\apps\testmgmt\templates\testmgmt\coverage.html:18
+#: .\templates\_issue_table.html:10 .\templates\_issue_table.html:26
+msgid "Status"
+msgstr "Κατάσταση"
+
+#: .\apps\accounts\templates\accounts\profile.html:59
+msgid "Read & write"
+msgstr "Ανάγνωση & εγγραφή"
+
+#: .\apps\accounts\templates\accounts\profile.html:62
+msgid "Revoked"
+msgstr "Ανακλήθηκε"
+
+#: .\apps\accounts\templates\accounts\profile.html:62
+msgid "Expired"
+msgstr "Έληξε"
+
+#: .\apps\accounts\templates\accounts\profile.html:64
+msgid "Revoke this key? Anything using it will stop working."
+msgstr "Ανάκληση κλειδιού; Ό,τι το χρησιμοποιεί θα σταματήσει να λειτουργεί."
+
+#: .\apps\accounts\templates\accounts\profile.html:66
+msgid "Revoke"
+msgstr "Ανάκληση"
+
+#: .\apps\accounts\templates\accounts\profile.html:71
+msgid "No API keys yet."
+msgstr "Δεν υπάρχουν κλειδιά API ακόμα."
+
+#: .\apps\accounts\templates\accounts\profile.html:77
+msgid "Using a key"
+msgstr "Χρήση κλειδιού"
+
+#: .\apps\accounts\templates\accounts\profile.html:82
+msgid ""
+"Claude Desktop / Claude Code: install the Mpira MCP server from the tools "
+"folder, and set MPIRA_URL and MPIRA_API_KEY in its configuration. The README "
+"explains the exact steps."
+msgstr ""
+"Claude Desktop / Claude Code: εγκαταστήστε τον MCP server του Mpira από τον "
+"φάκελο tools και ορίστε MPIRA_URL και MPIRA_API_KEY στις ρυθμίσεις του. Τα "
+"ακριβή βήματα είναι στο README."
+
+#: .\apps\accounts\templates\accounts\user_form.html:3
+#: .\apps\accounts\templates\accounts\user_form.html:6
+#: .\apps\accounts\templates\accounts\user_list.html:10
+msgid "Add user"
+msgstr "Προσθήκη χρήστη"
+
+#: .\apps\accounts\templates\accounts\user_form.html:5
+#: .\apps\accounts\templates\accounts\user_list.html:3
+#: .\apps\accounts\templates\accounts\user_list.html:7 .\templates\base.html:54
+#: .\templates\base.html:103
+msgid "Users"
+msgstr "Χρήστες"
+
+#: .\apps\accounts\templates\accounts\user_form.html:13
+#: .\apps\agile\templates\agile\backlog.html:51
+#: .\apps\agile\templates\agile\backlog.html:63
+#: .\apps\agile\templates\agile\backlog.html:86
+#: .\apps\agile\templates\agile\board.html:72
+#: .\apps\agile\templates\agile\sprint_form.html:12
+#: .\apps\issues\templates\issues\issue_form.html:21
+#: .\apps\projects\templates\projects\project_form.html:11
+#: .\apps\projects\templates\projects\settings_item.html:10
+#: .\apps\testmgmt\templates\testmgmt\execution_form.html:10
+#: .\apps\testmgmt\templates\testmgmt\plan_form.html:11
+#: .\apps\testmgmt\templates\testmgmt\test_steps.html:27
+#: .\apps\wiki\templates\wiki\page_form.html:12
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+#: .\apps\accounts\templates\accounts\user_form.html:19
+msgid "Set a new password"
+msgstr "Ορισμός νέου κωδικού"
+
+#: .\apps\accounts\templates\accounts\user_form.html:20
+msgid "Use this when someone forgets their password. Share it privately."
+msgstr ""
+"Χρησιμοποιήστε το όταν κάποιος ξεχάσει τον κωδικό του. Μοιραστείτε το "
+"ιδιωτικά.Χρησιμοποιήστε το όταν κάποιος ξεχάσει τον κωδικό του. Μοιραστείτε "
+"το ιδιωτικά.Χρησιμοποιήστε το όταν κάποιος ξεχάσει τον κωδικό του. "
+"Μοιραστείτε το ιδιωτικά.Χρησιμοποιήστε το όταν κάποιος ξεχάσει τον κωδικό "
+"του. Μοιραστείτε το ιδιωτικά.Χρησιμοποιήστε το όταν κάποιος ξεχάσει τον "
+"κωδικό του. Μοιραστείτε το ιδιωτικά.Χρησιμοποιήστε το όταν κάποιος ξεχάσει "
+"τον κωδικό του. Στείλτε τον ιδιωτικά."
+
+#: .\apps\accounts\templates\accounts\user_form.html:24
+msgid "Set password"
+msgstr "Ορισμός κωδικού"
+
+#: .\apps\accounts\templates\accounts\user_list.html:8
+#, python-format
+msgid "%(active_count)s of %(max_users)s active seats used"
+msgstr "%(active_count)s από %(max_users)s ενεργές θέσεις σε χρήση"
+
+#: .\apps\accounts\templates\accounts\user_list.html:15
+msgid "Handle"
+msgstr "Ψευδώνυμο"
+
+#: .\apps\accounts\templates\accounts\user_list.html:15
+msgid "Last login"
+msgstr "Τελευταία σύνδεση"
+
+#: .\apps\accounts\templates\accounts\user_list.html:23
+msgid "Inactive"
+msgstr "Ανενεργός"
+
+#: .\apps\accounts\templates\accounts\user_list.html:25
+#: .\apps\issues\templates\issues\issue_detail.html:17
+#: .\apps\issues\templates\issues\issue_form.html:3
+#: .\apps\issues\templates\issues\issue_form.html:6
+#: .\apps\projects\templates\projects\_settings_list.html:16
+#: .\apps\projects\templates\projects\settings_item.html:3
+#: .\apps\projects\templates\projects\settings_item.html:6
+#: .\apps\testmgmt\templates\testmgmt\plan_detail.html:8
+#: .\apps\wiki\templates\wiki\page_detail.html:18
+#: .\apps\wiki\templates\wiki\page_form.html:3
+#: .\apps\wiki\templates\wiki\page_form.html:5
+msgid "Edit"
+msgstr "Επεξεργασία"
+
+#: .\apps\accounts\views.py:68
+msgid "Password changed."
+msgstr "Ο κωδικός άλλαξε."
+
+#: .\apps\accounts\views.py:82
+msgid "API key created. Copy it now - it won't be shown again."
+msgstr ""
+"Το κλειδί API δημιουργήθηκε. Αντιγράψτε το τώρα, δεν θα ξαναεμφανιστεί.Το "
+"κλειδί API δημιουργήθηκε. Αντιγράψτε το τώρα, δεν θα ξαναεμφανιστεί.Το "
+"κλειδί API δημιουργήθηκε. Αντιγράψτε το τώρα, δεν θα ξαναεμφανιστεί.Το "
+"κλειδί API δημιουργήθηκε. Αντιγράψτε το τώρα, δεν θα ξαναεμφανιστεί.Το "
+"κλειδί API δημιουργήθηκε. Αντιγράψτε το τώρα, δεν θα ξαναεμφανιστεί.Το "
+"κλειδί API δημιουργήθηκε. Αντιγράψτε το τώρα - δεν θα ξαναεμφανιστεί."
+
+#: .\apps\accounts\views.py:86
+msgid "API key revoked."
+msgstr "Το κλειδί API ανακλήθηκε."
+
+#: .\apps\accounts\views.py:92
+msgid "Profile saved."
+msgstr "Το προφίλ αποθηκεύτηκε."
+
+#: .\apps\accounts\views.py:124
+#, python-format
+msgid "User %(name)s created."
+msgstr "Ο χρήστης %(name)s δημιουργήθηκε."
+
+#: .\apps\accounts\views.py:140
+msgid "Password updated."
+msgstr "Ο κωδικός ενημερώθηκε."
+
+#: .\apps\accounts\views.py:145
+msgid "You cannot deactivate yourself."
+msgstr "Δεν μπορείτε να απενεργοποιήσετε τον εαυτό σας."
+
+#: .\apps\accounts\views.py:152
+msgid "User updated."
+msgstr "Ο χρήστης ενημερώθηκε."
+
+#: .\apps\agile\apps.py:8
+msgid "Agile"
+msgstr "Agile"
+
+#: .\apps\agile\board.py:28 .\apps\issues\models.py:33
+#: .\apps\issues\workflow.py:45
+msgid "To Do"
+msgstr "Προς υλοποίηση"
+
+#: .\apps\agile\board.py:29 .\apps\issues\models.py:34
+#: .\apps\issues\workflow.py:46
+msgid "In Progress"
+msgstr "Σε εξέλιξη"
+
+#: .\apps\agile\board.py:30 .\apps\issues\models.py:35
+#: .\apps\issues\workflow.py:47
+msgid "In Review"
+msgstr "Σε έλεγχο"
+
+#: .\apps\agile\board.py:31 .\apps\issues\models.py:36
+#: .\apps\issues\templates\issues\workflow.html:17
+#: .\apps\issues\templates\issues\workflow.html:26
+#: .\apps\issues\templates\issues\workflow.html:31 .\apps\issues\workflow.py:48
+#: .\apps\testmgmt\models.py:75
+msgid "Done"
+msgstr "Ολοκληρώθηκε"
+
+#: .\apps\agile\board.py:79 .\apps\agile\board.py:90
+msgid "Give the column a name."
+msgstr "Δώστε όνομα στη στήλη."
+
+#: .\apps\agile\board.py:82
+msgid "A column with that name already exists."
+msgstr "Υπάρχει ήδη στήλη με αυτό το όνομα."
+
+#: .\apps\agile\board.py:110
+msgid "A board needs at least one column."
+msgstr "Ένα board χρειάζεται τουλάχιστον μία στήλη."
+
+#: .\apps\agile\board.py:113
+msgid "Choose another column to receive the statuses of this column."
+msgstr "Επιλέξτε άλλη στήλη που θα πάρει τις καταστάσεις αυτής της στήλης."
+
+#: .\apps\agile\board.py:126 .\apps\agile\views.py:290
+msgid "Every status must be placed in a column."
+msgstr "Κάθε κατάσταση πρέπει να είναι σε μία στήλη."
+
+#: .\apps\agile\board.py:129 .\apps\agile\board.py:141
+#: .\apps\agile\views.py:320
+msgid "Unknown column."
+msgstr "Άγνωστη στήλη."
+
+#: .\apps\agile\forms.py:21 .\apps\agile\forms.py:33
+#: .\apps\agile\services.py:46
+msgid "The end date must be after the start date."
+msgstr "Η ημερομηνία λήξης πρέπει να είναι μετά την έναρξη."
+
+#: .\apps\agile\forms.py:26 .\apps\agile\models.py:17
+#: .\apps\agile\templates\agile\backlog.html:60 .\apps\issues\models.py:189
+msgid "Start date"
+msgstr "Ημερομηνία έναρξης"
+
+#: .\apps\agile\forms.py:27 .\apps\agile\models.py:18
+#: .\apps\agile\templates\agile\backlog.html:61
+msgid "End date"
+msgstr "Ημερομηνία λήξης"
+
+#: .\apps\agile\models.py:9
+msgid "Future"
+msgstr "Μελλοντικό"
+
+#: .\apps\agile\models.py:11
+msgid "Closed"
+msgstr "Κλειστό"
+
+#: .\apps\agile\models.py:15
+msgid "Sprint goal"
+msgstr "Στόχος sprint"
+
+#: .\apps\agile\services.py:37
+msgid "Only a future sprint can be started."
+msgstr "Μόνο ένα μελλοντικό sprint μπορεί να ξεκινήσει."
+
+#: .\apps\agile\services.py:39
+msgid "This project already has an active sprint."
+msgstr "Το project έχει ήδη ενεργό sprint."
+
+#: .\apps\agile\services.py:41
+msgid "Add at least one issue to the sprint before starting it."
+msgstr "Προσθέστε τουλάχιστον ένα issue στο sprint πριν το ξεκινήσετε."
+
+#: .\apps\agile\services.py:61
+msgid "Only the active sprint can be completed."
+msgstr "Μόνο το ενεργό sprint μπορεί να ολοκληρωθεί."
+
+#: .\apps\agile\services.py:65
+msgid "Incomplete issues can only move to an open sprint of the same project."
+msgstr ""
+"Οι μη ολοκληρωμένες εργασίες μπορούν να μεταφερθούν μόνο σε ανοιχτό sprint "
+"του ίδιου έργου.Οι μη ολοκληρωμένες εργασίες μπορούν να μεταφερθούν μόνο σε "
+"ανοιχτό sprint του ίδιου έργου.Οι μη ολοκληρωμένες εργασίες μπορούν να "
+"μεταφερθούν μόνο σε ανοιχτό sprint του ίδιου έργου.Οι μη ολοκληρωμένες "
+"εργασίες μπορούν να μεταφερθούν μόνο σε ανοιχτό sprint του ίδιου έργου.Οι μη "
+"ολοκληρωμένες εργασίες μπορούν να μεταφερθούν μόνο σε ανοιχτό sprint του "
+"ίδιου έργου.Τα ημιτελή issues μπορούν να μεταφερθούν μόνο σε ανοιχτό sprint "
+"του ίδιου project."
+
+#: .\apps\agile\templates\agile\backlog.html:3
+#: .\apps\agile\templates\agile\backlog.html:50
+#: .\apps\agile\templates\agile\backlog.html:72
+#: .\apps\agile\templates\agile\board.html:69
+#: .\apps\agile\templates\agile\sprint_form.html:5
+#: .\apps\issues\templates\issues\issue_detail.html:186
+#: .\apps\projects\templates\projects\project_detail.html:26
+msgid "Backlog"
+msgstr "Backlog"
+
+#: .\apps\agile\templates\agile\backlog.html:7
+msgid "Backlog & sprint planning"
+msgstr "Backlog & σχεδιασμός sprint"
+
+#: .\apps\agile\templates\agile\backlog.html:8
+#, python-format
+msgid "Average velocity: %(velocity)s points per sprint"
+msgstr "Μέση ταχύτητα: %(velocity)s πόντοι ανά sprint"
+
+#: .\apps\agile\templates\agile\backlog.html:11
+#: .\apps\agile\templates\agile\backlog.html:84
+msgid "Create sprint"
+msgstr "Νέο sprint"
+
+#: .\apps\agile\templates\agile\backlog.html:12
+#: .\apps\issues\templates\issues\issue_form.html:3
+#: .\apps\issues\templates\issues\issue_form.html:6
+#: .\apps\issues\templates\issues\issue_list.html:9
+#: .\apps\projects\templates\projects\project_detail.html:11
+msgid "Create issue"
+msgstr "Νέο issue"
+
+#: .\apps\agile\templates\agile\backlog.html:22
+#: .\apps\agile\templates\agile\backlog.html:72
+#: .\apps\agile\templates\agile\reports.html:23
+msgid "issues"
+msgstr "issues"
+
+#: .\apps\agile\templates\agile\backlog.html:22
+#: .\apps\agile\templates\agile\backlog.html:72
+#: .\apps\agile\templates\agile\reports.html:62
+msgid "pts"
+msgstr "πόντοι"
+
+#: .\apps\agile\templates\agile\backlog.html:28
+#: .\apps\agile\templates\agile\board.html:3
+#: .\apps\agile\templates\agile\board_settings.html:5
+#: .\apps\issues\templates\issues\workflow.html:5 .\templates\base.html:72
+msgid "Board"
+msgstr "Board"
+
+#: .\apps\agile\templates\agile\backlog.html:29
+#: .\apps\agile\templates\agile\backlog.html:51
+#: .\apps\agile\templates\agile\board.html:20
+#: .\apps\agile\templates\agile\board.html:72
+msgid "Complete sprint"
+msgstr "Ολοκλήρωση sprint"
+
+#: .\apps\agile\templates\agile\backlog.html:31
+#: .\apps\agile\templates\agile\backlog.html:63
+msgid "Start sprint"
+msgstr "Έναρξη sprint"
+
+#: .\apps\agile\templates\agile\backlog.html:39
+msgid "Drag issues here from the backlog to plan this sprint."
+msgstr "Σύρετε issues εδώ από το backlog για να σχεδιάσετε το sprint."
+
+#: .\apps\agile\templates\agile\backlog.html:47
+#: .\apps\agile\templates\agile\board.html:66
+#, python-format
+msgid "Complete %(name)s"
+msgstr "Ολοκλήρωση %(name)s"
+
+#: .\apps\agile\templates\agile\backlog.html:48
+#, python-format
+msgid "%(done)s of %(total)s points done."
+msgstr "%(done)s από %(total)s πόντους ολοκληρώθηκαν."
+
+#: .\apps\agile\templates\agile\backlog.html:49
+#: .\apps\agile\templates\agile\board.html:67
+msgid "Done issues stay in the sprint. Incomplete issues move to:"
+msgstr "Τα ολοκληρωμένα μένουν στο sprint. Τα ημιτελή μεταφέρονται σε:"
+
+#: .\apps\agile\templates\agile\backlog.html:57
+#, python-format
+msgid "Start %(name)s"
+msgstr "Έναρξη %(name)s"
+
+#: .\apps\agile\templates\agile\backlog.html:58
+#, python-format
+msgid "%(n)s issues, %(pts)s story points will be committed."
+msgstr "Θα δεσμευτούν %(n)s issues, %(pts)s story points."
+
+#: .\apps\agile\templates\agile\backlog.html:76
+msgid "The backlog is empty."
+msgstr "Το backlog είναι άδειο."
+
+#: .\apps\agile\templates\agile\backlog.html:86
+#: .\apps\agile\templates\agile\board.html:22
+#: .\apps\issues\templates\issues\issue_form.html:19
+msgid "Create"
+msgstr "Δημιουργία"
+
+#: .\apps\agile\templates\agile\board.html:8
+msgid "Kanban board"
+msgstr "Kanban board"
+
+#: .\apps\agile\templates\agile\board.html:12
+msgid "All open issues, plus anything finished in the last 14 days."
+msgstr "Όλα τα ανοιχτά issues, και όσα ολοκληρώθηκαν τις τελευταίες 14 ημέρες."
+
+#: .\apps\agile\templates\agile\board.html:17
+#: .\apps\projects\templates\projects\project_detail.html:26
+msgid "Active sprint"
+msgstr "Ενεργό sprint"
+
+#: .\apps\agile\templates\agile\board.html:18
+#: .\apps\projects\templates\projects\project_detail.html:69
+msgid "All issues"
+msgstr "Όλα τα issues"
+
+#: .\apps\agile\templates\agile\board.html:21
+msgid "Reorder, add or remove columns"
+msgstr "Αλλαγή σειράς, προσθήκη ή αφαίρεση στηλών"
+
+#: .\apps\agile\templates\agile\board.html:21
+#: .\apps\agile\templates\agile\board_settings.html:16
+#: .\apps\core\templates\core\help.html:46
+#: .\apps\issues\templates\issues\issue_import.html:27
+#: .\apps\issues\templates\issues\workflow.html:5
+msgid "Columns"
+msgstr "Στήλες"
+
+#: .\apps\agile\templates\agile\board.html:27
+msgid "Filter cards…"
+msgstr "Φιλτράρισμα καρτών…"
+
+#: .\apps\agile\templates\agile\board.html:28
+msgid "Everyone"
+msgstr "Όλοι"
+
+#: .\apps\agile\templates\agile\board.html:28
+#: .\apps\agile\templates\agile\board.html:53 .\apps\agile\views.py:70
+#: .\apps\agile\views.py:75 .\apps\core\templatetags\mpira.py:81
+#: .\apps\issues\templates\issues\issue_detail.html:181
+#: .\apps\issues\templates\issues\issue_list.html:25 .\apps\issues\views.py:670
+#: .\templates\_issue_table.html:33 .\templates\_issue_table.html:39
+msgid "Unassigned"
+msgstr "Χωρίς ανάθεση"
+
+#: .\apps\agile\templates\agile\board.html:29
+#: .\apps\issues\templates\issues\issue_list.html:15
+#: .\apps\projects\templates\projects\_settings_list.html:12
+msgid "All types"
+msgstr "Όλοι οι τύποι"
+
+#: .\apps\agile\templates\agile\board.html:29 .\apps\issues\models.py:13
+msgid "Story"
+msgstr "Story"
+
+#: .\apps\agile\templates\agile\board.html:29 .\apps\issues\models.py:14
+msgid "Task"
+msgstr "Task"
+
+#: .\apps\agile\templates\agile\board.html:29 .\apps\issues\models.py:15
+msgid "Bug"
+msgstr "Bug"
+
+#: .\apps\agile\templates\agile\board.html:29 .\apps\issues\models.py:16
+#: .\apps\issues\templates\issues\issue_detail.html:18
+msgid "Sub-task"
+msgstr "Sub-task"
+
+#: .\apps\agile\templates\agile\board.html:29 .\apps\issues\models.py:17
+#: .\apps\issues\templates\issues\webhooks.html:32
+#: .\apps\testmgmt\templates\testmgmt\execution_detail.html:28
+#: .\apps\testmgmt\templates\testmgmt\plan_detail.html:20
+msgid "Test"
+msgstr "Test"
+
+#: .\apps\agile\templates\agile\board.html:31
+msgid "No swimlanes"
+msgstr "Χωρίς ζώνες"
+
+#: .\apps\agile\templates\agile\board.html:32
+#: .\apps\issues\templates\issues\timeline.html:17
+msgid "Swimlanes by epic"
+msgstr "Ζώνες ανά epic"
+
+#: .\apps\agile\templates\agile\board.html:33
+#: .\apps\issues\templates\issues\timeline.html:18
+msgid "Swimlanes by assignee"
+msgstr "Ζώνες ανά υπεύθυνο"
+
+#: .\apps\agile\templates\agile\board.html:35
+msgid ""
+"Drag cards between columns. Only allowed workflow transitions accept a drop."
+msgstr ""
+"Σύρετε κάρτες μεταξύ στηλών. Δέχονται μόνο οι επιτρεπτές μεταβάσεις του "
+"workflow."
+
+#: .\apps\agile\templates\agile\board.html:44
+#: .\apps\core\templatetags\mpira.py:36 .\apps\issues\models.py:178
+#: .\apps\issues\templates\issues\issue_detail.html:185
+msgid "Story points"
+msgstr "Story points"
+
+#: .\apps\agile\templates\agile\board.html:53
+#: .\apps\core\templatetags\mpira.py:32 .\apps\issues\models.py:151
+#: .\apps\issues\templates\issues\issue_detail.html:181
+#: .\templates\_issue_table.html:12 .\templates\_issue_table.html:32
+msgid "Assignee"
+msgstr "Υπεύθυνος"
+
+#: .\apps\agile\templates\agile\board_settings.html:3
+#: .\apps\agile\templates\agile\board_settings.html:8
+msgid "Board columns"
+msgstr "Στήλες board"
+
+#: .\apps\agile\templates\agile\board_settings.html:9
+msgid "Add or change statuses & workflow →"
+msgstr "Προσθήκη ή αλλαγή καταστάσεων & workflow →"
+
+#: .\apps\agile\templates\agile\board_settings.html:10
+msgid ""
+"Reorder, add, rename or remove the columns of the Kanban board. Each "
+"workflow status must sit in exactly one column."
+msgstr ""
+"Αλλάξτε τη σειρά, προσθέστε, μετονομάστε ή αφαιρέστε στήλες του Kanban "
+"board. Κάθε κατάσταση του workflow ανήκει σε μία μόνο στήλη."
+
+#: .\apps\agile\templates\agile\board_settings.html:19
+msgid "Order"
+msgstr "Σειρά"
+
+#: .\apps\agile\templates\agile\board_settings.html:19
+#: .\apps\agile\templates\agile\board_settings.html:73
+#: .\apps\issues\templates\issues\workflow.html:14
+msgid "Statuses"
+msgstr "Καταστάσεις"
+
+#: .\apps\agile\templates\agile\board_settings.html:19
+msgid "Actions"
+msgstr "Ενέργειες"
+
+#: .\apps\agile\templates\agile\board_settings.html:26
+msgid "Move up"
+msgstr "Μετακίνηση πάνω"
+
+#: .\apps\agile\templates\agile\board_settings.html:27
+msgid "Move down"
+msgstr "Μετακίνηση κάτω"
+
+#: .\apps\agile\templates\agile\board_settings.html:38
+msgid "No statuses - cards can't be dropped here"
+msgstr "Καμία κατάσταση - δεν μπορούν να μπουν κάρτες εδώ"
+
+#: .\apps\agile\templates\agile\board_settings.html:41
+msgid "Delete this column? Its statuses move to the column you choose."
+msgstr ""
+"Διαγραφή αυτής της στήλης; Οι καταστάσεις της μεταφέρονται στη στήλη που θα "
+"επιλέξετε.Διαγραφή αυτής της στήλης; Οι καταστάσεις της μεταφέρονται στη "
+"στήλη που θα επιλέξετε.Διαγραφή αυτής της στήλης; Οι καταστάσεις της "
+"μεταφέρονται στη στήλη που θα επιλέξετε.Διαγραφή αυτής της στήλης; Οι "
+"καταστάσεις της μεταφέρονται στη στήλη που θα επιλέξετε.Διαγραφή αυτής της "
+"στήλης; Οι καταστάσεις της μεταφέρονται στη στήλη που θα επιλέξετε.Διαγραφή "
+"στήλης; Οι καταστάσεις της θα μεταφερθούν στη στήλη που θα επιλέξετε."
+
+#: .\apps\agile\templates\agile\board_settings.html:46
+msgid "Move statuses to…"
+msgstr "Μεταφορά καταστάσεων σε…"
+
+#: .\apps\agile\templates\agile\board_settings.html:50
+#: .\apps\issues\templates\issues\automation.html:35
+#: .\apps\issues\templates\issues\issue_detail.html:21
+#: .\apps\issues\templates\issues\issue_list.html:49
+#: .\apps\issues\templates\issues\issue_list.html:74
+#: .\apps\issues\templates\issues\webhooks.html:33
+#: .\apps\issues\templates\issues\workflow.html:43
+#: .\apps\projects\templates\projects\_settings_list.html:17
+#: .\apps\testmgmt\templates\testmgmt\execution_detail.html:19
+#: .\apps\testmgmt\templates\testmgmt\test_steps.html:12
+#: .\apps\wiki\templates\wiki\page_detail.html:20
+msgid "Delete"
+msgstr "Διαγραφή"
+
+#: .\apps\agile\templates\agile\board_settings.html:63
+msgid "Add column"
+msgstr "Προσθήκη στήλης"
+
+#: .\apps\agile\templates\agile\board_settings.html:66
+msgid "Column name"
+msgstr "Όνομα στήλης"
+
+#: .\apps\agile\templates\agile\board_settings.html:67
+#: .\apps\issues\templates\issues\issue_detail.html:64
+#: .\apps\issues\templates\issues\webhooks.html:18
+#: .\apps\projects\templates\projects\_settings_list.html:27
+#: .\apps\projects\templates\projects\_settings_list.html:30
+#: .\apps\projects\templates\projects\settings.html:66
+msgid "Add"
+msgstr "Προσθήκη"
+
+#: .\apps\agile\templates\agile\board_settings.html:69
+msgid "A new column starts empty. Assign statuses to it below."
+msgstr "Μια νέα στήλη ξεκινά άδεια. Αντιστοιχίστε καταστάσεις παρακάτω."
+
+#: .\apps\agile\templates\agile\board_settings.html:77
+#: .\apps\issues\importer.py:154
+#: .\apps\issues\templates\issues\issue_import.html:29
+msgid "Column"
+msgstr "Στήλη"
+
+#: .\apps\agile\templates\agile\board_settings.html:91
+msgid "Save statuses"
+msgstr "Αποθήκευση καταστάσεων"
+
+#: .\apps\agile\templates\agile\board_settings.html:93
+msgid ""
+"The workflow (which status may follow which) doesn't change here - only how "
+"statuses are grouped on the board."
+msgstr ""
+"Το workflow (ποια κατάσταση ακολουθεί ποια) δεν αλλάζει εδώ - μόνο ο τρόπος "
+"ομαδοποίησης στο board."
+
+#: .\apps\agile\templates\agile\reports.html:3
+#: .\apps\agile\templates\agile\reports.html:6 .\templates\base.html:75
+msgid "Reports"
+msgstr "Αναφορές"
+
+#: .\apps\agile\templates\agile\reports.html:9
+#: .\apps\core\templatetags\mpira.py:35 .\apps\issues\models.py:176
+#: .\apps\issues\templates\issues\issue_detail.html:186
+msgid "Sprint"
+msgstr "Sprint"
+
+#: .\apps\agile\templates\agile\reports.html:18
+msgid "Start a sprint to see its burndown chart."
+msgstr "Ξεκινήστε ένα sprint για να δείτε το burndown."
+
+#: .\apps\agile\templates\agile\reports.html:18
+msgid "Go to the backlog"
+msgstr "Μετάβαση στο backlog"
+
+#: .\apps\agile\templates\agile\reports.html:21
+#: .\apps\agile\templates\agile\reports.html:74
+msgid "Committed"
+msgstr "Δεσμευμένα"
+
+#: .\apps\agile\templates\agile\reports.html:22
+msgid "Current scope"
+msgstr "Τρέχον εύρος"
+
+#: .\apps\agile\templates\agile\reports.html:23
+#: .\apps\agile\templates\agile\reports.html:74
+msgid "Completed"
+msgstr "Ολοκληρωμένα"
+
+#: .\apps\agile\templates\agile\reports.html:24
+msgid "Avg. velocity"
+msgstr "Μέση ταχύτητα"
+
+#: .\apps\agile\templates\agile\reports.html:28
+#: .\apps\projects\templates\projects\project_detail.html:31
+msgid "Burndown"
+msgstr "Burndown"
+
+#: .\apps\agile\templates\agile\reports.html:31
+msgid "Burndown chart"
+msgstr "Διάγραμμα burndown"
+
+#: .\apps\agile\templates\agile\reports.html:44
+msgid "Guideline (ideal)"
+msgstr "Ιδανική γραμμή"
+
+#: .\apps\agile\templates\agile\reports.html:44
+msgid "Remaining story points"
+msgstr "Story points που απομένουν"
+
+#: .\apps\agile\templates\agile\reports.html:45
+msgid "No dates set for this sprint."
+msgstr "Δεν έχουν οριστεί ημερομηνίες για το sprint."
+
+#: .\apps\agile\templates\agile\reports.html:50
+msgid "Completed issues"
+msgstr "Ολοκληρωμένα issues"
+
+#: .\apps\agile\templates\agile\reports.html:54
+msgid "Not completed"
+msgstr "Μη ολοκληρωμένα"
+
+#: .\apps\agile\templates\agile\reports.html:56
+msgid "Added after sprint start"
+msgstr "Προστέθηκαν μετά την έναρξη"
+
+#: .\apps\agile\templates\agile\reports.html:62
+msgid "Velocity"
+msgstr "Ταχύτητα (velocity)"
+
+#: .\apps\agile\templates\agile\reports.html:62
+msgid "Open backlog"
+msgstr "Ανοιχτό backlog"
+
+#: .\apps\agile\templates\agile\reports.html:65
+msgid "Velocity chart"
+msgstr "Διάγραμμα ταχύτητας"
+
+#: .\apps\agile\templates\agile\reports.html:75
+msgid "Velocity appears after the first sprint is completed."
+msgstr "Η ταχύτητα εμφανίζεται μετά την ολοκλήρωση του πρώτου sprint."
+
+#: .\apps\agile\templates\agile\sprint_form.html:6
+msgid "Edit sprint"
+msgstr "Επεξεργασία sprint"
+
+#: .\apps\agile\templates\agile\sprint_form.html:17
+msgid "Delete this sprint? Its issues go back to the backlog."
+msgstr "Διαγραφή sprint; Τα issues του επιστρέφουν στο backlog."
+
+#: .\apps\agile\templates\agile\sprint_form.html:17
+msgid "Delete sprint"
+msgstr "Διαγραφή sprint"
+
+#: .\apps\agile\views.py:72 .\apps\agile\views.py:75 .\apps\issues\views.py:672
+msgid "No epic"
+msgstr "Χωρίς epic"
+
+#: .\apps\agile\views.py:129
+#, python-format
+msgid "%(key)s Sprint %(n)s"
+msgstr "%(key)s Sprint %(n)s"
+
+#: .\apps\agile\views.py:147
+msgid "Sprint created."
+msgstr "Το sprint δημιουργήθηκε."
+
+#: .\apps\agile\views.py:162
+msgid "Sprint deleted; its issues moved to the backlog."
+msgstr "Το sprint διαγράφηκε· τα issues του μεταφέρθηκαν στο backlog."
+
+#: .\apps\agile\views.py:166
+msgid "Sprint updated."
+msgstr "Το sprint ενημερώθηκε."
+
+#: .\apps\agile\views.py:182
+#, python-format
+msgid "%(name)s started."
+msgstr "Το %(name)s ξεκίνησε."
+
+#: .\apps\agile\views.py:202
+#, python-format
+msgid "%(name)s completed. %(n)s incomplete issue(s) moved."
+msgstr "Το %(name)s ολοκληρώθηκε. Μεταφέρθηκαν %(n)s ημιτελή issues."
+
+#: .\apps\agile\views.py:273
+msgid "Column added."
+msgstr "Η στήλη προστέθηκε."
+
+#: .\apps\agile\views.py:276
+msgid "Column renamed."
+msgstr "Η στήλη μετονομάστηκε."
+
+#: .\apps\agile\views.py:284
+msgid "Column deleted."
+msgstr "Η στήλη διαγράφηκε."
+
+#: .\apps\agile\views.py:293
+msgid "Board saved."
+msgstr "Το board αποθηκεύτηκε."
+
+#: .\apps\api\apps.py:8
+msgid "API"
+msgstr "API"
+
+#: .\apps\core\apps.py:8
+msgid "Core"
+msgstr "Πυρήνας"
+
+#: .\apps\core\models.py:8
+msgid "mentioned you"
+msgstr "σας ανέφερε στο"
+
+#: .\apps\core\models.py:9
+msgid "assigned you"
+msgstr "σας ανέθεσε το"
+
+#: .\apps\core\models.py:10
+msgid "commented on"
+msgstr "σχολίασε στο"
+
+#: .\apps\core\models.py:11
+msgid "changed the status of"
+msgstr "άλλαξε την κατάσταση του"
+
+#: .\apps\core\models.py:12
+msgid "mentioned you on a page"
+msgstr "σας ανέφερε στη σελίδα"
+
+#: .\apps\core\templates\core\_notification_list.html:8
+#: .\apps\core\templates\core\dashboard.html:26
+#: .\apps\issues\templates\issues\issue_detail.html:155
+msgid "Someone"
+msgstr "Κάποιος"
+
+#: .\apps\core\templates\core\_notification_list.html:10
+#: .\apps\core\templates\core\dashboard.html:27
+msgid "ago"
+msgstr "πριν"
+
+#: .\apps\core\templates\core\_notification_list.html:10
+msgid "new"
+msgstr "νέο"
+
+#: .\apps\core\templates\core\_notification_list.html:14
+msgid "No notifications."
+msgstr "Καμία ειδοποίηση."
+
+#: .\apps\core\templates\core\dashboard.html:3 .\templates\base.html:100
+msgid "Dashboard"
+msgstr "Αρχική"
+
+#: .\apps\core\templates\core\dashboard.html:7
+#, python-format
+msgid "Hi %(name)s 👋"
+msgstr "Γεια σου %(name)s 👋"
+
+#: .\apps\core\templates\core\dashboard.html:8
+msgid "Here is what needs your attention."
+msgstr "Αυτά χρειάζονται την προσοχή σου."
+
+#: .\apps\core\templates\core\dashboard.html:15
+#: .\apps\issues\templates\issues\issue_list.html:24
+msgid "Assigned to me"
+msgstr "Ανατεθειμένα σε μένα"
+
+#: .\apps\core\templates\core\dashboard.html:15
+msgid "open issues"
+msgstr "ανοιχτά issues"
+
+#: .\apps\core\templates\core\dashboard.html:19
+msgid "Reported by me"
+msgstr "Τα δικά μου αιτήματα"
+
+#: .\apps\core\templates\core\dashboard.html:23
+msgid "Recent activity"
+msgstr "Πρόσφατη δραστηριότητα"
+
+#: .\apps\core\templates\core\dashboard.html:29
+msgid "Nothing yet."
+msgstr "Τίποτα ακόμα."
+
+#: .\apps\core\templates\core\dashboard.html:36 .\apps\projects\apps.py:8
+#: .\apps\projects\templates\projects\project_form.html:5
+#: .\apps\projects\templates\projects\project_list.html:3
+#: .\apps\projects\templates\projects\project_list.html:6
+#: .\templates\base.html:107
+msgid "Projects"
+msgstr "Projects"
+
+#: .\apps\core\templates\core\dashboard.html:36
+msgid "New"
+msgstr "Νέο"
+
+#: .\apps\core\templates\core\dashboard.html:41
+msgid "You are not a member of any project yet."
+msgstr "Δεν είστε ακόμα μέλος σε κανένα project."
+
+#: .\apps\core\templates\core\dashboard.html:46
+#: .\apps\core\templates\core\notifications.html:3
+#: .\apps\core\templates\core\notifications.html:6 .\templates\base.html:46
+msgid "Notifications"
+msgstr "Ειδοποιήσεις"
+
+#: .\apps\core\templates\core\dashboard.html:46
+msgid "All"
+msgstr "Όλες"
+
+#: .\apps\core\templates\core\error.html:18
+msgid "This page doesn't exist, or you don't have access to it."
+msgstr "Η σελίδα δεν υπάρχει ή δεν έχετε πρόσβαση."
+
+#: .\apps\core\templates\core\error.html:19
+msgid "Your role doesn't allow this action."
+msgstr "Ο ρόλος σας δεν επιτρέπει αυτή την ενέργεια."
+
+#: .\apps\core\templates\core\error.html:20
+msgid "Something went wrong on our side. Please try again."
+msgstr "Κάτι πήγε στραβά. Δοκιμάστε ξανά."
+
+#: .\apps\core\templates\core\error.html:21
+msgid "Back to the dashboard"
+msgstr "Επιστροφή στην αρχική"
+
+#: .\apps\core\templates\core\help.html:3
+#: .\apps\core\templates\core\help.html:7 .\templates\base.html:53
+#: .\templates\base.html:102
+msgid "Guide"
+msgstr "Οδηγίες"
+
+#: .\apps\core\templates\core\help.html:8
+msgid ""
+"How to work with tickets, boards, imports, API keys and AI assistants in "
+"Mpira."
+msgstr ""
+"Πώς δουλεύετε με tickets, boards, εισαγωγές, κλειδιά API και βοηθούς AI στο "
+"Mpira."
+
+#: .\apps\core\templates\core\help.html:13
+msgid "On this page"
+msgstr "Σε αυτή τη σελίδα"
+
+#: .\apps\core\templates\core\help.html:15
+#: .\apps\core\templates\core\help.html:27
+msgid "Tickets"
+msgstr "Tickets"
+
+#: .\apps\core\templates\core\help.html:16
+#: .\apps\core\templates\core\help.html:38
+msgid "Import tickets from a file"
+msgstr "Εισαγωγή tickets από αρχείο"
+
+#: .\apps\core\templates\core\help.html:17
+#: .\apps\core\templates\core\help.html:59
+msgid "Board and columns"
+msgstr "Board και στήλες"
+
+#: .\apps\core\templates\core\help.html:18
+#: .\apps\core\templates\core\help.html:69
+msgid "Statuses and workflow"
+msgstr "Καταστάσεις και workflow"
+
+#: .\apps\core\templates\core\help.html:20
+#: .\apps\core\templates\core\help.html:92
+msgid "Connect Claude"
+msgstr "Σύνδεση με το Claude"
+
+#: .\apps\core\templates\core\help.html:21
+#: .\apps\core\templates\core\help.html:129
+msgid "Using the API directly"
+msgstr "Χρήση του API απευθείας"
+
+#: .\apps\core\templates\core\help.html:22
+#: .\apps\core\templates\core\help.html:140
+msgid "Roles and access"
+msgstr "Ρόλοι και πρόσβαση"
+
+#: .\apps\core\templates\core\help.html:29
+msgid ""
+"Every ticket has a key made of the project key and a number, for example "
+"MPR-12."
+msgstr ""
+"Κάθε ticket έχει κλειδί από το κλειδί του project και έναν αριθμό, π.χ. "
+"MPR-12."
+
+#: .\apps\core\templates\core\help.html:30
+msgid ""
+"Create a ticket from a project's Issues page with + Create issue. Choose its "
+"type: epic, story, task, bug, sub-task or test."
+msgstr ""
+"Δημιουργήστε ticket από τη σελίδα Issues του project με το + Create issue. "
+"Επιλέξτε τον τύπο του: epic, story, task, bug, sub-task ή test."
+
+#: .\apps\core\templates\core\help.html:31
+msgid ""
+"Assign it to a project member, set a priority, story points and a due date, "
+"and link it to an epic or a parent."
+msgstr ""
+"Αναθέστε το σε μέλος του project, ορίστε προτεραιότητα, story points και "
+"προθεσμία, και συνδέστε το με epic ή γονικό issue."
+
+#: .\apps\core\templates\core\help.html:32
+msgid ""
+"Comments support Markdown. Type @handle to mention a teammate; they get a "
+"notification."
+msgstr ""
+"Τα σχόλια υποστηρίζουν Markdown. Γράψτε @ψευδώνυμο για να αναφέρετε "
+"συνάδελφο· λαμβάνει ειδοποίηση."
+
+#: .\apps\core\templates\core\help.html:33
+msgid ""
+"Use the search box at the top (or press /) to find a ticket by text or jump "
+"straight to a key such as MPR-12."
+msgstr ""
+"Χρησιμοποιήστε την αναζήτηση στο πάνω μέρος (ή πατήστε /) για να βρείτε "
+"ticket με κείμενο ή να πάτε απευθείας σε κλειδί όπως MPR-12."
+
+#: .\apps\core\templates\core\help.html:39
+msgid "You can create many tickets at once from Excel, CSV or JSON."
+msgstr "Μπορείτε να δημιουργήσετε πολλά tickets μαζί από Excel, CSV ή JSON."
+
+#: .\apps\core\templates\core\help.html:41
+msgid "Open the project and go to Issues → Import CSV."
+msgstr "Ανοίξτε το project και πηγαίνετε στα Issues → Εισαγωγή CSV."
+
+#: .\apps\core\templates\core\help.html:42
+msgid ""
+"Download the template in the format you like: Excel (.xlsx), CSV or JSON. "
+"The template has the right columns and example rows."
+msgstr ""
+"Κατεβάστε το template στη μορφή που προτιμάτε: Excel (.xlsx), CSV ή JSON. Το "
+"template έχει τις σωστές στήλες και γραμμές παραδείγματος."
+
+#: .\apps\core\templates\core\help.html:43
+msgid "Delete the example rows and fill in one ticket per row."
+msgstr ""
+"Διαγράψτε τις γραμμές παραδείγματος και συμπληρώστε μία εργασία ανά "
+"γραμμή.Διαγράψτε τις γραμμές παραδείγματος και συμπληρώστε μία εργασία ανά "
+"γραμμή.Διαγράψτε τις γραμμές παραδείγματος και συμπληρώστε μία εργασία ανά "
+"γραμμή.Διαγράψτε τις γραμμές παραδείγματος και συμπληρώστε μία εργασία ανά "
+"γραμμή.Διαγράψτε τις γραμμές παραδείγματος και συμπληρώστε μία εργασία ανά "
+"γραμμή.Διαγράψτε τις γραμμές παραδείγματος και συμπληρώστε ένα ticket ανά "
+"γραμμή."
+
+#: .\apps\core\templates\core\help.html:44
+msgid ""
+"Upload the file. If any row has a problem, nothing is imported and every "
+"problem is listed with its line number. Fix them and upload again."
+msgstr ""
+"Ανεβάστε το αρχείο. Αν μια γραμμή έχει πρόβλημα, δεν εισάγεται τίποτα και "
+"εμφανίζονται όλα τα προβλήματα με τον αριθμό γραμμής. Διορθώστε τα και "
+"ανεβάστε ξανά."
+
+#: .\apps\core\templates\core\help.html:48
+msgid "(required)"
+msgstr "(υποχρεωτικό)"
+
+#: .\apps\core\templates\core\help.html:49
+msgid "email or handle of a member"
+msgstr "email ή ψευδώνυμο μέλους"
+
+#: .\apps\core\templates\core\help.html:50
+msgid "issue keys, e.g. MPR-1"
+msgstr "κλειδιά issues, π.χ. MPR-1"
+
+#: .\apps\core\templates\core\help.html:50
+msgid "name of an open sprint"
+msgstr "όνομα ανοιχτού sprint"
+
+#: .\apps\core\templates\core\help.html:52
+msgid "names separated by ;"
+msgstr "ονόματα χωρισμένα με ;"
+
+#: .\apps\core\templates\core\help.html:53
+msgid "a custom field of the project"
+msgstr "προσαρμοσμένο πεδίο του project"
+
+#: .\apps\core\templates\core\help.html:55
+msgid ""
+"Limits: 500 rows and 1 MB per file. Every new ticket starts in the project's "
+"starting status."
+msgstr ""
+"Όρια: 500 γραμμές και 1 MB ανά αρχείο. Κάθε νέο ticket ξεκινά στην αρχική "
+"κατάσταση του project."
+
+#: .\apps\core\templates\core\help.html:61
+msgid ""
+"The Board shows the tickets of the active sprint, or all open tickets with "
+"‘All issues’. Drag a card to another column to move it."
+msgstr ""
+"Το Board δείχνει τα tickets του ενεργού sprint, ή όλα τα ανοιχτά με το ‘Όλα "
+"τα issues’. Σύρετε μια κάρτα σε άλλη στήλη για να τη μετακινήσετε."
+
+#: .\apps\core\templates\core\help.html:62
+msgid ""
+"Drag and drop only accepts moves the workflow allows. A card dropped on a "
+"column moves to that column's first status."
+msgstr ""
+"Το σύρσιμο δέχεται μόνο κινήσεις που επιτρέπει το workflow. Μια κάρτα που "
+"πέφτει σε στήλη πάει στην πρώτη κατάσταση της στήλης."
+
+#: .\apps\core\templates\core\help.html:63
+msgid ""
+"Project managers and admins can change the columns with ⚙ Columns: move a "
+"column up or down, rename it, add or delete columns."
+msgstr ""
+"Οι project managers και οι διαχειριστές αλλάζουν τις στήλες με ⚙ Columns: "
+"μετακινούν μια στήλη πάνω ή κάτω, τη μετονομάζουν, προσθέτουν ή διαγράφουν "
+"στήλες."
+
+#: .\apps\core\templates\core\help.html:64
+msgid ""
+"Every status belongs to exactly one column. When you delete a column, choose "
+"where its statuses go."
+msgstr ""
+"Κάθε κατάσταση ανήκει σε μία μόνο στήλη. Όταν διαγράφετε μια στήλη, "
+"επιλέγετε πού θα πάνε οι καταστάσεις της."
+
+#: .\apps\core\templates\core\help.html:70
+msgid ""
+"Project managers and admins can change the statuses of a project from ⚙ "
+"Columns → Add or change statuses & workflow."
+msgstr ""
+"Οι project managers και οι διαχειριστές αλλάζουν τις καταστάσεις ενός "
+"project από ⚙ Columns → Προσθήκη ή αλλαγή καταστάσεων & workflow."
+
+#: .\apps\core\templates\core\help.html:72
+msgid "Add status:"
+msgstr "Προσθήκη κατάστασης:"
+
+#: .\apps\core\templates\core\help.html:72
+msgid ""
+"give it a name, pick the board column it goes to, and tick ‘Counts as done’ "
+"if finished tickets should be marked as done."
+msgstr ""
+"δώστε όνομα, επιλέξτε τη στήλη του board και τσεκάρετε το ‘Μετράει ως "
+"ολοκληρωμένη’ αν τα ολοκληρωμένα tickets πρέπει να μετράνε ως done."
+
+#: .\apps\core\templates\core\help.html:73
+msgid "Start:"
+msgstr "Έναρξη:"
+
+#: .\apps\core\templates\core\help.html:73
+msgid ""
+"the status new tickets begin in. Exactly one status is the start status."
+msgstr ""
+"η κατάσταση στην οποία ξεκινούν τα νέα tickets. Υπάρχει ακριβώς μία "
+"κατάσταση έναρξης."
+
+#: .\apps\core\templates\core\help.html:74
+msgid "Counts as done:"
+msgstr "Μετράει ως ολοκληρωμένη:"
+
+#: .\apps\core\templates\core\help.html:74
+msgid ""
+"tickets in these statuses are resolved, leave the open lists, and count as "
+"completed in sprints and epics."
+msgstr ""
+"τα tickets σε αυτές τις καταστάσεις θεωρούνται επιλυμένα, βγαίνουν από τις "
+"λίστες ανοιχτών και μετράνε ως ολοκληρωμένα σε sprints και epics."
+
+#: .\apps\core\templates\core\help.html:75
+msgid "Transitions table:"
+msgstr "Πίνακας μεταβάσεων:"
+
+#: .\apps\core\templates\core\help.html:75
+msgid ""
+"a checked box means a ticket may move from the row status to the column "
+"status. Every status needs at least one exit."
+msgstr ""
+"ένα τσεκαρισμένο κουτί σημαίνει ότι ένα ticket μπορεί να περάσει από την "
+"κατάσταση της γραμμής στην κατάσταση της στήλης. Κάθε κατάσταση χρειάζεται "
+"τουλάχιστον μία έξοδο."
+
+#: .\apps\core\templates\core\help.html:76
+msgid "Delete status:"
+msgstr "Διαγραφή κατάστασης:"
+
+#: .\apps\core\templates\core\help.html:76
+msgid ""
+"its tickets move to the status you choose. The start status can't be deleted."
+msgstr ""
+"τα tickets της μεταφέρονται στην κατάσταση που επιλέγετε. Η κατάσταση "
+"έναρξης δεν διαγράφεται."
+
+#: .\apps\core\templates\core\help.html:83
+msgid "Open your profile (your name at the top right) and go to API keys."
+msgstr ""
+"Ανοίξτε το προφίλ σας (το όνομά σας πάνω δεξιά) και μεταβείτε στα κλειδιά "
+"API.Ανοίξτε το προφίλ σας (το όνομά σας πάνω δεξιά) και μεταβείτε στα "
+"κλειδιά API.Ανοίξτε το προφίλ σας (το όνομά σας πάνω δεξιά) και μεταβείτε "
+"στα κλειδιά API.Ανοίξτε το προφίλ σας (το όνομά σας πάνω δεξιά) και "
+"μεταβείτε στα κλειδιά API.Ανοίξτε το προφίλ σας (το όνομά σας πάνω δεξιά) "
+"και μεταβείτε στα κλειδιά API.Ανοίξτε το προφίλ σας (το όνομά σας πάνω "
+"δεξιά) και πηγαίνετε στα κλειδιά API."
+
+#: .\apps\core\templates\core\help.html:84
+msgid ""
+"Enter a name, for example Claude, and optionally tick Read only or set an "
+"expiry in days. Click Create key."
+msgstr ""
+"Δώστε όνομα, π.χ. Claude, και προαιρετικά τσεκάρετε Μόνο ανάγνωση ή ορίστε "
+"λήξη σε ημέρες. Πατήστε Δημιουργία κλειδιού."
+
+#: .\apps\core\templates\core\help.html:85
+msgid ""
+"Copy the key right away. It starts with mpk_ and is shown only once. Mpira "
+"keeps only a fingerprint of it."
+msgstr ""
+"Αντιγράψτε το κλειδί αμέσως. Ξεκινά με mpk_ και εμφανίζεται μόνο μία φορά. "
+"Το Mpira κρατά μόνο αποτύπωμά του."
+
+#: .\apps\core\templates\core\help.html:86
+msgid ""
+"To stop a key from working, click Revoke next to it. Anything using the key "
+"stops working immediately."
+msgstr ""
+"Για να σταματήσει ένα κλειδί, πατήστε Ανάκληση δίπλα του. Ό,τι το "
+"χρησιμοποιεί σταματά να λειτουργεί αμέσως."
+
+#: .\apps\core\templates\core\help.html:88
+msgid ""
+"A key has the same project access you have. Use a read-only key whenever "
+"writing isn't needed."
+msgstr ""
+"Ένα κλειδί έχει την ίδια πρόσβαση σε projects με εσάς. Χρησιμοποιήστε κλειδί "
+"μόνο ανάγνωσης όταν δεν χρειάζεται εγγραφή."
+
+#: .\apps\core\templates\core\help.html:93
+msgid ""
+"The Mpira MCP server lets Claude read and write tickets for you. It needs "
+"Python 3.10 or newer and your API key."
+msgstr ""
+"Ο MCP server του Mpira επιτρέπει στο Claude να διαβάζει και να γράφει "
+"tickets για εσάς. Χρειάζεται Python 3.10 ή νεότερη και το κλειδί API σας."
+
+#: .\apps\core\templates\core\help.html:94
+msgid "1. Get the server"
+msgstr "1. Αποκτήστε τον server"
+
+#: .\apps\core\templates\core\help.html:95
+msgid ""
+"The server is in the tools/mpira-mcp folder of the project. In that folder "
+"run:"
+msgstr ""
+"Ο server βρίσκεται στον φάκελο tools/mpira-mcp του project. Σε αυτόν τον "
+"φάκελο τρέξτε:"
+
+#: .\apps\core\templates\core\help.html:98
+msgid "2a. Claude Code"
+msgstr "2α. Claude Code"
+
+#: .\apps\core\templates\core\help.html:104
+msgid "2b. Claude Desktop"
+msgstr "2β. Claude Desktop"
+
+#: .\apps\core\templates\core\help.html:105
+msgid ""
+"Open Settings → Developer → Edit config and add this to "
+"claude_desktop_config.json, then restart Claude:"
+msgstr ""
+"Ανοίξτε Settings → Developer → Edit config και προσθέστε αυτό στο "
+"claude_desktop_config.json, και μετά κάντε επανεκκίνηση του Claude:"
+
+#: .\apps\core\templates\core\help.html:119
+msgid "3. Ask Claude"
+msgstr "3. Ρωτήστε το Claude"
+
+#: .\apps\core\templates\core\help.html:121
+msgid "“What are my open tickets?”"
+msgstr "«Ποια είναι τα ανοιχτά μου tickets;»"
+
+#: .\apps\core\templates\core\help.html:122
+msgid ""
+"“Create a high priority bug in MPR: the checkout total is off by one cent, "
+"assign it to nikos.”"
+msgstr ""
+"«Φτιάξε bug υψηλής προτεραιότητας στο MPR: το σύνολο στο ταμείο είναι λάθος "
+"κατά ένα σεντ, ανάθεσέ το στον nikos.»"
+
+#: .\apps\core\templates\core\help.html:123
+msgid "“Move MPR-14 to in progress and comment that I've started.”"
+msgstr "«Πέρασε το MPR-14 σε εξέλιξη και γράψε σχόλιο ότι ξεκίνησα.»"
+
+#: .\apps\core\templates\core\help.html:125
+msgid ""
+"The key is stored in your own Claude settings file. Don't share that file, "
+"and revoke the key if it leaks."
+msgstr ""
+"Το κλειδί αποθηκεύεται στο δικό σας αρχείο ρυθμίσεων του Claude. Μην "
+"μοιράζεστε αυτό το αρχείο και ανακαλέστε το κλειδί αν διαρρεύσει."
+
+#: .\apps\core\templates\core\help.html:130
+msgid "Send the key in the Authorization header. The base address is:"
+msgstr ""
+"Στείλτε το κλειδί στην κεφαλίδα Authorization. Η βασική διεύθυνση "
+"είναι:Στείλτε το κλειδί στην κεφαλίδα Authorization. Η βασική διεύθυνση "
+"είναι:Στείλτε το κλειδί στην κεφαλίδα Authorization. Η βασική διεύθυνση "
+"είναι:Στείλτε το κλειδί στην κεφαλίδα Authorization. Η βασική διεύθυνση "
+"είναι:Στείλτε το κλειδί στην κεφαλίδα Authorization. Η βασική διεύθυνση "
+"είναι:Στείλτε το κλειδί στην κεφαλίδα Authorization. Η βασική διεύθυνση "
+"είναι:"
+
+#: .\apps\core\templates\core\help.html:136
+msgid ""
+"Errors always look like {error: {code, message, details}}. A wrong or "
+"revoked key returns 401, and a read-only key that tries to write returns 403."
+msgstr ""
+"Τα σφάλματα έχουν πάντα μορφή {error: {code, message, details}}. Λάθος ή "
+"ανακληθέν κλειδί επιστρέφει 401, και κλειδί μόνο ανάγνωσης που προσπαθεί να "
+"γράψει επιστρέφει 403."
+
+#: .\apps\core\templates\core\help.html:142
+msgid "Admin:"
+msgstr "Διαχειριστής:"
+
+#: .\apps\core\templates\core\help.html:142
+msgid "manages users and can see every project."
+msgstr "διαχειρίζεται χρήστες και βλέπει όλα τα projects."
+
+#: .\apps\core\templates\core\help.html:143
+msgid "Project manager:"
+msgstr "Project manager:"
+
+#: .\apps\core\templates\core\help.html:143
+msgid "manages sprints, columns, statuses, project settings and members."
+msgstr ""
+"διαχειρίζεται sprints, στήλες, καταστάσεις, ρυθμίσεις project και "
+"μέλη.διαχειρίζεται sprints, στήλες, καταστάσεις, ρυθμίσεις project και "
+"μέλη.διαχειρίζεται sprints, στήλες, καταστάσεις, ρυθμίσεις project και "
+"μέλη.διαχειρίζεται sprints, στήλες, καταστάσεις, ρυθμίσεις project και "
+"μέλη.διαχειρίζεται sprints, στήλες, καταστάσεις, ρυθμίσεις έργου και "
+"μέλη.διαχειρίζεται sprints, στήλες, καταστάσεις, ρυθμίσεις project και μέλη."
+
+#: .\apps\core\templates\core\help.html:144
+msgid "Developer:"
+msgstr "Developer:"
+
+#: .\apps\core\templates\core\help.html:144
+msgid "creates and updates tickets, moves them and comments."
+msgstr "δημιουργεί και ενημερώνει tickets, τα μετακινεί και σχολιάζει."
+
+#: .\apps\core\templates\core\help.html:145
+msgid "Tester:"
+msgstr "Tester:"
+
+#: .\apps\core\templates\core\help.html:145
+msgid "also manages test plans and executions."
+msgstr "διαχειρίζεται επίσης πλάνα και εκτελέσεις tests."
+
+#: .\apps\core\templates\core\help.html:146
+msgid "Viewer:"
+msgstr "Viewer:"
+
+#: .\apps\core\templates\core\help.html:146
+msgid "can see the project but not change it."
+msgstr "βλέπει το project αλλά δεν το αλλάζει."
+
+#: .\apps\core\templates\core\help.html:148
+msgid ""
+"You only see projects you are a member of. Projects you can't see don't "
+"appear in lists or search."
+msgstr ""
+"Βλέπετε μόνο projects στα οποία είστε μέλος. Τα υπόλοιπα δεν εμφανίζονται σε "
+"λίστες ή αναζήτηση."
+
+#: .\apps\core\templates\core\notifications.html:7
+msgid "Mark all as read"
+msgstr "Σήμανση όλων ως αναγνωσμένα"
+
+#: .\apps\core\templates\core\search.html:3
+#: .\apps\core\templates\core\search.html:5
+#: .\apps\core\templates\core\search.html:6 .\templates\base.html:30
+#: .\templates\base.html:51
+msgid "Search"
+msgstr "Αναζήτηση"
+
+#: .\apps\core\templates\core\search.html:9 .\apps\issues\apps.py:8
+#: .\apps\issues\templates\issues\issue_form.html:5
+#: .\apps\issues\templates\issues\issue_import.html:5
+#: .\apps\issues\templates\issues\issue_list.html:3
+#: .\apps\issues\templates\issues\issue_list.html:6
+#: .\apps\issues\templates\issues\workflow.html:17 .\templates\base.html:74
+msgid "Issues"
+msgstr "Ζητήματα"
+
+#: .\apps\core\templates\core\search.html:13
+msgid "Wiki pages"
+msgstr "Σελίδες wiki"
+
+#: .\apps\core\templates\core\search.html:16
+msgid "updated"
+msgstr "ενημερώθηκε"
+
+#: .\apps\core\templates\core\search.html:18
+#: .\apps\wiki\templates\wiki\space_home.html:16
+msgid "No pages found."
+msgstr "Δεν βρέθηκαν σελίδες."
+
+#: .\apps\core\templatetags\mpira.py:28 .\apps\issues\models.py:131
+#: .\templates\_issue_table.html:9
+msgid "Summary"
+msgstr "Τίτλος"
+
+#: .\apps\core\templatetags\mpira.py:29 .\apps\issues\models.py:132
+#: .\apps\issues\templates\issues\issue_detail.html:29
+#: .\apps\projects\models.py:30 .\apps\projects\models.py:87
+#: .\apps\projects\models.py:105 .\apps\testmgmt\models.py:35
+#: .\apps\wiki\models.py:15
+msgid "Description"
+msgstr "Περιγραφή"
+
+#: .\apps\core\templatetags\mpira.py:30 .\apps\issues\models.py:129
+#: .\apps\issues\templates\issues\issue_detail.html:183
+msgid "Type"
+msgstr "Τύπος"
+
+#: .\apps\core\templatetags\mpira.py:31 .\apps\issues\models.py:136
+#: .\apps\issues\templates\issues\issue_detail.html:184
+#: .\templates\_issue_table.html:11 .\templates\_issue_table.html:29
+msgid "Priority"
+msgstr "Προτεραιότητα"
+
+#: .\apps\core\templatetags\mpira.py:33 .\apps\issues\models.py:12
+#: .\apps\issues\models.py:160
+#: .\apps\issues\templates\issues\issue_detail.html:187
+msgid "Epic"
+msgstr "Epic"
+
+#: .\apps\core\templatetags\mpira.py:34 .\apps\issues\models.py:168
+#: .\apps\issues\templates\issues\issue_detail.html:188
+msgid "Parent"
+msgstr "Γονικό"
+
+#: .\apps\core\templatetags\mpira.py:37 .\apps\issues\models.py:190
+#: .\apps\issues\templates\issues\issue_detail.html:192
+msgid "Due date"
+msgstr "Προθεσμία"
+
+#: .\apps\core\templatetags\mpira.py:38 .\apps\issues\models.py:179
+#: .\apps\issues\templates\issues\issue_detail.html:189
+#: .\apps\projects\templates\projects\settings.html:11
+msgid "Labels"
+msgstr "Ετικέτες"
+
+#: .\apps\core\templatetags\mpira.py:39 .\apps\issues\models.py:181
+#: .\apps\issues\templates\issues\issue_detail.html:190
+#: .\apps\projects\templates\projects\settings.html:9
+msgid "Components"
+msgstr "Components"
+
+#: .\apps\core\templatetags\mpira.py:40 .\apps\issues\models.py:184
+#: .\apps\issues\templates\issues\issue_detail.html:191
+msgid "Fix versions"
+msgstr "Εκδόσεις"
+
+#: .\apps\issues\bulk.py:27 .\apps\issues\views.py:636
+msgid "Choose a status."
+msgstr "Επιλέξτε κατάσταση."
+
+#: .\apps\issues\bulk.py:31
+msgid "Choose a member of the project, or nobody."
+msgstr "Επιλέξτε μέλος του project, ή κανέναν."
+
+#: .\apps\issues\bulk.py:34
+msgid "Choose a priority."
+msgstr "Επιλέξτε προτεραιότητα."
+
+#: .\apps\issues\bulk.py:40
+msgid "Choose an action."
+msgstr "Επιλέξτε ενέργεια."
+
+#: .\apps\issues\bulk.py:42
+#, python-format
+msgid "At most %(n)d issues at a time."
+msgstr "Έως %(n)d εργασίες τη φορά."
+
+#: .\apps\issues\bulk.py:44
+msgid "You cannot delete issues in this project."
+msgstr "Δεν μπορείτε να διαγράψετε εργασίες σε αυτό το project."
+
+#: .\apps\issues\custom_fields.py:51
+msgid "Enter a number."
+msgstr "Εισάγετε αριθμό."
+
+#: .\apps\issues\custom_fields.py:59
+msgid "Enter a date as YYYY-MM-DD."
+msgstr "Εισάγετε ημερομηνία ως ΕΕΕΕ-ΜΜ-ΗΗ."
+
+#: .\apps\issues\custom_fields.py:63
+#, python-format
+msgid "Choose one of: %(options)s."
+msgstr "Επιλέξτε ένα από: %(options)s."
+
+#: .\apps\issues\custom_fields.py:72
+msgid "At most 500 characters."
+msgstr "Έως 500 χαρακτήρες."
+
+#: .\apps\issues\custom_fields.py:84
+msgid "Must be an object."
+msgstr "Πρέπει να είναι αντικείμενο."
+
+#: .\apps\issues\custom_fields.py:89
+msgid "Unknown custom field."
+msgstr "Άγνωστο προσαρμοσμένο πεδίο."
+
+#: .\apps\issues\custom_fields.py:99
+msgid "This field is required."
+msgstr "Το πεδίο είναι υποχρεωτικό."
+
+#: .\apps\issues\custom_fields.py:115
+msgid "Yes"
+msgstr "Ναι"
+
+#: .\apps\issues\custom_fields.py:115
+msgid "No"
+msgstr "Όχι"
+
+#: .\apps\issues\forms.py:58
+msgid "Required for sub-tasks."
+msgstr "Υποχρεωτικό για sub-tasks."
+
+#: .\apps\issues\forms.py:84
+msgid "A sub-task needs a parent issue."
+msgstr "Ένα sub-task χρειάζεται γονικό issue."
+
+#: .\apps\issues\forms.py:116
+#: .\apps\issues\templates\issues\issue_detail.html:147
+msgid "Add a comment… use @handle to mention someone"
+msgstr "Προσθέστε σχόλιο… γράψτε @ψευδώνυμο για αναφορά"
+
+#: .\apps\issues\forms.py:123
+msgid "File"
+msgstr "Αρχείο"
+
+#: .\apps\issues\forms.py:129
+#, python-format
+msgid "Files can be at most %(mb)s MB."
+msgstr "Τα αρχεία μπορούν να είναι έως %(mb)s MB."
+
+#: .\apps\issues\forms.py:135
+msgid "this issue →"
+msgstr "αυτό το issue →"
+
+#: .\apps\issues\forms.py:135
+msgid "← this issue"
+msgstr "← αυτό το issue"
+
+#: .\apps\issues\forms.py:136 .\apps\issues\models.py:292
+msgid "Link type"
+msgstr "Τύπος σύνδεσης"
+
+#: .\apps\issues\forms.py:137
+msgid "Issue key"
+msgstr "Κλειδί issue"
+
+#: .\apps\issues\importer.py:49
+msgid "epic, story, task, bug, subtask or test. Required."
+msgstr "epic, story, task, bug, subtask ή test. Υποχρεωτικό."
+
+#: .\apps\issues\importer.py:50
+msgid "Summary, up to 255 characters. Required."
+msgstr "Τίτλος, έως 255 χαρακτήρες. Υποχρεωτικό."
+
+#: .\apps\issues\importer.py:51
+msgid "Markdown is supported."
+msgstr "Υποστηρίζεται Markdown."
+
+#: .\apps\issues\importer.py:52
+msgid "highest, high, medium, low or lowest. Default medium."
+msgstr "highest, high, medium, low ή lowest. Προεπιλογή medium."
+
+#: .\apps\issues\importer.py:53
+msgid "Email or handle of a project member."
+msgstr "Email ή ψευδώνυμο μέλους του project."
+
+#: .\apps\issues\importer.py:54
+msgid "Key of an epic in this project, e.g. MPR-1."
+msgstr "Κλειδί epic αυτού του project, π.χ. MPR-1."
+
+#: .\apps\issues\importer.py:55
+msgid "Key of the parent issue. Required for sub-tasks."
+msgstr "Κλειδί του γονικού issue. Υποχρεωτικό για sub-tasks."
+
+#: .\apps\issues\importer.py:56
+msgid "Name of an open sprint."
+msgstr "Όνομα ανοιχτού sprint."
+
+#: .\apps\issues\importer.py:57
+msgid "Whole number from 0 to 1000."
+msgstr "Ακέραιος αριθμός από 0 έως 1000."
+
+#: .\apps\issues\importer.py:58
+msgid "YYYY-MM-DD."
+msgstr "ΕΕΕΕ-ΜΜ-ΗΗ."
+
+#: .\apps\issues\importer.py:59 .\apps\issues\importer.py:60
+#: .\apps\issues\importer.py:61
+msgid "Names separated by semicolons (;)."
+msgstr "Ονόματα χωρισμένα με ερωτηματικό (;)."
+
+#: .\apps\issues\importer.py:62
+msgid "A custom field of this project, e.g. cf_environment."
+msgstr "Προσαρμοσμένο πεδίο αυτού του project, π.χ. cf_environment."
+
+#: .\apps\issues\importer.py:154
+#: .\apps\issues\templates\issues\issue_import.html:29
+msgid "Notes"
+msgstr "Σημειώσεις"
+
+#: .\apps\issues\importer.py:162
+msgid "Delete the example rows on the Issues sheet before uploading."
+msgstr ""
+"Διαγράψτε τις γραμμές παραδείγματος στο φύλλο Issues πριν το "
+"ανεβάσετε.Διαγράψτε τις γραμμές παραδείγματος στο φύλλο Issues πριν το "
+"ανεβάσετε.Διαγράψτε τις γραμμές παραδείγματος στο φύλλο Issues πριν το "
+"ανεβάσετε.Διαγράψτε τις γραμμές παραδείγματος στο φύλλο Issues πριν το "
+"ανεβάσετε.Διαγράψτε τις γραμμές παραδείγματος στο φύλλο Issues πριν το "
+"ανεβάσετε.Διαγράψτε τις γραμμές παραδείγματος στο φύλλο Issues πριν το "
+"ανεβάσετε."
+
+#: .\apps\issues\importer.py:202
+msgid "The file must be UTF-8 encoded (save it as “CSV UTF-8” in Excel)."
+msgstr ""
+"Το αρχείο πρέπει να είναι κωδικοποιημένο σε UTF-8 (αποθηκεύστε το ως «CSV "
+"UTF-8» στο Excel).Το αρχείο πρέπει να είναι κωδικοποιημένο σε UTF-8 "
+"(αποθηκεύστε το ως «CSV UTF-8» στο Excel).Το αρχείο πρέπει να είναι "
+"κωδικοποιημένο σε UTF-8 (αποθηκεύστε το ως «CSV UTF-8» στο Excel).Το αρχείο "
+"πρέπει να είναι κωδικοποιημένο σε UTF-8 (αποθηκεύστε το ως «CSV UTF-8» στο "
+"Excel).Το αρχείο πρέπει να είναι σε κωδικοποίηση UTF-8 (στο Excel: «CSV "
+"UTF-8»)."
+
+#: .\apps\issues\importer.py:207 .\apps\issues\importer.py:223
+#: .\apps\issues\importer.py:303
+msgid "The file is empty."
+msgstr "Το αρχείο είναι κενό."
+
+#: .\apps\issues\importer.py:217
+msgid "This Excel file could not be read. Save it as .xlsx and try again."
+msgstr ""
+"Το αρχείο Excel δεν μπόρεσε να διαβαστεί. Αποθηκεύστε το ως .xlsx και "
+"δοκιμάστε ξανά.Το αρχείο Excel δεν μπόρεσε να διαβαστεί. Αποθηκεύστε το "
+"ως .xlsx και δοκιμάστε ξανά.Το αρχείο Excel δεν μπόρεσε να διαβαστεί. "
+"Αποθηκεύστε το ως .xlsx και δοκιμάστε ξανά.Το αρχείο Excel δεν μπόρεσε να "
+"διαβαστεί. Αποθηκεύστε το ως .xlsx και δοκιμάστε ξανά.Το αρχείο Excel δεν "
+"μπόρεσε να διαβαστεί. Αποθηκεύστε το ως .xlsx και δοκιμάστε ξανά.Αυτό το "
+"αρχείο Excel δεν διαβάστηκε. Αποθηκεύστε το ως .xlsx και δοκιμάστε ξανά."
+
+#: .\apps\issues\importer.py:233
+msgid "The JSON file is not valid JSON."
+msgstr "Το αρχείο JSON δεν είναι έγκυρο JSON."
+
+#: .\apps\issues\importer.py:237
+msgid "JSON must be a list of issues, or an object with an \"issues\" list."
+msgstr ""
+"Το JSON πρέπει να είναι λίστα εργασιών ή αντικείμενο με λίστα \"issues\".Το "
+"JSON πρέπει να είναι λίστα εργασιών ή αντικείμενο με λίστα \"issues\".Το "
+"JSON πρέπει να είναι λίστα εργασιών ή αντικείμενο με λίστα \"issues\".Το "
+"JSON πρέπει να είναι λίστα εργασιών ή αντικείμενο με λίστα \"issues\".Το "
+"JSON πρέπει να είναι λίστα εργασιών ή αντικείμενο με λίστα \"issues\".Το "
+"JSON πρέπει να είναι λίστα issues ή αντικείμενο με λίστα \"issues\"."
+
+#: .\apps\issues\importer.py:242
+msgid "Every JSON issue must be an object."
+msgstr "Κάθε issue στο JSON πρέπει να είναι αντικείμενο."
+
+#: .\apps\issues\importer.py:248
+msgid "custom_fields must be an object."
+msgstr "Το custom_fields πρέπει να είναι αντικείμενο."
+
+#: .\apps\issues\importer.py:274
+msgid "The file is larger than 1 MB."
+msgstr "Το αρχείο είναι μεγαλύτερο από 1 MB."
+
+#: .\apps\issues\importer.py:306
+#, python-format
+msgid "Missing required column(s): %(cols)s"
+msgstr "Λείπουν υποχρεωτικές στήλες: %(cols)s"
+
+#: .\apps\issues\importer.py:309
+#, python-format
+msgid "Unknown column(s): %(cols)s"
+msgstr "Άγνωστες στήλες: %(cols)s"
+
+#: .\apps\issues\importer.py:311
+msgid "The file has no issue rows."
+msgstr "Το αρχείο δεν έχει γραμμές issues."
+
+#: .\apps\issues\importer.py:313
+#, python-format
+msgid "At most %(n)s rows per import."
+msgstr "Έως %(n)s γραμμές ανά εισαγωγή."
+
+#: .\apps\issues\importer.py:337 .\apps\issues\importer.py:346
+#, python-format
+msgid "use one of: %(v)s"
+msgstr "χρησιμοποιήστε μία από: %(v)s"
+
+#: .\apps\issues\importer.py:340
+#: .\apps\issues\templates\issues\issue_import.html:31
+#: .\apps\issues\templates\issues\issue_import.html:32
+#: .\apps\projects\templates\projects\_settings_list.html:12
+msgid "required"
+msgstr "υποχρεωτικό"
+
+#: .\apps\issues\importer.py:342
+msgid "at most 255 characters"
+msgstr "έως 255 χαρακτήρες"
+
+#: .\apps\issues\importer.py:352
+#, python-format
+msgid "%(v)s is not a member of this project"
+msgstr "Το %(v)s δεν είναι μέλος αυτού του project"
+
+#: .\apps\issues\importer.py:358
+#, python-format
+msgid "no epic %(v)s in this project"
+msgstr "δεν υπάρχει epic %(v)s σε αυτό το project"
+
+#: .\apps\issues\importer.py:364
+#, python-format
+msgid "no issue %(v)s in this project"
+msgstr "δεν υπάρχει issue %(v)s σε αυτό το project"
+
+#: .\apps\issues\importer.py:366
+msgid "a sub-task needs a parent issue key"
+msgstr "ένα sub-task χρειάζεται κλειδί γονικού issue"
+
+#: .\apps\issues\importer.py:372
+#, python-format
+msgid "no open sprint named %(v)s"
+msgstr "δεν υπάρχει ανοιχτό sprint με όνομα %(v)s"
+
+#: .\apps\issues\importer.py:381
+msgid "whole number between 0 and 1000"
+msgstr "ακέραιος αριθμός από 0 έως 1000"
+
+#: .\apps\issues\importer.py:388
+msgid "use YYYY-MM-DD"
+msgstr "χρησιμοποιήστε ΕΕΕΕ-ΜΜ-ΗΗ"
+
+#: .\apps\issues\importer.py:394
+#, python-format
+msgid "no label %(v)s"
+msgstr "δεν υπάρχει ετικέτα %(v)s"
+
+#: .\apps\issues\importer.py:400
+#, python-format
+msgid "no component %(v)s"
+msgstr "δεν υπάρχει component %(v)s"
+
+#: .\apps\issues\importer.py:406
+#, python-format
+msgid "no version %(v)s"
+msgstr "δεν υπάρχει έκδοση %(v)s"
+
+#: .\apps\issues\importer.py:413
+msgid "unknown custom field"
+msgstr "άγνωστο προσαρμοσμένο πεδίο"
+
+#: .\apps\issues\management\commands\add_canceled_status.py:42
+#: .\apps\issues\management\commands\add_canceled_status.py:45
+#: .\apps\issues\workflow.py:76
+msgid "Canceled"
+msgstr "Ακυρώθηκε"
+
+#: .\apps\issues\models.py:56
+msgid "Initial"
+msgstr "Αρχική"
+
+#: .\apps\issues\models.py:58 .\apps\issues\templates\issues\workflow.html:63
+msgid "Counts as done"
+msgstr "Μετράει ως ολοκληρωμένη"
+
+#: .\apps\issues\models.py:72
+msgid "Highest"
+msgstr "Κρίσιμη"
+
+#: .\apps\issues\models.py:73
+msgid "High"
+msgstr "Υψηλή"
+
+#: .\apps\issues\models.py:74
+msgid "Medium"
+msgstr "Μεσαία"
+
+#: .\apps\issues\models.py:75
+msgid "Low"
+msgstr "Χαμηλή"
+
+#: .\apps\issues\models.py:76
+msgid "Lowest"
+msgstr "Ελάχιστη"
+
+#: .\apps\issues\models.py:90
+msgid "Text"
+msgstr "Κείμενο"
+
+#: .\apps\issues\models.py:91
+msgid "Number"
+msgstr "Αριθμός"
+
+#: .\apps\issues\models.py:92 .\apps\wiki\templates\wiki\page_history.html:9
+msgid "Date"
+msgstr "Ημερομηνία"
+
+#: .\apps\issues\models.py:93
+msgid "Select"
+msgstr "Επιλογή"
+
+#: .\apps\issues\models.py:94
+msgid "Checkbox"
+msgstr "Checkbox"
+
+#: .\apps\issues\models.py:98
+msgid "Issue type"
+msgstr "Τύπος issue"
+
+#: .\apps\issues\models.py:102
+msgid "Leave empty to apply to every issue type."
+msgstr "Αφήστε κενό για όλους τους τύπους."
+
+#: .\apps\issues\models.py:106
+msgid "Field type"
+msgstr "Τύπος πεδίου"
+
+#: .\apps\issues\models.py:108
+msgid "Options"
+msgstr "Επιλογές"
+
+#: .\apps\issues\models.py:108
+msgid "Comma-separated, for Select fields."
+msgstr "Χωρισμένες με κόμμα, για πεδία Επιλογής."
+
+#: .\apps\issues\models.py:110
+msgid "Required"
+msgstr "Υποχρεωτικό"
+
+#: .\apps\issues\models.py:143
+#: .\apps\issues\templates\issues\issue_detail.html:182
+msgid "Reporter"
+msgstr "Δημιουργός"
+
+#: .\apps\issues\models.py:235
+#: .\apps\issues\templates\issues\issue_detail.html:148
+#: .\apps\testmgmt\models.py:128
+#: .\apps\testmgmt\templates\testmgmt\execution_detail.html:28
+msgid "Comment"
+msgstr "Σχόλιο"
+
+#: .\apps\issues\models.py:277
+msgid "blocks"
+msgstr "μπλοκάρει"
+
+#: .\apps\issues\models.py:278 .\apps\issues\models.py:285
+msgid "relates to"
+msgstr "σχετίζεται με"
+
+#: .\apps\issues\models.py:279
+msgid "duplicates"
+msgstr "είναι διπλότυπο του"
+
+#: .\apps\issues\models.py:280
+#: .\apps\testmgmt\templates\testmgmt\plan_detail.html:7
+msgid "tests"
+msgstr "ελέγχει"
+
+#: .\apps\issues\models.py:284
+msgid "is blocked by"
+msgstr "μπλοκάρεται από"
+
+#: .\apps\issues\models.py:286
+msgid "is duplicated by"
+msgstr "έχει διπλότυπο το"
+
+#: .\apps\issues\models.py:287
+msgid "is tested by"
+msgstr "ελέγχεται από"
+
+#: .\apps\issues\models.py:314
+msgid "created the issue"
+msgstr "δημιούργησε το issue"
+
+#: .\apps\issues\models.py:315
+msgid "changed"
+msgstr "άλλαξε"
+
+#: .\apps\issues\models.py:316
+msgid "changed the status"
+msgstr "άλλαξε την κατάσταση"
+
+#: .\apps\issues\models.py:317
+msgid "commented"
+msgstr "σχολίασε"
+
+#: .\apps\issues\models.py:318
+msgid "attached a file"
+msgstr "επισύναψε αρχείο"
+
+#: .\apps\issues\models.py:319
+msgid "linked an issue"
+msgstr "συνέδεσε issue"
+
+#: .\apps\issues\models.py:367
+msgid "Filters"
+msgstr "Φίλτρα"
+
+#: .\apps\issues\models.py:368
+msgid "Shared with the project"
+msgstr "Κοινή χρήση με το project"
+
+#: .\apps\issues\models.py:383 .\apps\issues\models.py:411
+msgid "Issue created"
+msgstr "Η εργασία δημιουργήθηκε"
+
+#: .\apps\issues\models.py:384 .\apps\issues\models.py:412
+msgid "Issue moved to another status"
+msgstr "Η εργασία μετακινήθηκε σε άλλη κατάσταση"
+
+#: .\apps\issues\models.py:385 .\apps\issues\models.py:413
+msgid "Comment added"
+msgstr "Προστέθηκε σχόλιο"
+
+#: .\apps\issues\models.py:388 .\apps\issues\templates\issues\webhooks.html:24
+msgid "Address"
+msgstr "Διεύθυνση"
+
+#: .\apps\issues\models.py:389
+msgid "Signing secret"
+msgstr "Μυστικό υπογραφής"
+
+#: .\apps\issues\models.py:390 .\apps\issues\templates\issues\webhooks.html:15
+#: .\apps\issues\templates\issues\webhooks.html:24
+msgid "Events"
+msgstr "Γεγονότα"
+
+#: .\apps\issues\models.py:392
+msgid "Last HTTP status"
+msgstr "Τελευταία κατάσταση HTTP"
+
+#: .\apps\issues\models.py:393 .\apps\issues\models.py:431
+#: .\apps\issues\templates\issues\automation.html:24
+msgid "Last error"
+msgstr "Τελευταίο σφάλμα"
+
+#: .\apps\issues\models.py:414
+msgid "Every day, for the issues the condition matches"
+msgstr "Κάθε μέρα, για τα issues που ταιριάζει η συνθήκη"
+
+#: .\apps\issues\models.py:417
+#: .\apps\issues\templates\issues\issue_list.html:46
+msgid "Move to status"
+msgstr "Μετακίνηση σε κατάσταση"
+
+#: .\apps\issues\models.py:418
+#: .\apps\issues\templates\issues\issue_list.html:48
+msgid "Set priority"
+msgstr "Ορισμός προτεραιότητας"
+
+#: .\apps\issues\models.py:419
+msgid "Assign to (member id, or none)"
+msgstr "Ανάθεση σε (κωδικός μέλους ή none)"
+
+#: .\apps\issues\models.py:420
+msgid "Add a comment"
+msgstr "Προσθήκη σχολίου"
+
+#: .\apps\issues\models.py:424
+msgid "Enabled"
+msgstr "Ενεργός"
+
+#: .\apps\issues\models.py:425
+#: .\apps\issues\templates\issues\automation.html:12
+#: .\apps\issues\templates\issues\automation.html:24
+msgid "When"
+msgstr "Πότε"
+
+#: .\apps\issues\models.py:426
+msgid "If (query)"
+msgstr "Αν (ερώτημα)"
+
+#: .\apps\issues\models.py:427
+msgid ""
+"A query in the list's language, for example type = bug. Empty means always."
+msgstr "Ερώτημα στη γλώσσα της λίστας, π.χ. type = bug. Κενό σημαίνει πάντα."
+
+#: .\apps\issues\models.py:428
+#: .\apps\issues\templates\issues\automation.html:15
+#: .\apps\issues\templates\issues\automation.html:24
+msgid "Then"
+msgstr "Τότε"
+
+#: .\apps\issues\models.py:429
+#: .\apps\issues\templates\issues\automation.html:17
+#: .\apps\issues\templates\issues\issue_list.html:51
+msgid "Value"
+msgstr "Τιμή"
+
+#: .\apps\issues\query.py:46
+#, python-format
+msgid "Unexpected text near “%(text)s”."
+msgstr "Μη αναμενόμενο κείμενο κοντά στο “%(text)s”."
+
+#: .\apps\issues\query.py:78
+#, python-format
+msgid "Expected “%(op)s”."
+msgstr "Αναμενόταν “%(op)s”."
+
+#: .\apps\issues\query.py:106
+msgid "A value is missing."
+msgstr "Λείπει μια τιμή."
+
+#: .\apps\issues\query.py:113
+#, python-format
+msgid "Unknown function %(name)s()."
+msgstr "Άγνωστη συνάρτηση %(name)s()."
+
+#: .\apps\issues\query.py:119
+msgid "Expected a field name."
+msgstr "Αναμένεται όνομα πεδίου."
+
+#: .\apps\issues\query.py:124
+#, python-format
+msgid "Unknown field “%(field)s”."
+msgstr "Άγνωστο πεδίο “%(field)s”."
+
+#: .\apps\issues\query.py:132
+msgid "Expected EMPTY after IS."
+msgstr "Μετά το IS αναμένεται EMPTY."
+
+#: .\apps\issues\query.py:145
+#, python-format
+msgid "Expected an operator after “%(field)s”."
+msgstr "Μετά το “%(field)s” αναμένεται τελεστής."
+
+#: .\apps\issues\query.py:168
+#, python-format
+msgid "EMPTY does not apply to “%(field)s”."
+msgstr "Το EMPTY δεν ισχύει για το “%(field)s”."
+
+#: .\apps\issues\query.py:180
+msgid "A key looks like KEY-12."
+msgstr "Το κλειδί μοιάζει με KEY-12."
+
+#: .\apps\issues\query.py:184
+#, python-format
+msgid "Unknown type “%(value)s”."
+msgstr "Άγνωστος τύπος “%(value)s”."
+
+#: .\apps\issues\query.py:188
+#, python-format
+msgid "Unknown priority “%(value)s”."
+msgstr "Άγνωστη προτεραιότητα “%(value)s”."
+
+#: .\apps\issues\query.py:198
+msgid "text supports ~ and !~ only."
+msgstr "Το text δέχεται μόνο ~ και !~."
+
+#: .\apps\issues\query.py:206
+#, python-format
+msgid "%(field)s supports = and != only."
+msgstr "Το %(field)s δέχεται μόνο = και !=."
+
+#: .\apps\issues\query.py:210
+msgid "An epic looks like KEY-12."
+msgstr "Το epic μοιάζει με KEY-12."
+
+#: .\apps\issues\query.py:220
+#, python-format
+msgid "%(field)s does not support %(op)s."
+msgstr "Το %(field)s δεν δέχεται %(op)s."
+
+#: .\apps\issues\query.py:227
+#, python-format
+msgid "%(column)s supports = and != only."
+msgstr "Το %(column)s δέχεται μόνο = και !=."
+
+#: .\apps\issues\query.py:234
+msgid "This field supports ~ and !~ only."
+msgstr "Αυτό το πεδίο δέχεται μόνο ~ και !~."
+
+#: .\apps\issues\query.py:240
+#, python-format
+msgid "“%(value)s” is not a date (use YYYY-MM-DD)."
+msgstr "“%(value)s” δεν είναι ημερομηνία (χρησιμοποιήστε YYYY-MM-DD)."
+
+#: .\apps\issues\query.py:243
+#, python-format
+msgid "Dates support = != < > <= >=, not %(op)s."
+msgstr "Οι ημερομηνίες δέχονται = != < > <= >=, όχι %(op)s."
+
+#: .\apps\issues\query.py:264
+msgid "ORDER BY takes a field and optionally ASC or DESC."
+msgstr "Το ORDER BY θέλει ένα πεδίο και προαιρετικά ASC ή DESC."
+
+#: .\apps\issues\query.py:267
+#, python-format
+msgid "Cannot order by “%(field)s”."
+msgstr "Δεν γίνεται ταξινόμηση κατά “%(field)s”."
+
+#: .\apps\issues\query.py:270
+msgid "Use ASC or DESC."
+msgstr "Χρησιμοποιήστε ASC ή DESC."
+
+#: .\apps\issues\query.py:279
+msgid "Something after the end of the query is not understood."
+msgstr "Κάτι μετά το τέλος του ερωτήματος δεν είναι κατανοητό."
+
+#: .\apps\issues\services.py:154 .\apps\issues\workflow.py:262
+msgid "Unknown status."
+msgstr "Άγνωστη κατάσταση."
+
+#: .\apps\issues\services.py:160
+#, python-format
+msgid "Cannot move from %(old)s to %(new)s."
+msgstr "Δεν επιτρέπεται η μετάβαση από %(old)s σε %(new)s."
+
+#: .\apps\issues\services.py:233
+msgid "An issue cannot be linked to itself."
+msgstr "Ένα issue δεν μπορεί να συνδεθεί με τον εαυτό του."
+
+#: .\apps\issues\services.py:235
+msgid "Only Test issues can use the 'tests' link."
+msgstr "Μόνο τα Test issues μπορούν να χρησιμοποιήσουν τη σύνδεση 'ελέγχει'."
+
+#: .\apps\issues\templates\issues\automation.html:3
+#: .\apps\issues\templates\issues\automation.html:5 .\templates\base.html:93
+msgid "Automation"
+msgstr "Αυτοματισμοί"
+
+#: .\apps\issues\templates\issues\automation.html:6
+msgid ""
+"A rule runs right after the change that triggers it. If the condition "
+"matches, its one action is done on the issue. A change made by a rule does "
+"not start other rules."
+msgstr ""
+"Ένας κανόνας τρέχει αμέσως μετά την αλλαγή που τον ενεργοποιεί. Αν ισχύει η "
+"συνθήκη, γίνεται η μία του ενέργεια στο issue. Μια αλλαγή που κάνει κανόνας "
+"δεν ενεργοποιεί άλλους κανόνες."
+
+#: .\apps\issues\templates\issues\automation.html:8
+msgid "Add a rule"
+msgstr "Προσθήκη κανόνα"
+
+#: .\apps\issues\templates\issues\automation.html:14
+msgid "If (query, optional)"
+msgstr "Αν (ερώτημα, προαιρετικό)"
+
+#: .\apps\issues\templates\issues\automation.html:17
+msgid "status key, priority, member id or none, or comment text"
+msgstr ""
+"κλειδί κατάστασης, προτεραιότητα, κωδικός μέλους ή none, ή κείμενο "
+"σχολίουκλειδί κατάστασης, προτεραιότητα, κωδικός μέλους ή none, ή κείμενο "
+"σχολίου"
+
+#: .\apps\issues\templates\issues\automation.html:18
+msgid "Add rule"
+msgstr "Προσθήκη κανόνα"
+
+#: .\apps\issues\templates\issues\automation.html:24
+msgid "If"
+msgstr "Αν"
+
+#: .\apps\issues\templates\issues\automation.html:28
+msgid "off"
+msgstr "ανενεργός"
+
+#: .\apps\issues\templates\issues\automation.html:34
+msgid "Turn off"
+msgstr "Απενεργοποίηση"
+
+#: .\apps\issues\templates\issues\automation.html:34
+msgid "Turn on"
+msgstr "Ενεργοποίηση"
+
+#: .\apps\issues\templates\issues\automation.html:42
+msgid "No rules yet."
+msgstr "Δεν υπάρχουν κανόνες ακόμα."
+
+#: .\apps\issues\templates\issues\issue_detail.html:15
+msgid "Unwatch"
+msgstr "Διακοπή παρακολούθησης"
+
+#: .\apps\issues\templates\issues\issue_detail.html:15
+msgid "Watch"
+msgstr "Παρακολούθηση"
+
+#: .\apps\issues\templates\issues\issue_detail.html:19
+msgid "Issue in epic"
+msgstr "Issue στο epic"
+
+#: .\apps\issues\templates\issues\issue_detail.html:21
+msgid "Delete this issue permanently?"
+msgstr "Οριστική διαγραφή του issue;"
+
+#: .\apps\issues\templates\issues\issue_detail.html:30
+msgid "No description."
+msgstr "Χωρίς περιγραφή."
+
+#: .\apps\issues\templates\issues\issue_detail.html:35
+#: .\apps\testmgmt\templates\testmgmt\test_steps.html:3
+#: .\apps\testmgmt\templates\testmgmt\test_steps.html:6
+msgid "Test steps"
+msgstr "Βήματα test"
+
+#: .\apps\issues\templates\issues\issue_detail.html:35
+msgid "Edit steps"
+msgstr "Επεξεργασία βημάτων"
+
+#: .\apps\issues\templates\issues\issue_detail.html:38
+#: .\apps\testmgmt\models.py:21
+#: .\apps\testmgmt\templates\testmgmt\test_steps.html:12
+msgid "Action"
+msgstr "Ενέργεια"
+
+#: .\apps\issues\templates\issues\issue_detail.html:38
+#: .\apps\testmgmt\models.py:22
+#: .\apps\testmgmt\templates\testmgmt\test_steps.html:12
+msgid "Test data"
+msgstr "Δεδομένα"
+
+#: .\apps\issues\templates\issues\issue_detail.html:38
+#: .\apps\testmgmt\models.py:23
+#: .\apps\testmgmt\templates\testmgmt\test_steps.html:12
+msgid "Expected result"
+msgstr "Αναμενόμενο αποτέλεσμα"
+
+#: .\apps\issues\templates\issues\issue_detail.html:41
+msgid "No steps defined yet."
+msgstr "Δεν έχουν οριστεί βήματα."
+
+#: .\apps\issues\templates\issues\issue_detail.html:42
+msgid "Covers requirements"
+msgstr "Καλύπτει απαιτήσεις"
+
+#: .\apps\issues\templates\issues\issue_detail.html:43
+msgid "Link this test to a story with the “tests” link type below."
+msgstr "Συνδέστε το test με ένα story με τον τύπο σύνδεσης «ελέγχει» παρακάτω."
+
+#: .\apps\issues\templates\issues\issue_detail.html:44
+msgid "Recent runs"
+msgstr "Πρόσφατες εκτελέσεις"
+
+#: .\apps\issues\templates\issues\issue_detail.html:47
+msgid "Never executed."
+msgstr "Δεν έχει εκτελεστεί."
+
+#: .\apps\issues\templates\issues\issue_detail.html:53
+msgid "Test coverage"
+msgstr "Κάλυψη από tests"
+
+#: .\apps\issues\templates\issues\issue_detail.html:55
+#: .\apps\testmgmt\services.py:21
+#: .\apps\testmgmt\templates\testmgmt\coverage.html:25
+#: .\apps\testmgmt\templates\testmgmt\plan_detail.html:15
+#: .\apps\testmgmt\templates\testmgmt\plan_detail.html:25
+msgid "Not run"
+msgstr "Δεν εκτελέστηκε"
+
+#: .\apps\issues\templates\issues\issue_detail.html:57
+msgid "No tests cover this issue yet."
+msgstr "Κανένα test δεν καλύπτει ακόμα αυτό το issue."
+
+#: .\apps\issues\templates\issues\issue_detail.html:57
+msgid "Create a test"
+msgstr "Δημιουργία test"
+
+#: .\apps\issues\templates\issues\issue_detail.html:64
+msgid "Sub-tasks"
+msgstr "Sub-tasks"
+
+#: .\apps\issues\templates\issues\issue_detail.html:67
+msgid "No sub-tasks."
+msgstr "Χωρίς sub-tasks."
+
+#: .\apps\issues\templates\issues\issue_detail.html:73
+msgid "Issues in this epic"
+msgstr "Issues σε αυτό το epic"
+
+#: .\apps\issues\templates\issues\issue_detail.html:76
+msgid "No issues yet."
+msgstr "Δεν υπάρχουν issues ακόμα."
+
+#: .\apps\issues\templates\issues\issue_detail.html:81
+#: .\apps\wiki\templates\wiki\page_detail.html:34
+msgid "Linked issues"
+msgstr "Συνδεδεμένα issues"
+
+#: .\apps\issues\templates\issues\issue_detail.html:85
+#: .\apps\issues\templates\issues\issue_detail.html:91
+msgid "Remove link"
+msgstr "Αφαίρεση σύνδεσης"
+
+#: .\apps\issues\templates\issues\issue_detail.html:94
+msgid "No links."
+msgstr "Χωρίς συνδέσεις."
+
+#: .\apps\issues\templates\issues\issue_detail.html:100
+msgid "Link"
+msgstr "Σύνδεση"
+
+#: .\apps\issues\templates\issues\issue_detail.html:107
+msgid "Mentioned in wiki pages"
+msgstr "Αναφέρεται σε σελίδες wiki"
+
+#: .\apps\issues\templates\issues\issue_detail.html:113
+msgid "Attachments"
+msgstr "Συνημμένα"
+
+#: .\apps\issues\templates\issues\issue_detail.html:117
+msgid "Delete this attachment?"
+msgstr "Διαγραφή συνημμένου;"
+
+#: .\apps\issues\templates\issues\issue_detail.html:119
+msgid "No attachments."
+msgstr "Χωρίς συνημμένα."
+
+#: .\apps\issues\templates\issues\issue_detail.html:123
+#: .\apps\issues\templates\issues\issue_import.html:49
+msgid "Upload"
+msgstr "Ανέβασμα"
+
+#: .\apps\issues\templates\issues\issue_detail.html:130
+msgid "Comments"
+msgstr "Σχόλια"
+
+#: .\apps\issues\templates\issues\issue_detail.html:131
+#: .\apps\wiki\templates\wiki\page_detail.html:15
+#: .\apps\wiki\templates\wiki\page_history.html:3
+#: .\apps\wiki\templates\wiki\page_version.html:5
+msgid "History"
+msgstr "Ιστορικό"
+
+#: .\apps\issues\templates\issues\issue_detail.html:138
+msgid "Deleted user"
+msgstr "Διαγραμμένος χρήστης"
+
+#: .\apps\issues\templates\issues\issue_detail.html:139
+msgid "Delete this comment?"
+msgstr "Διαγραφή σχολίου;"
+
+#: .\apps\issues\templates\issues\issue_detail.html:144
+msgid "No comments yet."
+msgstr "Δεν υπάρχουν σχόλια."
+
+#: .\apps\issues\templates\issues\issue_detail.html:197
+#: .\apps\testmgmt\templates\testmgmt\execution_list.html:11
+#: .\apps\testmgmt\templates\testmgmt\plan_list.html:14 .\apps\wiki\views.py:68
+msgid "Created"
+msgstr "Δημιουργήθηκε"
+
+#: .\apps\issues\templates\issues\issue_detail.html:198
+msgid "Updated"
+msgstr "Ενημερώθηκε"
+
+#: .\apps\issues\templates\issues\issue_detail.html:199
+msgid "Resolved"
+msgstr "Επιλύθηκε"
+
+#: .\apps\issues\templates\issues\issue_detail.html:200
+msgid "Watchers"
+msgstr "Παρακολουθούν"
+
+#: .\apps\issues\templates\issues\issue_form.html:15
+#: .\apps\projects\templates\projects\settings.html:12
+msgid "Custom fields"
+msgstr "Προσαρμοσμένα πεδία"
+
+#: .\apps\issues\templates\issues\issue_form.html:20
+msgid "Create & add another"
+msgstr "Δημιουργία & νέο"
+
+#: .\apps\issues\templates\issues\issue_import.html:3
+msgid "Import issues"
+msgstr "Εισαγωγή issues"
+
+#: .\apps\issues\templates\issues\issue_import.html:8
+msgid "Import issues from CSV"
+msgstr "Εισαγωγή issues από CSV"
+
+#: .\apps\issues\templates\issues\issue_import.html:9
+msgid "Bulk-create issues for"
+msgstr "Μαζική δημιουργία issues για"
+
+#: .\apps\issues\templates\issues\issue_import.html:13
+msgid "Template"
+msgstr "Template"
+
+#: .\apps\issues\templates\issues\issue_import.html:20
+msgid "How it works"
+msgstr "Πώς λειτουργεί"
+
+#: .\apps\issues\templates\issues\issue_import.html:22
+msgid ""
+"Download the template in the format you like: Excel (.xlsx), CSV or JSON."
+msgstr ""
+"Κατεβάστε το template στη μορφή που προτιμάτε: Excel (.xlsx), CSV ή JSON."
+
+#: .\apps\issues\templates\issues\issue_import.html:23
+msgid ""
+"Fill one issue per row. Keep the header row. Delete the 5 example rows first "
+"- they refer to sample names."
+msgstr ""
+"Συμπληρώστε ένα issue ανά γραμμή. Κρατήστε τη γραμμή επικεφαλίδων. Διαγράψτε "
+"πρώτα τις 5 γραμμές παραδείγματος - αναφέρονται σε δείγμα ονομάτων."
+
+#: .\apps\issues\templates\issues\issue_import.html:24
+msgid "Keep the file format of the template (.xlsx, .csv or .json)."
+msgstr "Κρατήστε τη μορφή αρχείου του template (.xlsx, .csv ή .json)."
+
+#: .\apps\issues\templates\issues\issue_import.html:25
+msgid ""
+"Upload it here. If any row is wrong, nothing is imported and every error is "
+"listed."
+msgstr ""
+"Ανεβάστε το εδώ. Αν μία γραμμή είναι λάθος, δεν εισάγεται τίποτα και "
+"εμφανίζονται όλα τα λάθη."
+
+#: .\apps\issues\templates\issues\issue_import.html:31
+msgid "epic, story, task, bug, subtask or test"
+msgstr "epic, story, task, bug, subtask ή test"
+
+#: .\apps\issues\templates\issues\issue_import.html:32
+msgid "Summary, up to 255 characters"
+msgstr "Τίτλος, έως 255 χαρακτήρες"
+
+#: .\apps\issues\templates\issues\issue_import.html:33
+msgid "Markdown is supported"
+msgstr "Υποστηρίζεται Markdown"
+
+#: .\apps\issues\templates\issues\issue_import.html:34
+msgid "default medium"
+msgstr "προεπιλογή medium"
+
+#: .\apps\issues\templates\issues\issue_import.html:35
+msgid "Email or handle of a project member"
+msgstr "Email ή ψευδώνυμο μέλους του project"
+
+#: .\apps\issues\templates\issues\issue_import.html:36
+msgid "Key of an epic in this project, e.g."
+msgstr "Κλειδί epic αυτού του project, π.χ."
+
+#: .\apps\issues\templates\issues\issue_import.html:37
+msgid "Key of the parent issue (required for sub-tasks)"
+msgstr "Κλειδί του γονικού issue (υποχρεωτικό για sub-tasks)"
+
+#: .\apps\issues\templates\issues\issue_import.html:38
+msgid "Name of an open sprint"
+msgstr "Όνομα ανοιχτού sprint"
+
+#: .\apps\issues\templates\issues\issue_import.html:41
+msgid "Names separated by semicolons (;)"
+msgstr "Ονόματα χωρισμένα με ερωτηματικό (;)"
+
+#: .\apps\issues\templates\issues\issue_import.html:42
+msgid "A custom field of this project, e.g. cf_environment"
+msgstr "Προσαρμοσμένο πεδίο αυτού του project, π.χ. cf_environment"
+
+#: .\apps\issues\templates\issues\issue_import.html:45
+msgid ""
+"Maximum 500 rows and 1 MB per file. Workflow status always starts as To Do."
+msgstr ""
+"Έως 500 γραμμές και 1 MB ανά αρχείο. Η κατάσταση ξεκινά πάντα ως Προς "
+"υλοποίηση."
+
+#: .\apps\issues\templates\issues\issue_import.html:52
+msgid "CSV file"
+msgstr "Αρχείο CSV"
+
+#: .\apps\issues\templates\issues\issue_import.html:55
+msgid "Import"
+msgstr "Εισαγωγή"
+
+#: .\apps\issues\templates\issues\issue_import.html:59
+#, python-format
+msgid "%(n)s row with errors"
+msgid_plural "%(n)s rows with errors"
+msgstr[0] "%(n)s γραμμή με σφάλματα"
+msgstr[1] "%(n)s γραμμές με σφάλματα"
+
+#: .\apps\issues\templates\issues\issue_import.html:62
+msgid "Line"
+msgstr "Γραμμή"
+
+#: .\apps\issues\templates\issues\issue_import.html:62
+msgid "Problems"
+msgstr "Προβλήματα"
+
+#: .\apps\issues\templates\issues\issue_list.html:8
+msgid "Import CSV"
+msgstr "Εισαγωγή CSV"
+
+#: .\apps\issues\templates\issues\issue_list.html:13
+msgid "Search…"
+msgstr "Αναζήτηση…"
+
+#: .\apps\issues\templates\issues\issue_list.html:14
+msgid ""
+"Query, e.g. type = bug AND assignee = currentUser() ORDER BY updated DESC"
+msgstr ""
+"Ερώτημα, π.χ. type = bug AND assignee = currentUser() ORDER BY updated DESC"
+
+#: .\apps\issues\templates\issues\issue_list.html:17
+msgid "Any status"
+msgstr "Οποιαδήποτε κατάσταση"
+
+#: .\apps\issues\templates\issues\issue_list.html:18
+msgid "Open (not done)"
+msgstr "Ανοιχτά (μη ολοκληρωμένα)"
+
+#: .\apps\issues\templates\issues\issue_list.html:21
+msgid "Any priority"
+msgstr "Οποιαδήποτε προτεραιότητα"
+
+#: .\apps\issues\templates\issues\issue_list.html:23
+msgid "Anyone"
+msgstr "Οποιοσδήποτε"
+
+#: .\apps\issues\templates\issues\issue_list.html:28
+msgid "Any label"
+msgstr "Οποιαδήποτε ετικέτα"
+
+#: .\apps\issues\templates\issues\issue_list.html:29
+msgid "Any component"
+msgstr "Οποιοδήποτε component"
+
+#: .\apps\issues\templates\issues\issue_list.html:30
+msgid "Any version"
+msgstr "Οποιαδήποτε έκδοση"
+
+#: .\apps\issues\templates\issues\issue_list.html:31
+msgid "Any epic"
+msgstr "Οποιοδήποτε epic"
+
+#: .\apps\issues\templates\issues\issue_list.html:33
+#: .\apps\projects\templates\projects\project_detail.html:69
+#: .\apps\wiki\templates\wiki\space_home.html:22
+msgid "Recently updated"
+msgstr "Πρόσφατα ενημερωμένα"
+
+#: .\apps\issues\templates\issues\issue_list.html:34
+msgid "Recently created"
+msgstr "Πρόσφατα δημιουργημένα"
+
+#: .\apps\issues\templates\issues\issue_list.html:38
+msgid "Filter"
+msgstr "Φίλτρο"
+
+#: .\apps\issues\templates\issues\issue_list.html:39
+msgid "Reset"
+msgstr "Καθαρισμός"
+
+#: .\apps\issues\templates\issues\issue_list.html:40
+msgid "Export CSV"
+msgstr "Εξαγωγή CSV"
+
+#: .\apps\issues\templates\issues\issue_list.html:44
+msgid "Bulk action"
+msgstr "Μαζική ενέργεια"
+
+#: .\apps\issues\templates\issues\issue_list.html:45
+msgid "Bulk action…"
+msgstr "Μαζική ενέργεια…"
+
+#: .\apps\issues\templates\issues\issue_list.html:47
+msgid "Assign to"
+msgstr "Ανάθεση σε"
+
+#: .\apps\issues\templates\issues\issue_list.html:53
+msgid "Status:"
+msgstr "Κατάσταση:"
+
+#: .\apps\issues\templates\issues\issue_list.html:54
+msgid "Nobody"
+msgstr "Κανένας"
+
+#: .\apps\issues\templates\issues\issue_list.html:55
+msgid "Member:"
+msgstr "Μέλος:"
+
+#: .\apps\issues\templates\issues\issue_list.html:56
+msgid "Priority:"
+msgstr "Προτεραιότητα:"
+
+#: .\apps\issues\templates\issues\issue_list.html:58
+msgid "Apply to selected"
+msgstr "Εφαρμογή στις επιλεγμένες"
+
+#: .\apps\issues\templates\issues\issue_list.html:63
+msgid "Saved filters"
+msgstr "Αποθηκευμένα φίλτρα"
+
+#: .\apps\issues\templates\issues\issue_list.html:64
+msgid "shared"
+msgstr "κοινόχρηστο"
+
+#: .\apps\issues\templates\issues\issue_list.html:69
+msgid "Name this filter"
+msgstr "Όνομα για αυτό το φίλτρο"
+
+#: .\apps\issues\templates\issues\issue_list.html:70
+msgid "Shared"
+msgstr "Κοινόχρηστο"
+
+#: .\apps\issues\templates\issues\issue_list.html:71
+msgid "Save filter"
+msgstr "Αποθήκευση φίλτρου"
+
+#: .\apps\issues\templates\issues\issue_list.html:82
+msgid "Previous"
+msgstr "Προηγούμενη"
+
+#: .\apps\issues\templates\issues\issue_list.html:83
+#, python-format
+msgid "Page %(n)s of %(total)s"
+msgstr "Σελίδα %(n)s από %(total)s"
+
+#: .\apps\issues\templates\issues\issue_list.html:84
+msgid "Next"
+msgstr "Επόμενη"
+
+#: .\apps\issues\templates\issues\issue_list.html:95
+msgid "The change was refused."
+msgstr "Η αλλαγή απορρίφθηκε."
+
+#: .\apps\issues\templates\issues\releases.html:3
+#: .\apps\issues\templates\issues\releases.html:5 .\templates\base.html:76
+msgid "Releases"
+msgstr "Εκδόσεις"
+
+#: .\apps\issues\templates\issues\releases.html:9 .\apps\testmgmt\models.py:37
+#: .\apps\testmgmt\models.py:91
+#: .\apps\testmgmt\templates\testmgmt\plan_detail.html:7
+#: .\apps\testmgmt\templates\testmgmt\plan_list.html:14
+#: .\apps\wiki\templates\wiki\page_history.html:9
+msgid "Version"
+msgstr "Έκδοση"
+
+#: .\apps\issues\templates\issues\releases.html:9 .\apps\issues\views.py:581
+#: .\apps\projects\models.py:106
+msgid "Release date"
+msgstr "Ημερομηνία έκδοσης"
+
+#: .\apps\issues\templates\issues\releases.html:9
+#: .\apps\testmgmt\templates\testmgmt\execution_list.html:11
+msgid "Progress"
+msgstr "Πρόοδος"
+
+#: .\apps\issues\templates\issues\releases.html:22
+msgid "Release notes"
+msgstr "Σημειώσεις έκδοσης"
+
+#: .\apps\issues\templates\issues\releases.html:29
+msgid "No versions yet. Add them in the project settings."
+msgstr "Δεν υπάρχουν εκδόσεις ακόμα. Προσθέστε τις στις ρυθμίσεις του project."
+
+#: .\apps\issues\templates\issues\timeline.html:3
+#: .\apps\issues\templates\issues\timeline.html:15 .\templates\base.html:77
+msgid "Timeline"
+msgstr "Χρονοδιάγραμμα"
+
+#: .\apps\issues\templates\issues\timeline.html:21
+msgid ""
+"A bar runs from the start date to the due date. Set the dates in the issue "
+"form. Issues without any date are not shown here."
+msgstr ""
+"Μια μπάρα ξεκινά από την ημερομηνία έναρξης και τελειώνει στην ημερομηνία "
+"λήξης. Ορίστε τις ημερομηνίες στη φόρμα του issue. Τα issues χωρίς "
+"ημερομηνία δεν εμφανίζονται εδώ."
+
+#: .\apps\issues\templates\issues\timeline.html:21
+#, python-format
+msgid "%(n)s issues have no date."
+msgstr "%(n)s εργασίες δεν έχουν ημερομηνία."
+
+#: .\apps\issues\templates\issues\timeline.html:34
+msgid "No issues with dates yet."
+msgstr "Δεν υπάρχουν εργασίες με ημερομηνίες ακόμα."
+
+#: .\apps\issues\templates\issues\webhooks.html:3
+#: .\apps\issues\templates\issues\webhooks.html:6 .\templates\base.html:92
+msgid "Webhooks"
+msgstr "Webhooks"
+
+#: .\apps\issues\templates\issues\webhooks.html:8
+msgid ""
+"A signed JSON POST goes to each address when the chosen events happen. The "
+"signature is the HMAC-SHA256 of the body, in the X-Mpira-Signature header, "
+"with the signing secret."
+msgstr ""
+"Ένα υπογεγραμμένο JSON POST στέλνεται σε κάθε διεύθυνση όταν συμβαίνουν τα "
+"επιλεγμένα γεγονότα. Η υπογραφή είναι το HMAC-SHA256 του σώματος, στην "
+"κεφαλίδα X-Mpira-Signature, με το μυστικό υπογραφής."
+
+#: .\apps\issues\templates\issues\webhooks.html:10
+msgid "Add a webhook"
+msgstr "Προσθήκη webhook"
+
+#: .\apps\issues\templates\issues\webhooks.html:13
+msgid "Address (https only)"
+msgstr "Διεύθυνση (μόνο https)"
+
+#: .\apps\issues\templates\issues\webhooks.html:24
+msgid "Last result"
+msgstr "Τελευταίο αποτέλεσμα"
+
+#: .\apps\issues\templates\issues\webhooks.html:33
+msgid "Delete this webhook?"
+msgstr "Διαγραφή αυτού του webhook;"
+
+#: .\apps\issues\templates\issues\webhooks.html:40
+msgid "No webhooks yet."
+msgstr "Δεν υπάρχουν webhooks ακόμα."
+
+#: .\apps\issues\templates\issues\workflow.html:3
+#: .\apps\issues\templates\issues\workflow.html:8
+msgid "Statuses & workflow"
+msgstr "Καταστάσεις & workflow"
+
+#: .\apps\issues\templates\issues\workflow.html:9
+msgid ""
+"Add the statuses your team needs, decide which ones count as done, and which "
+"status may follow which."
+msgstr ""
+"Προσθέστε τις καταστάσεις που χρειάζεται η ομάδα σας, ορίστε ποιες μετράνε "
+"ως ολοκληρωμένες και ποια κατάσταση μπορεί να ακολουθεί ποια."
+
+#: .\apps\issues\templates\issues\workflow.html:17
+#: .\apps\issues\templates\issues\workflow.html:25
+#: .\apps\issues\templates\issues\workflow.html:30
+msgid "Start"
+msgstr "Έναρξη"
+
+#: .\apps\issues\templates\issues\workflow.html:25
+msgid "New issues start here"
+msgstr "Τα νέα issues ξεκινούν εδώ"
+
+#: .\apps\issues\templates\issues\workflow.html:35
+msgid "Delete this status? Its issues move to the status you choose."
+msgstr ""
+"Διαγραφή αυτής της κατάστασης; Οι εργασίες της μεταφέρονται στην κατάσταση "
+"που θα επιλέξετε.Διαγραφή αυτής της κατάστασης; Οι εργασίες της μεταφέρονται "
+"στην κατάσταση που θα επιλέξετε.Διαγραφή αυτής της κατάστασης; Οι εργασίες "
+"της μεταφέρονται στην κατάσταση που θα επιλέξετε.Διαγραφή αυτής της "
+"κατάστασης; Οι εργασίες της μεταφέρονται στην κατάσταση που θα "
+"επιλέξετε.Διαγραφή αυτής της κατάστασης; Οι εργασίες της μεταφέρονται στην "
+"κατάσταση που θα επιλέξετε.Διαγραφή κατάστασης; Τα issues της θα μεταφερθούν "
+"στην κατάσταση που θα επιλέξετε."
+
+#: .\apps\issues\templates\issues\workflow.html:39
+msgid "Move issues to…"
+msgstr "Μεταφορά issues σε…"
+
+#: .\apps\issues\templates\issues\workflow.html:56
+#: .\apps\issues\templates\issues\workflow.html:64
+msgid "Add status"
+msgstr "Προσθήκη κατάστασης"
+
+#: .\apps\issues\templates\issues\workflow.html:59
+msgid "e.g. QA"
+msgstr "π.χ. QA"
+
+#: .\apps\issues\templates\issues\workflow.html:60
+msgid "Board column"
+msgstr "Στήλη board"
+
+#: .\apps\issues\templates\issues\workflow.html:66
+msgid ""
+"A new status can be reached from and can move to every other status. Adjust "
+"that in the transitions table below."
+msgstr ""
+"Μια νέα κατάσταση μπορεί να φτάσει από και προς κάθε άλλη κατάσταση. Αλλάξτε "
+"το στον πίνακα μεταβάσεων παρακάτω."
+
+#: .\apps\issues\templates\issues\workflow.html:71
+msgid "Transitions"
+msgstr "Μεταβάσεις"
+
+#: .\apps\issues\templates\issues\workflow.html:71
+msgid "Row = from, column = to. Checked boxes are allowed moves."
+msgstr ""
+"Γραμμή = από, στήλη = προς. Τα επιλεγμένα πλαίσια είναι επιτρεπτές "
+"μεταβάσεις.Γραμμή = από, στήλη = προς. Τα επιλεγμένα πλαίσια είναι "
+"επιτρεπτές μεταβάσεις.Γραμμή = από, στήλη = προς. Τα επιλεγμένα πλαίσια "
+"είναι επιτρεπτές μεταβάσεις.Γραμμή = από, στήλη = προς. Τα επιλεγμένα "
+"πλαίσια είναι επιτρεπτές μεταβάσεις.Γραμμή = από, στήλη = προς. Τα "
+"επιλεγμένα πλαίσια είναι επιτρεπτές μεταβάσεις.Γραμμή = από, στήλη = προς. "
+"Τα επιλεγμένα κουτιά είναι επιτρεπτές κινήσεις."
+
+#: .\apps\issues\templates\issues\workflow.html:77
+msgid "From \\ To"
+msgstr "Από \\ Προς"
+
+#: .\apps\issues\templates\issues\workflow.html:95
+msgid "Save transitions"
+msgstr "Αποθήκευση μεταβάσεων"
+
+#: .\apps\issues\views.py:99
+#, python-format
+msgid "Created %(key)s."
+msgstr "Δημιουργήθηκε το %(key)s."
+
+#: .\apps\issues\views.py:116 .\apps\projects\views.py:233
+msgid "Saved."
+msgstr "Αποθηκεύτηκε."
+
+#: .\apps\issues\views.py:167
+#, python-format
+msgid "Deleted %(key)s."
+msgstr "Διαγράφηκε το %(key)s."
+
+#: .\apps\issues\views.py:190
+msgid "The comment cannot be empty."
+msgstr "Το σχόλιο δεν μπορεί να είναι κενό."
+
+#: .\apps\issues\views.py:202
+msgid "Comment deleted."
+msgstr "Το σχόλιο διαγράφηκε."
+
+#: .\apps\issues\views.py:217
+msgid "File attached."
+msgstr "Το αρχείο επισυνάφθηκε."
+
+#: .\apps\issues\views.py:247
+msgid "Attachment deleted."
+msgstr "Το συνημμένο διαγράφηκε."
+
+#: .\apps\issues\views.py:257
+msgid "Invalid link."
+msgstr "Μη έγκυρη σύνδεση."
+
+#: .\apps\issues\views.py:266
+#, python-format
+msgid "Issue %(key)s not found."
+msgstr "Το issue %(key)s δεν βρέθηκε."
+
+#: .\apps\issues\views.py:273
+msgid "Link added."
+msgstr "Η σύνδεση προστέθηκε."
+
+#: .\apps\issues\views.py:285
+msgid "Link removed."
+msgstr "Η σύνδεση αφαιρέθηκε."
+
+#: .\apps\issues\views.py:318
+msgid "Choose a CSV file first."
+msgstr "Επιλέξτε πρώτα ένα αρχείο CSV."
+
+#: .\apps\issues\views.py:328
+#, python-format
+msgid ""
+"Nothing was imported. Fix the %(n)s row(s) below and upload the file again."
+msgstr ""
+"Δεν εισήχθη τίποτα. Διορθώστε τις %(n)s γραμμές και ανεβάστε ξανά το αρχείο."
+
+#: .\apps\issues\views.py:334
+#, python-format
+msgid "Imported %(n)s issues."
+msgstr "Εισήχθησαν %(n)s issues."
+
+#: .\apps\issues\views.py:364
+msgid "Status added."
+msgstr "Η κατάσταση προστέθηκε."
+
+#: .\apps\issues\views.py:373
+msgid "Status saved."
+msgstr "Η κατάσταση αποθηκεύτηκε."
+
+#: .\apps\issues\views.py:381
+msgid "Status deleted."
+msgstr "Η κατάσταση διαγράφηκε."
+
+#: .\apps\issues\views.py:390
+msgid "Transitions saved."
+msgstr "Οι μεταβάσεις αποθηκεύτηκαν."
+
+#: .\apps\issues\views.py:486
+msgid "Give the filter a name."
+msgstr "Δώστε όνομα στο φίλτρο."
+
+#: .\apps\issues\views.py:490
+msgid "There are no filters to save."
+msgstr "Δεν υπάρχουν φίλτρα για αποθήκευση."
+
+#: .\apps\issues\views.py:496
+msgid "Filter saved."
+msgstr "Το φίλτρο αποθηκεύτηκε."
+
+#: .\apps\issues\views.py:496
+msgid "Filter updated."
+msgstr "Το φίλτρο ενημερώθηκε."
+
+#: .\apps\issues\views.py:507
+msgid "Filter deleted."
+msgstr "Το φίλτρο διαγράφηκε."
+
+#: .\apps\issues\views.py:524
+msgid "The address is required."
+msgstr "Η διεύθυνση είναι υποχρεωτική."
+
+#: .\apps\issues\views.py:528
+msgid "Choose at least one event."
+msgstr "Επιλέξτε τουλάχιστον ένα γεγονός."
+
+#: .\apps\issues\views.py:532
+#, python-format
+msgid ""
+"Webhook added. Its signing secret is shown once, copy it now: %(secret)s"
+msgstr ""
+"Προστέθηκε το webhook. Το μυστικό υπογραφής εμφανίζεται μία φορά, αντιγράψτε "
+"το τώρα: %(secret)s"
+
+#: .\apps\issues\views.py:538
+msgid "Webhook deleted."
+msgstr "Το webhook διαγράφηκε."
+
+#: .\apps\issues\views.py:541
+msgid "The address answered."
+msgstr "Η διεύθυνση απάντησε."
+
+#: .\apps\issues\views.py:541
+#, python-format
+msgid "The address did not answer: %(error)s"
+msgstr "Η διεύθυνση δεν απάντησε: %(error)s"
+
+#: .\apps\issues\views.py:589
+msgid "Not done"
+msgstr "Δεν ολοκληρώθηκε"
+
+#: .\apps\issues\views.py:617
+#, python-format
+msgid "%(n)d issue changed."
+msgid_plural "%(n)d issues changed."
+msgstr[0] "Άλλαξε %(n)d εργασία."
+msgstr[1] "Άλλαξαν %(n)d εργασίες."
+
+#: .\apps\issues\views.py:705
+msgid "Give the rule a name."
+msgstr "Δώστε όνομα στον κανόνα."
+
+#: .\apps\issues\views.py:713
+msgid "Rule added."
+msgstr "Ο κανόνας προστέθηκε."
+
+#: .\apps\issues\views.py:718
+msgid "Rule deleted."
+msgstr "Ο κανόνας διαγράφηκε."
+
+#: .\apps\issues\workflow.py:162 .\apps\issues\workflow.py:189
+msgid "Give the status a name."
+msgstr "Δώστε όνομα στην κατάσταση."
+
+#: .\apps\issues\workflow.py:164 .\apps\issues\workflow.py:191
+msgid "A status with that name already exists."
+msgstr "Υπάρχει ήδη κατάσταση με αυτό το όνομα."
+
+#: .\apps\issues\workflow.py:195 .\apps\issues\workflow.py:216
+msgid "At least one status must count as done."
+msgstr "Τουλάχιστον μία κατάσταση πρέπει να μετράει ως ολοκληρωμένη."
+
+#: .\apps\issues\workflow.py:201
+msgid "Choose another initial status instead."
+msgstr "Ορίστε πρώτα άλλη αρχική κατάσταση."
+
+#: .\apps\issues\workflow.py:212
+msgid "A workflow needs at least two statuses."
+msgstr "Το workflow χρειάζεται τουλάχιστον δύο καταστάσεις."
+
+#: .\apps\issues\workflow.py:214
+msgid "The initial status can't be deleted. Make another status initial first."
+msgstr "Η αρχική κατάσταση δεν διαγράφεται. Ορίστε πρώτα άλλη αρχική."
+
+#: .\apps\issues\workflow.py:220
+msgid "Choose another status to move the issues of this status to."
+msgstr "Επιλέξτε άλλη κατάσταση για τη μεταφορά των issues."
+
+#: .\apps\issues\workflow.py:265
+#, python-format
+msgid "%(name)s needs at least one status it can move to."
+msgstr "Η κατάσταση %(name)s χρειάζεται τουλάχιστον μία επόμενη κατάσταση."
+
+#: .\apps\projects\forms.py:33
+msgid "Already exists in this project."
+msgstr "Υπάρχει ήδη σε αυτό το project."
+
+#: .\apps\projects\forms.py:72
+#: .\apps\projects\templates\projects\settings.html:41
+msgid "User"
+msgstr "Χρήστης"
+
+#: .\apps\projects\forms.py:107
+msgid "Select fields need at least one option."
+msgstr "Τα πεδία Επιλογής χρειάζονται τουλάχιστον μία επιλογή."
+
+#: .\apps\projects\models.py:24
+msgid "2-10 uppercase letters/digits, starting with a letter (e.g. MPR)."
+msgstr ""
+"2-10 κεφαλαία γράμματα/ψηφία, ξεκινώντας με γράμμα (π.χ. MPR).2-10 κεφαλαία "
+"γράμματα/ψηφία, ξεκινώντας με γράμμα (π.χ. MPR).2-10 κεφαλαία γράμματα/"
+"ψηφία, ξεκινώντας με γράμμα (π.χ. MPR).2-10 κεφαλαία γράμματα/ψηφία, "
+"ξεκινώντας με γράμμα (π.χ. MPR).2-10 κεφαλαία γράμματα/ψηφία, ξεκινώντας με "
+"γράμμα (π.χ. MPR).2-10 κεφαλαία λατινικά γράμματα/ψηφία, ξεκινώντας με "
+"γράμμα (π.χ. MPR)."
+
+#: .\apps\projects\models.py:27
+msgid "Prefix for issue keys, e.g. MPR → MPR-42. Cannot be changed later."
+msgstr ""
+"Πρόθεμα για τους κωδικούς εργασιών, π.χ. MPR → MPR-42. Δεν αλλάζει "
+"αργότερα.Πρόθεμα για τους κωδικούς εργασιών, π.χ. MPR → MPR-42. Δεν αλλάζει "
+"αργότερα.Πρόθεμα για τους κωδικούς εργασιών, π.χ. MPR → MPR-42. Δεν αλλάζει "
+"αργότερα.Πρόθεμα για τους κωδικούς εργασιών, π.χ. MPR → MPR-42. Δεν αλλάζει "
+"αργότερα.Πρόθεμα για τους κωδικούς εργασιών, π.χ. MPR → MPR-42. Δεν αλλάζει "
+"αργότερα.Πρόθεμα για τα κλειδιά των issues, π.χ. MPR → MPR-42. Δεν αλλάζει "
+"αργότερα."
+
+#: .\apps\projects\models.py:37
+msgid "Project lead"
+msgstr "Υπεύθυνος project"
+
+#: .\apps\projects\models.py:42 .\apps\projects\models.py:101
+msgid "Archived"
+msgstr "Αρχειοθετημένο"
+
+#: .\apps\projects\models.py:99
+msgid "Unreleased"
+msgstr "Μη εκδοθείσα"
+
+#: .\apps\projects\models.py:100
+msgid "Released"
+msgstr "Εκδόθηκε"
+
+#: .\apps\projects\models.py:124
+msgid "Color"
+msgstr "Χρώμα"
+
+#: .\apps\projects\templates\projects\_settings_list.html:5
+msgid "Details"
+msgstr "Λεπτομέρειες"
+
+#: .\apps\projects\templates\projects\_settings_list.html:17
+msgid "Delete this item?"
+msgstr "Διαγραφή;"
+
+#: .\apps\projects\templates\projects\_settings_list.html:21
+msgid "Nothing here yet."
+msgstr "Δεν υπάρχει τίποτα ακόμα."
+
+#: .\apps\projects\templates\projects\project_detail.html:8
+msgid "Lead"
+msgstr "Υπεύθυνος"
+
+#: .\apps\projects\templates\projects\project_detail.html:12
+msgid "Open board"
+msgstr "Άνοιγμα board"
+
+#: .\apps\projects\templates\projects\project_detail.html:31
+#, python-format
+msgid "%(d)s of %(t)s story points done"
+msgstr "%(d)s από %(t)s story points ολοκληρώθηκαν"
+
+#: .\apps\projects\templates\projects\project_detail.html:33
+msgid "No active sprint."
+msgstr "Δεν υπάρχει ενεργό sprint."
+
+#: .\apps\projects\templates\projects\project_detail.html:37
+msgid "Epics"
+msgstr "Epics"
+
+#: .\apps\projects\templates\projects\project_detail.html:44
+msgid "No epics yet."
+msgstr "Δεν υπάρχουν epics ακόμα."
+
+#: .\apps\projects\templates\projects\project_detail.html:50
+msgid "Issues by type"
+msgstr "Issues ανά τύπο"
+
+#: .\apps\projects\templates\projects\project_detail.html:58
+msgid "Team"
+msgstr "Ομάδα"
+
+#: .\apps\projects\templates\projects\project_detail.html:58
+msgid "Manage"
+msgstr "Διαχείριση"
+
+#: .\apps\projects\templates\projects\project_form.html:3
+#: .\apps\projects\templates\projects\project_form.html:6
+#: .\apps\projects\templates\projects\project_list.html:7
+msgid "New project"
+msgstr "Νέο project"
+
+#: .\apps\projects\templates\projects\project_form.html:10
+msgid "A wiki space is created automatically for every project."
+msgstr "Για κάθε project δημιουργείται αυτόματα ένας χώρος wiki."
+
+#: .\apps\projects\templates\projects\project_form.html:11
+msgid "Create project"
+msgstr "Δημιουργία project"
+
+#: .\apps\projects\templates\projects\project_list.html:14
+#, python-format
+msgid "%(n)s open issue"
+msgid_plural "%(n)s open issues"
+msgstr[0] "%(n)s ανοιχτό issue"
+msgstr[1] "%(n)s ανοιχτά issues"
+
+#: .\apps\projects\templates\projects\project_list.html:14
+#, python-format
+msgid "%(n)s member"
+msgid_plural "%(n)s members"
+msgstr[0] "%(n)s μέλος"
+msgstr[1] "%(n)s μέλη"
+
+#: .\apps\projects\templates\projects\project_list.html:17
+msgid "No projects yet."
+msgstr "Δεν υπάρχουν projects ακόμα."
+
+#: .\apps\projects\templates\projects\project_list.html:17
+msgid "Create the first one"
+msgstr "Δημιουργήστε το πρώτο"
+
+#: .\apps\projects\templates\projects\settings.html:3
+#: .\apps\projects\templates\projects\settings.html:5
+#: .\apps\projects\templates\projects\settings_item.html:5
+#: .\templates\base.html:91
+msgid "Project settings"
+msgstr "Ρυθμίσεις project"
+
+#: .\apps\projects\templates\projects\settings.html:7
+msgid "General"
+msgstr "Γενικά"
+
+#: .\apps\projects\templates\projects\settings.html:8
+msgid "Members"
+msgstr "Μέλη"
+
+#: .\apps\projects\templates\projects\settings.html:10
+msgid "Versions"
+msgstr "Εκδόσεις"
+
+#: .\apps\projects\templates\projects\settings.html:26
+msgid "Delete project"
+msgstr "Διαγραφή project"
+
+#: .\apps\projects\templates\projects\settings.html:27
+msgid ""
+"This permanently deletes the project with its issues, sprints, wiki, tests, "
+"attachments and history. It can't be undone."
+msgstr ""
+"Αυτό διαγράφει οριστικά το project με τα issues, τα sprints, το wiki, τα "
+"tests, τα συνημμένα και το ιστορικό του. Δεν αναιρείται."
+
+#: .\apps\projects\templates\projects\settings.html:28
+msgid "Delete this project permanently?"
+msgstr "Οριστική διαγραφή του project;"
+
+#: .\apps\projects\templates\projects\settings.html:30
+msgid "Type the project key to confirm"
+msgstr "Πληκτρολογήστε το κλειδί του project για επιβεβαίωση"
+
+#: .\apps\projects\templates\projects\settings.html:33
+msgid "Delete project permanently"
+msgstr "Οριστική διαγραφή project"
+
+#: .\apps\projects\templates\projects\settings.html:41
+msgid "Workspace role"
+msgstr "Ρόλος χώρου εργασίας"
+
+#: .\apps\projects\templates\projects\settings.html:41
+msgid "Project role"
+msgstr "Ρόλος στο project"
+
+#: .\apps\projects\templates\projects\settings.html:55
+msgid "Remove this member?"
+msgstr "Αφαίρεση μέλους;"
+
+#: .\apps\projects\templates\projects\settings.html:55
+msgid "Remove"
+msgstr "Αφαίρεση"
+
+#: .\apps\projects\templates\projects\settings.html:63
+msgid "Add member"
+msgstr "Προσθήκη μέλους"
+
+#: .\apps\projects\templates\projects\settings.html:68
+msgid "Workspace admins can see every project without being members."
+msgstr "Οι διαχειριστές βλέπουν όλα τα projects χωρίς να είναι μέλη."
+
+#: .\apps\projects\views.py:73
+#, python-format
+msgid "Project %(key)s created."
+msgstr "Το project %(key)s δημιουργήθηκε."
+
+#: .\apps\projects\views.py:128
+msgid "Type the project key to confirm the deletion."
+msgstr "Πληκτρολογήστε το κλειδί του project για να επιβεβαιώσετε τη διαγραφή."
+
+#: .\apps\projects\views.py:136
+#, python-format
+msgid "Project %(name)s was deleted."
+msgstr "Το project %(name)s διαγράφηκε."
+
+#: .\apps\projects\views.py:146
+msgid "Project updated."
+msgstr "Το project ενημερώθηκε."
+
+#: .\apps\projects\views.py:180
+msgid "Member added."
+msgstr "Το μέλος προστέθηκε."
+
+#: .\apps\projects\views.py:182
+#, python-format
+msgid "Could not add member: %(err)s"
+msgstr "Δεν ήταν δυνατή η προσθήκη μέλους: %(err)s"
+
+#: .\apps\projects\views.py:193
+msgid "You cannot remove yourself."
+msgstr "Δεν μπορείτε να αφαιρέσετε τον εαυτό σας."
+
+#: .\apps\projects\views.py:196
+msgid "Member removed."
+msgstr "Το μέλος αφαιρέθηκε."
+
+#: .\apps\projects\views.py:202
+msgid "Role updated."
+msgstr "Ο ρόλος ενημερώθηκε."
+
+#: .\apps\projects\views.py:225
+msgid "Deleted."
+msgstr "Διαγράφηκε."
+
+#: .\apps\testmgmt\apps.py:8
+msgid "Test management"
+msgstr "Διαχείριση tests"
+
+#: .\apps\testmgmt\forms.py:16 .\apps\testmgmt\models.py:44
+#: .\apps\testmgmt\templates\testmgmt\coverage.html:18
+#: .\apps\testmgmt\templates\testmgmt\plan_list.html:14
+msgid "Tests"
+msgstr "Tests"
+
+#: .\apps\testmgmt\forms.py:34
+msgid "Additional tests"
+msgstr "Επιπλέον tests"
+
+#: .\apps\testmgmt\forms.py:35
+msgid "Tests from the selected plan are included automatically."
+msgstr "Τα tests του επιλεγμένου πλάνου προστίθενται αυτόματα."
+
+#: .\apps\testmgmt\forms.py:51
+msgid "Pick a test plan or at least one test."
+msgstr "Επιλέξτε πλάνο ή τουλάχιστον ένα test."
+
+#: .\apps\testmgmt\models.py:60
+#: .\apps\testmgmt\templates\testmgmt\execution_detail.html:23
+msgctxt "test run"
+msgid "To Do"
+msgstr "Εκκρεμεί"
+
+#: .\apps\testmgmt\models.py:61
+#: .\apps\testmgmt\templates\testmgmt\execution_detail.html:23
+#: .\apps\testmgmt\templates\testmgmt\plan_detail.html:12
+msgid "Pass"
+msgstr "Επιτυχία"
+
+#: .\apps\testmgmt\models.py:62
+#: .\apps\testmgmt\templates\testmgmt\execution_detail.html:23
+#: .\apps\testmgmt\templates\testmgmt\plan_detail.html:13
+msgid "Fail"
+msgstr "Αποτυχία"
+
+#: .\apps\testmgmt\models.py:63 .\apps\testmgmt\services.py:24
+#: .\apps\testmgmt\templates\testmgmt\execution_detail.html:23
+#: .\apps\testmgmt\templates\testmgmt\plan_detail.html:14
+msgid "Blocked"
+msgstr "Μπλοκαρισμένο"
+
+#: .\apps\testmgmt\models.py:65
+msgid "Skipped"
+msgstr "Παρακάμφθηκε"
+
+#: .\apps\testmgmt\models.py:66
+msgid "N/A"
+msgstr "Δ/Ε"
+
+#: .\apps\testmgmt\models.py:72
+msgid "Idle"
+msgstr "Αδράνεια"
+
+#: .\apps\testmgmt\models.py:73
+msgid "Queued"
+msgstr "Στην ουρά"
+
+#: .\apps\testmgmt\models.py:74
+msgid "Running"
+msgstr "Εκτελείται"
+
+#: .\apps\testmgmt\models.py:86
+msgid "Test plan"
+msgstr "Πλάνο test"
+
+#: .\apps\testmgmt\models.py:89
+#: .\apps\testmgmt\templates\testmgmt\execution_list.html:11
+msgid "Environment"
+msgstr "Περιβάλλον"
+
+#: .\apps\testmgmt\models.py:95
+msgid "Automated run"
+msgstr "Αυτόματη εκτέλεση"
+
+#: .\apps\testmgmt\services.py:20
+msgid "Uncovered"
+msgstr "Χωρίς κάλυψη"
+
+#: .\apps\testmgmt\services.py:22
+msgid "OK"
+msgstr "OK"
+
+#: .\apps\testmgmt\services.py:23
+msgid "Failing"
+msgstr "Αποτυγχάνει"
+
+#: .\apps\testmgmt\templates\testmgmt\coverage.html:3
+#: .\apps\testmgmt\templates\testmgmt\coverage.html:18 .\templates\base.html:87
+msgid "Coverage"
+msgstr "Κάλυψη"
+
+#: .\apps\testmgmt\templates\testmgmt\coverage.html:6
+msgid "Requirement coverage"
+msgstr "Κάλυψη απαιτήσεων"
+
+#: .\apps\testmgmt\templates\testmgmt\coverage.html:6
+msgid ""
+"Stories, tasks, bugs and epics, with the latest result of the tests linked "
+"to them (“tests” link)."
+msgstr ""
+"Stories, tasks, bugs και epics, με το τελευταίο αποτέλεσμα των tests που τα "
+"καλύπτουν (σύνδεση «ελέγχει»)."
+
+#: .\apps\testmgmt\templates\testmgmt\coverage.html:8
+msgid "All versions"
+msgstr "Όλες οι εκδόσεις"
+
+#: .\apps\testmgmt\templates\testmgmt\coverage.html:12
+#, python-format
+msgid "%(p)s%% of %(t)s requirements are covered by at least one test"
+msgstr "Το %(p)s%% από %(t)s απαιτήσεις καλύπτεται από τουλάχιστον ένα test"
+
+#: .\apps\testmgmt\templates\testmgmt\coverage.html:18
+msgid "Requirement"
+msgstr "Απαίτηση"
+
+#: .\apps\testmgmt\templates\testmgmt\coverage.html:27
+msgid "No requirements found."
+msgstr "Δεν βρέθηκαν απαιτήσεις."
+
+#: .\apps\testmgmt\templates\testmgmt\execution_detail.html:5
+#: .\apps\testmgmt\templates\testmgmt\execution_form.html:5
+#: .\apps\testmgmt\templates\testmgmt\execution_list.html:3
+#: .\apps\testmgmt\templates\testmgmt\execution_list.html:6
+#: .\templates\base.html:86
+msgid "Test executions"
+msgstr "Εκτελέσεις tests"
+
+#: .\apps\testmgmt\templates\testmgmt\execution_detail.html:9
+#: .\apps\testmgmt\templates\testmgmt\execution_list.html:11
+msgid "Plan"
+msgstr "Πλάνο"
+
+#: .\apps\testmgmt\templates\testmgmt\execution_detail.html:14
+msgid "Run automated tests"
+msgstr "Εκτέλεση αυτοματοποιημένων tests"
+
+#: .\apps\testmgmt\templates\testmgmt\execution_detail.html:19
+msgid "Delete this execution and all its results?"
+msgstr "Διαγραφή εκτέλεσης και όλων των αποτελεσμάτων;"
+
+#: .\apps\testmgmt\templates\testmgmt\execution_detail.html:22
+#, python-format
+msgid "%(e)s of %(t)s executed"
+msgstr "%(e)s από %(t)s εκτελέστηκαν"
+
+#: .\apps\testmgmt\templates\testmgmt\execution_detail.html:28
+msgid "Result"
+msgstr "Αποτέλεσμα"
+
+#: .\apps\testmgmt\templates\testmgmt\execution_detail.html:28
+msgid "Executed"
+msgstr "Εκτελέστηκε"
+
+#: .\apps\testmgmt\templates\testmgmt\execution_detail.html:35
+#, python-format
+msgid "%(n)s step"
+msgid_plural "%(n)s steps"
+msgstr[0] "%(n)s βήμα"
+msgstr[1] "%(n)s βήματα"
+
+#: .\apps\testmgmt\templates\testmgmt\execution_detail.html:47
+msgid "Optional note…"
+msgstr "Προαιρετική σημείωση…"
+
+#: .\apps\testmgmt\templates\testmgmt\execution_detail.html:50
+msgid "No tests in this execution."
+msgstr "Δεν υπάρχουν tests σε αυτή την εκτέλεση."
+
+#: .\apps\testmgmt\templates\testmgmt\execution_form.html:3
+#: .\apps\testmgmt\templates\testmgmt\execution_list.html:7
+#: .\apps\testmgmt\templates\testmgmt\plan_detail.html:8
+msgid "New execution"
+msgstr "Νέα εκτέλεση"
+
+#: .\apps\testmgmt\templates\testmgmt\execution_form.html:6
+msgid "New test execution"
+msgstr "Νέα εκτέλεση tests"
+
+#: .\apps\testmgmt\templates\testmgmt\execution_form.html:10
+msgid "Create execution"
+msgstr "Δημιουργία εκτέλεσης"
+
+#: .\apps\testmgmt\templates\testmgmt\execution_list.html:20
+msgid "executed"
+msgstr "εκτελέστηκαν"
+
+#: .\apps\testmgmt\templates\testmgmt\execution_list.html:20
+msgid "pass"
+msgstr "επιτυχία"
+
+#: .\apps\testmgmt\templates\testmgmt\execution_list.html:24
+msgid "No test executions yet."
+msgstr "Δεν υπάρχουν εκτελέσεις ακόμα."
+
+#: .\apps\testmgmt\templates\testmgmt\plan_detail.html:5
+#: .\apps\testmgmt\templates\testmgmt\plan_form.html:5
+#: .\apps\testmgmt\templates\testmgmt\plan_list.html:3
+#: .\apps\testmgmt\templates\testmgmt\plan_list.html:6 .\templates\base.html:85
+msgid "Test plans"
+msgstr "Πλάνα tests"
+
+#: .\apps\testmgmt\templates\testmgmt\plan_detail.html:18
+msgid "Tests and their latest result"
+msgstr "Tests και τελευταίο αποτέλεσμα"
+
+#: .\apps\testmgmt\templates\testmgmt\plan_detail.html:20
+msgid "Latest result"
+msgstr "Τελευταίο αποτέλεσμα"
+
+#: .\apps\testmgmt\templates\testmgmt\plan_detail.html:20
+msgid "Execution"
+msgstr "Εκτέλεση"
+
+#: .\apps\testmgmt\templates\testmgmt\plan_detail.html:28
+msgid "No tests in this plan."
+msgstr "Δεν υπάρχουν tests στο πλάνο."
+
+#: .\apps\testmgmt\templates\testmgmt\plan_detail.html:33
+msgid "Executions"
+msgstr "Εκτελέσεις"
+
+#: .\apps\testmgmt\templates\testmgmt\plan_detail.html:34
+msgid "Not executed yet."
+msgstr "Δεν έχει εκτελεστεί ακόμα."
+
+#: .\apps\testmgmt\templates\testmgmt\plan_form.html:3
+#: .\apps\testmgmt\templates\testmgmt\plan_form.html:6
+#: .\apps\testmgmt\templates\testmgmt\plan_list.html:9
+msgid "New test plan"
+msgstr "Νέο πλάνο tests"
+
+#: .\apps\testmgmt\templates\testmgmt\plan_form.html:6
+msgid "Edit test plan"
+msgstr "Επεξεργασία πλάνου"
+
+#: .\apps\testmgmt\templates\testmgmt\plan_form.html:10
+msgid "There are no Test issues yet - create some first."
+msgstr "Δεν υπάρχουν ακόμα Test issues - δημιουργήστε πρώτα μερικά."
+
+#: .\apps\testmgmt\templates\testmgmt\plan_form.html:13
+msgid "Delete this test plan? Executions are kept."
+msgstr "Διαγραφή πλάνου; Οι εκτελέσεις διατηρούνται."
+
+#: .\apps\testmgmt\templates\testmgmt\plan_form.html:13
+msgid "Delete plan"
+msgstr "Διαγραφή πλάνου"
+
+#: .\apps\testmgmt\templates\testmgmt\plan_list.html:6
+msgid "Group tests to run for a release or a feature."
+msgstr "Ομαδοποιήστε tests για μια έκδοση ή λειτουργία."
+
+#: .\apps\testmgmt\templates\testmgmt\plan_list.html:8
+msgid "New test case"
+msgstr "Νέο test case"
+
+#: .\apps\testmgmt\templates\testmgmt\plan_list.html:22
+msgid "Run"
+msgstr "Εκτέλεση"
+
+#: .\apps\testmgmt\templates\testmgmt\plan_list.html:25
+msgid "No test plans yet."
+msgstr "Δεν υπάρχουν πλάνα ακόμα."
+
+#: .\apps\testmgmt\templates\testmgmt\test_steps.html:26
+msgid "Empty rows are ignored. Save to get two more blank rows."
+msgstr "Οι κενές γραμμές αγνοούνται. Αποθηκεύστε για δύο ακόμα κενές γραμμές."
+
+#: .\apps\testmgmt\templates\testmgmt\test_steps.html:27
+msgid "Save steps"
+msgstr "Αποθήκευση βημάτων"
+
+#: .\apps\testmgmt\views.py:65
+msgid "Test steps saved."
+msgstr "Τα βήματα αποθηκεύτηκαν."
+
+#: .\apps\testmgmt\views.py:85
+msgid "Test plan deleted."
+msgstr "Το πλάνο διαγράφηκε."
+
+#: .\apps\testmgmt\views.py:94
+msgid "Test plan saved."
+msgstr "Το πλάνο αποθηκεύτηκε."
+
+#: .\apps\testmgmt\views.py:141
+msgid "run"
+msgstr "εκτέλεση"
+
+#: .\apps\testmgmt\views.py:153
+msgid "Test execution created."
+msgstr "Η εκτέλεση δημιουργήθηκε."
+
+#: .\apps\testmgmt\views.py:183
+msgid "Test execution deleted."
+msgstr "Η εκτέλεση διαγράφηκε."
+
+#: .\apps\testmgmt\views.py:221
+msgid "Η εκτέλεση μπήκε στην ουρά του αυτοματοποιημένου runner."
+msgstr "Η εκτέλεση μπήκε στην ουρά του αυτόματου runner."
+
+#: .\apps\wiki\apps.py:16 .\apps\wiki\templates\wiki\space_home.html:3
+#: .\templates\base.html:81
+msgid "Wiki"
+msgstr "Wiki"
+
+#: .\apps\wiki\forms.py:8 .\apps\wiki\models.py:31
+msgid "Title"
+msgstr "Τίτλος"
+
+#: .\apps\wiki\forms.py:9 .\apps\wiki\models.py:29
+msgid "Parent page"
+msgstr "Γονική σελίδα"
+
+#: .\apps\wiki\forms.py:11 .\apps\wiki\models.py:32
+msgid "Content"
+msgstr "Περιεχόμενο"
+
+#: .\apps\wiki\forms.py:14
+msgid "Markdown. Embed issues with [[KEY-123]], mention people with @handle."
+msgstr ""
+"Markdown. Ενσωματώστε εργασίες με [[KEY-123]], αναφέρετε άτομα με "
+"@handle.Markdown. Ενσωματώστε εργασίες με [[KEY-123]], αναφέρετε άτομα με "
+"@handle.Markdown. Ενσωματώστε εργασίες με [[KEY-123]], αναφέρετε άτομα με "
+"@handle.Markdown. Ενσωματώστε εργασίες με [[KEY-123]], αναφέρετε άτομα με "
+"@handle.Markdown. Ενσωματώστε εργασίες με [[KEY-123]], αναφέρετε άτομα με "
+"@handle.Markdown. Ενσωματώστε issues με [[KEY-123]], αναφέρετε άτομα με "
+"@ψευδώνυμο."
+
+#: .\apps\wiki\forms.py:16 .\apps\wiki\models.py:77
+#: .\apps\wiki\templates\wiki\page_history.html:9
+msgid "Change note"
+msgstr "Σημείωση αλλαγής"
+
+#: .\apps\wiki\templates\wiki\_layout.html:8
+#: .\apps\wiki\templates\wiki\page_form.html:3
+#: .\apps\wiki\templates\wiki\page_form.html:5
+#: .\apps\wiki\templates\wiki\space_home.html:7
+msgid "New page"
+msgstr "Νέα σελίδα"
+
+#: .\apps\wiki\templates\wiki\_layout.html:10
+msgid "Search this space…"
+msgstr "Αναζήτηση στον χώρο…"
+
+#: .\apps\wiki\templates\wiki\_layout.html:11
+msgid "No pages yet."
+msgstr "Δεν υπάρχουν σελίδες ακόμα."
+
+#: .\apps\wiki\templates\wiki\page_detail.html:12
+msgid "last edited by"
+msgstr "τελευταία επεξεργασία από"
+
+#: .\apps\wiki\templates\wiki\page_detail.html:17
+msgid "Child page"
+msgstr "Υποσελίδα"
+
+#: .\apps\wiki\templates\wiki\page_detail.html:20
+msgid "Delete this page? Child pages move up one level."
+msgstr "Διαγραφή σελίδας; Οι υποσελίδες ανεβαίνουν ένα επίπεδο."
+
+#: .\apps\wiki\templates\wiki\page_detail.html:25
+msgid "This page is empty."
+msgstr "Η σελίδα είναι κενή."
+
+#: .\apps\wiki\templates\wiki\page_detail.html:28
+msgid "Child pages"
+msgstr "Υποσελίδες"
+
+#: .\apps\wiki\templates\wiki\page_form.html:11
+msgid "Create page"
+msgstr "Δημιουργία σελίδας"
+
+#: .\apps\wiki\templates\wiki\page_form.html:11
+msgid "Save new version"
+msgstr "Αποθήκευση νέας έκδοσης"
+
+#: .\apps\wiki\templates\wiki\page_history.html:6
+msgid "Page history"
+msgstr "Ιστορικό σελίδας"
+
+#: .\apps\wiki\templates\wiki\page_history.html:9
+msgid "Author"
+msgstr "Συντάκτης"
+
+#: .\apps\wiki\templates\wiki\page_history.html:13
+msgid "current"
+msgstr "τρέχουσα"
+
+#: .\apps\wiki\templates\wiki\page_history.html:18
+msgid "View & diff"
+msgstr "Προβολή & διαφορές"
+
+#: .\apps\wiki\templates\wiki\page_history.html:20
+msgid "Restore this version? A new version will be created."
+msgstr "Επαναφορά αυτής της έκδοσης; Θα δημιουργηθεί νέα έκδοση."
+
+#: .\apps\wiki\templates\wiki\page_history.html:20
+msgid "Restore"
+msgstr "Επαναφορά"
+
+#: .\apps\wiki\templates\wiki\page_version.html:10
+msgid "Restore this version"
+msgstr "Επαναφορά έκδοσης"
+
+#: .\apps\wiki\templates\wiki\page_version.html:14
+#, python-format
+msgid "Changes from v%(a)s to v%(b)s"
+msgstr "Αλλαγές από v%(a)s σε v%(b)s"
+
+#: .\apps\wiki\templates\wiki\page_version.html:14
+msgid "Initial version"
+msgstr "Αρχική έκδοση"
+
+#: .\apps\wiki\templates\wiki\page_version.html:17
+msgid "No content changes (title or location only)."
+msgstr "Καμία αλλαγή περιεχομένου (μόνο τίτλος ή θέση)."
+
+#: .\apps\wiki\templates\wiki\page_version.html:19
+msgid "Rendered content of this version"
+msgstr "Περιεχόμενο αυτής της έκδοσης"
+
+#: .\apps\wiki\templates\wiki\space_home.html:6
+msgid "Project documentation, decisions and how-tos."
+msgstr "Τεκμηρίωση, αποφάσεις και οδηγοί του project."
+
+#: .\apps\wiki\templates\wiki\space_home.html:11
+#, python-format
+msgid "Results for “%(q)s”"
+msgstr "Αποτελέσματα για «%(q)s»"
+
+#: .\apps\wiki\templates\wiki\space_home.html:27
+msgid "This space is empty."
+msgstr "Ο χώρος είναι άδειος."
+
+#: .\apps\wiki\templates\wiki\space_home.html:27
+msgid "Write the first page"
+msgstr "Γράψτε την πρώτη σελίδα"
+
+#: .\apps\wiki\templates\wiki\space_home.html:32
+msgid "Tip"
+msgstr "Συμβουλή"
+
+#: .\apps\wiki\templates\wiki\space_home.html:32
+msgid ""
+"Write [[KEY-123]] in a page to embed a live link to an issue (with its "
+"status), and @handle to mention a teammate."
+msgstr ""
+"Γράψτε [[KEY-123]] σε μια σελίδα για ζωντανό σύνδεσμο προς issue (με την "
+"κατάστασή του), και @ψευδώνυμο για αναφορά σε συνάδελφο."
+
+#: .\apps\wiki\views.py:70
+msgid "Page created."
+msgstr "Η σελίδα δημιουργήθηκε."
+
+#: .\apps\wiki\views.py:91
+#, python-format
+msgid ""
+"Someone saved a newer version (v%(v)s) while you were editing. Copy your "
+"changes, reload and try again."
+msgstr ""
+"Κάποιος αποθήκευσε νεότερη έκδοση (v%(v)s) ενώ κάνατε αλλαγές. Αντιγράψτε "
+"τις αλλαγές σας, ανανεώστε και δοκιμάστε ξανά."
+
+#: .\apps\wiki\views.py:103
+#, python-format
+msgid "Page saved (v%(v)s)."
+msgstr "Η σελίδα αποθηκεύτηκε (v%(v)s)."
+
+#: .\apps\wiki\views.py:103
+msgid "No changes."
+msgstr "Καμία αλλαγή."
+
+#: .\apps\wiki\views.py:140
+#, python-format
+msgid "Restored version %(v)s."
+msgstr "Έγινε επαναφορά της έκδοσης %(v)s."
+
+#: .\apps\wiki\views.py:154
+msgid "Page deleted."
+msgstr "Η σελίδα διαγράφηκε."
+
+#: .\config\settings\base.py:100
+msgid "English"
+msgstr "Αγγλικά"
+
+#: .\config\settings\base.py:101
+msgid "Greek"
+msgstr "Ελληνικά"
+
+#: .\templates\_issue_table.html:6
+msgid "Select all"
+msgstr "Επιλογή όλων"
+
+#: .\templates\_issue_table.html:13
+msgid "Pts"
+msgstr "Πόντοι"
+
+#: .\templates\_issue_table.html:44
+msgid "No issues."
+msgstr "Δεν υπάρχουν issues."
+
+#: .\templates\base.html:24
+msgid "Write"
+msgstr "Γραφή"
+
+#: .\templates\base.html:24
+msgid "Preview"
+msgstr "Προεπισκόπηση"
+
+#: .\templates\base.html:27
+msgid "Menu"
+msgstr "Μενού"
+
+#: .\templates\base.html:30
+msgid "Search issues & pages, or jump to a key (e.g. MPR-12)…  ( / )"
+msgstr "Αναζήτηση issues & σελίδων ή μετάβαση σε κλειδί (π.χ. MPR-12)…  ( / )"
+
+#: .\templates\base.html:34
+msgid "Jump to…"
+msgstr "Μετάβαση σε…"
+
+#: .\templates\base.html:45
+msgid "Toggle dark mode"
+msgstr "Εναλλαγή σκοτεινού θέματος"
+
+#: .\templates\base.html:48
+msgid "Account menu"
+msgstr "Μενού λογαριασμού"
+
+#: .\templates\base.html:52
+msgid "Profile & password"
+msgstr "Προφίλ & κωδικός"
+
+#: .\templates\base.html:55
+msgid "Django admin"
+msgstr "Django admin"
+
+#: .\templates\base.html:56
+msgid "Log out"
+msgstr "Αποσύνδεση"
+
+#: .\templates\base.html:70
+msgid "Planning"
+msgstr "Σχεδιασμός"
+
+#: .\templates\base.html:71
+msgid "Overview"
+msgstr "Επισκόπηση"
+
+#: .\templates\base.html:73
+msgid "Backlog & sprints"
+msgstr "Backlog & sprints"
+
+#: .\templates\base.html:80
+msgid "Knowledge"
+msgstr "Γνώση"
+
+#: .\templates\base.html:84
+msgid "Testing"
+msgstr "Δοκιμές"
+
+#: .\templates\base.html:101
+msgid "All projects"
+msgstr "Όλα τα projects"
+
+#: .\templates\base.html:114 .\templates\base.html:115
+msgid "Quick jump"
+msgstr "Γρήγορη μετάβαση"
+
+#: .\templates\base.html:115
+msgid "Type to jump to a page…"
+msgstr "Πληκτρολογήστε για μετάβαση σε σελίδα…"
+
+#: .\templates\base.html:117
+msgid "No matches"
+msgstr "Δεν βρέθηκε αποτέλεσμα"
+
+#: .\templates\base.html:119
+msgid "move"
+msgstr "μετακίνηση"
+
+#: .\templates\base.html:120
+msgid "open"
+msgstr "άνοιγμα"
+
+#: .\templates\base.html:121
+msgid "close"
+msgstr "κλείσιμο"

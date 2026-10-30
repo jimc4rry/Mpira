@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Timeline" %} · {{ project.key }}{% endblock %}
+{% block content %}
+<style>
+  .tl-lane { margin: 18px 0 6px; font-weight: 600; }
+  .tl-row { display: grid; grid-template-columns: minmax(180px, 30%) 1fr; gap: 10px; align-items: center; margin: 4px 0; }
+  .tl-label { font-size: 13px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .tl-track { position: relative; height: 16px; background: #f3f4f6; border-radius: 4px; }
+  .tl-bar { position: absolute; top: 0; bottom: 0; background: #2563eb; border-radius: 4px; }
+  .tl-bar.done { background: #16a34a; }
+  .tl-range { display: flex; justify-content: space-between; font-size: 12px; color: #6b7280; margin-top: 6px; }
+</style>
+<div class="page-head">
+  <h1>{% trans "Timeline" %}</h1>
+  <div class="row">
+    <a class="btn btn-sm {% if group == 'epic' %}btn-primary{% endif %}" href="?group=epic">{% trans "Swimlanes by epic" %}</a>
+    <a class="btn btn-sm {% if group == 'assignee' %}btn-primary{% endif %}" href="?group=assignee">{% trans "Swimlanes by assignee" %}</a>
+  </div>
+</div>
+<p class="muted small">{% trans "A bar runs from the start date to the due date. Set the dates in the issue form. Issues without any date are not shown here." %}{% if undated %} {% blocktrans with n=undated %}{{ n }} issues have no date.{% endblocktrans %}{% endif %}</p>
+{% if lanes %}
+  {% for lane in lanes %}
+    <div class="tl-lane">{{ lane.name }}</div>
+    {% for row in lane.rows %}
+      <div class="tl-row">
+        <div class="tl-label"><a href="{{ row.issue.get_absolute_url }}">{{ row.issue.key }}</a> {{ row.issue.title }}</div>
+        <div class="tl-track"><div class="tl-bar {% if row.done %}done{% endif %}" style="left:{{ row.left }}%;width:{{ row.width }}%" title="{{ row.span }}"></div></div>
+      </div>
+    {% endfor %}
+  {% endfor %}
+  <div class="tl-range"><span>{{ first|date:"Y-m-d" }}</span><span>{{ last|date:"Y-m-d" }}</span></div>
+{% else %}
+  <p class="empty">{% trans "No issues with dates yet." %}</p>
+{% endif %}
+{% endblock %}

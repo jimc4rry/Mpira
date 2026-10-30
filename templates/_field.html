@@ -1,0 +1,12 @@
+{% with w=field.field.widget.input_type %}
+<div class="form-field{% if w == 'checkbox' and not field.field.widget.allow_multiple_selected %} checkbox{% endif %}{% if field.field.widget.allow_multiple_selected and w == 'checkbox' %} checkbox-list{% endif %}"{% if field.name %} data-field="{{ field.name }}"{% endif %}>
+  {% if w == "checkbox" and not field.field.widget.allow_multiple_selected %}
+    <label>{{ field }} {{ field.label }}</label>
+  {% else %}
+    <label for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %} *{% endif %}</label>
+    {{ field }}
+  {% endif %}
+  {% if field.help_text %}<div class="help">{{ field.help_text|safe }}</div>{% endif %}
+  {% if field.errors %}<ul class="errors">{% for e in field.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+</div>
+{% endwith %}

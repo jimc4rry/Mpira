@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load i18n mpira %}
+{% block title %}{{ plan.name }}{% endblock %}
+{% block content %}
+<div class="breadcrumbs"><a href="{% url 'testmgmt:plan_list' project.key %}">{% trans "Test plans" %}</a></div>
+<div class="page-head">
+  <div><h1>🗂 {{ plan.name }}</h1><div class="muted">{% if plan.fix_version %}{% trans "Version" %} {{ plan.fix_version }} · {% endif %}{{ rows|length }} {% trans "tests" %}</div></div>
+  {% if caps.manage_tests %}<div class="row"><a class="btn" href="{% url 'testmgmt:plan_edit' project.key plan.pk %}">✎ {% trans "Edit" %}</a><a class="btn btn-primary" href="{% url 'testmgmt:execution_create' project.key %}?plan={{ plan.pk }}">▶ {% trans "New execution" %}</a></div>{% endif %}
+</div>
+{% if plan.description %}<div class="card">{{ plan.description|linebreaks }}</div>{% endif %}
+<div class="grid grid-4" style="margin-bottom:1rem">
+  <div class="stat-tile"><div class="label">{% trans "Pass" %}</div><div class="value" style="color:var(--success)">{{ counts.pass }}</div></div>
+  <div class="stat-tile"><div class="label">{% trans "Fail" %}</div><div class="value" style="color:var(--danger)">{{ counts.fail }}</div></div>
+  <div class="stat-tile"><div class="label">{% trans "Blocked" %}</div><div class="value" style="color:var(--warning)">{{ counts.blocked }}</div></div>
+  <div class="stat-tile"><div class="label">{% trans "Not run" %}</div><div class="value">{{ counts.todo }}</div></div>
+</div>
+<div class="card flush">
+  <div class="card-head"><h2>{% trans "Tests and their latest result" %}</h2></div>
+  <div class="table-wrap"><table class="data-table">
+    <thead><tr><th>{% trans "Test" %}</th><th>{% trans "Latest result" %}</th><th>{% trans "Execution" %}</th></tr></thead>
+    <tbody>
+    {% for t, run in rows %}
+      <tr>
+        <td><a href="{{ t.get_absolute_url }}">{{ t.key }}</a> {{ t.title }}</td>
+        <td>{% if run %}<span class="pill run-{{ run.status }}">{{ run.get_status_display }}</span>{% else %}<span class="pill run-todo">{% trans "Not run" %}</span>{% endif %}</td>
+        <td class="muted small">{% if run %}<a href="{{ run.execution.get_absolute_url }}">{{ run.execution.name }}</a> · {{ run.executed_at|date:"d/m/Y" }}{% endif %}</td>
+      </tr>
+    {% empty %}<tr><td colspan="3" class="empty">{% trans "No tests in this plan." %}</td></tr>{% endfor %}
+    </tbody>
+  </table></div>
+</div>
+<div class="card">
+  <h2>{% trans "Executions" %}</h2>
+  {% for e in executions %}<div><a href="{{ e.get_absolute_url }}">▶ {{ e.name }}</a> <span class="muted small">{{ e.environment }} · {{ e.created_at|date:"d/m/Y" }}</span></div>{% empty %}<p class="muted">{% trans "Not executed yet." %}</p>{% endfor %}
+</div>
+{% endblock %}

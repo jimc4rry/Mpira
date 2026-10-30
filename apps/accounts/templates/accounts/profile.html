@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load i18n mpira %}
+{% block title %}{% trans "Profile" %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div class="row">{% avatar request.user "lg" %}<div><h1>{{ request.user.display_name }}</h1><div class="muted">{{ request.user.email }} · {{ request.user.get_role_display }}</div></div></div>
+</div>
+<div class="grid grid-2">
+  <div class="card">
+    <h2>{% trans "Profile" %}</h2>
+    <form method="post">{% csrf_token %}
+      {% with form=profile_form %}{% include "_form.html" %}{% endwith %}
+      <div class="form-actions"><button class="btn btn-primary">{% trans "Save" %}</button></div>
+    </form>
+  </div>
+  <div class="card">
+    <h2>{% trans "Change password" %}</h2>
+    <form method="post">{% csrf_token %}
+      <input type="hidden" name="action" value="change_password">
+      {% with form=password_form %}{% include "_form.html" %}{% endwith %}
+      <div class="form-actions"><button class="btn btn-primary">{% trans "Change password" %}</button></div>
+    </form>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-head"><h2>{% trans "API keys" %}</h2></div>
+  <p class="muted">{% trans "Use a key to read and write tickets from scripts, or to connect an AI assistant such as Claude. A key has the same project access as you. Keys are shown only once." %}</p>
+
+  {% if new_key %}
+  <div class="card" style="border-color:var(--success);background:var(--success-soft)">
+    <strong>{% trans "Your new API key" %}</strong>
+    <p class="muted small">{% trans "Copy it now. You won't be able to see it again." %}</p>
+    <pre id="new-api-key" class="mono" style="user-select:all">{{ new_key }}</pre>
+    <div class="small muted">{% trans "Header" %}: <code>Authorization: Bearer {{ new_key|slice:":8" }}…</code></div>
+  </div>
+  {% endif %}
+
+  <form method="post" class="row" style="align-items:flex-end;margin-bottom:1rem">{% csrf_token %}
+    <input type="hidden" name="action" value="create_key">
+    {% for field in key_form %}
+      <div class="form-field" style="margin:0">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {% if field.errors %}<ul class="errors">{% for e in field.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+      </div>
+    {% endfor %}
+    <button class="btn btn-primary">{% trans "Create key" %}</button>
+  </form>
+
+  <div class="table-wrap">
+  <table class="data-table">
+    <thead><tr><th>{% trans "Name" %}</th><th>{% trans "Key" %}</th><th>{% trans "Access" %}</th><th>{% trans "Last used" %}</th><th>{% trans "Expires" %}</th><th>{% trans "Status" %}</th><th></th></tr></thead>
+    <tbody>
+    {% for k in api_keys %}
+      <tr>
+        <td>{{ k.name }}</td>
+        <td class="mono small">{{ k.prefix }}…</td>
+        <td>{% if k.read_only %}{% trans "Read only" %}{% else %}{% trans "Read & write" %}{% endif %}</td>
+        <td class="muted small">{{ k.last_used_at|date:"d/m/Y H:i"|default:"—" }}</td>
+        <td class="muted small">{{ k.expires_at|date:"d/m/Y"|default:"—" }}</td>
+        <td>{% if k.revoked_at %}<span class="pill">{% trans "Revoked" %}</span>{% elif not k.is_active %}<span class="pill">{% trans "Expired" %}</span>{% else %}<span class="pill status-done">{% trans "Active" %}</span>{% endif %}</td>
+        <td class="right">{% if not k.revoked_at %}
+          <form method="post" data-confirm="{% trans 'Revoke this key? Anything using it will stop working.' %}">{% csrf_token %}
+            <input type="hidden" name="action" value="revoke_key"><input type="hidden" name="key_id" value="{{ k.pk }}">
+            <button class="btn btn-sm btn-danger">{% trans "Revoke" %}</button>
+          </form>
+        {% endif %}</td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="7" class="empty">{% trans "No API keys yet." %}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+
+  <h3 style="margin-top:1.4rem">{% trans "Using a key" %}</h3>
+  <pre class="mono small">curl -H "Authorization: Bearer mpk_…" {{ api_base }}projects/
+curl -H "Authorization: Bearer mpk_…" {{ api_base }}issues/?assignee=me
+curl -X POST -H "Authorization: Bearer mpk_…" -H "Content-Type: application/json" \
+     -d '{"title":"New bug","issue_type":"bug"}' {{ api_base }}projects/MPR/issues/</pre>
+  <p class="muted small">{% trans "Claude Desktop / Claude Code: install the Mpira MCP server from the tools folder, and set MPIRA_URL and MPIRA_API_KEY in its configuration. The README explains the exact steps." %}</p>
+</div>
+{% endblock %}

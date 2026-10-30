@@ -1,0 +1,135 @@
+{% load i18n static mpira %}{% get_current_language as LANGUAGE_CODE %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("mpira-theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>{% block title %}Mpira{% endblock %} · Mpira</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232f6bff'/%3E%3Cstop offset='1' stop-color='%237a5cff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='url(%23g)'/%3E%3Ctext x='50' y='70' font-family='Arial' font-weight='900' font-size='60' text-anchor='middle' fill='white'%3EM%3C/text%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="{% static 'img/apple-touch-icon.png' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/mpira.css' %}">
+  {% block head %}{% endblock %}
+</head>
+<body data-md-preview-url="{% url 'api:markdown_preview' %}" data-i18n-write="{% trans 'Write' %}" data-i18n-preview="{% trans 'Preview' %}">
+{% block body %}
+<header class="app-header">
+  <button class="icon-btn mobile-nav-toggle" data-nav-toggle aria-label="{% trans 'Menu' %}">☰</button>
+  <a class="brand" href="{% url 'core:dashboard' %}"><span class="brand-mark">M</span>Mpira</a>
+  <form class="header-search" action="{% url 'core:search' %}" method="get" role="search">
+    <input type="search" name="q" value="{{ request.GET.q|default:'' }}" placeholder="{% trans 'Search issues & pages, or jump to a key (e.g. MPR-12)…  ( / )' %}" aria-label="{% trans 'Search' %}">
+  </form>
+  <div class="header-actions">
+    <button class="palette-trigger" type="button" data-palette-open aria-keyshortcuts="Control+K Meta+K">
+      <span>{% trans "Jump to…" %}</span><kbd>Ctrl K</kbd>
+    </button>
+    <form method="post" action="{% url 'accounts:set_language' %}" class="inline-form">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ request.get_full_path }}">
+      {% if LANGUAGE_CODE == "el" %}
+        <button class="icon-btn" name="language" value="en" title="English">EN</button>
+      {% else %}
+        <button class="icon-btn" name="language" value="el" title="Ελληνικά">EL</button>
+      {% endif %}
+    </form>
+    <button class="icon-btn" data-theme-toggle title="{% trans 'Toggle dark mode' %}" aria-label="{% trans 'Toggle dark mode' %}">◐</button>
+    <a class="icon-btn" href="{% url 'core:notifications' %}" title="{% trans 'Notifications' %}" aria-label="{% trans 'Notifications' %}">🔔{% if unread_notifications %}<span class="dot-badge">{{ unread_notifications }}</span>{% endif %}</a>
+    <div class="menu">
+      <button class="icon-btn" data-menu-trigger aria-label="{% trans 'Account menu' %}" style="width:auto;padding:0 4px;">{% avatar request.user "md" %}</button>
+      <div class="menu-panel">
+        <div class="menu-head"><strong>{{ request.user.display_name }}</strong><div class="muted small">{{ request.user.email }}</div><div class="muted small">{{ request.user.get_role_display }}</div></div>
+        <a class="only-mobile" href="{% url 'core:search' %}">{% trans "Search" %}</a>
+        <a href="{% url 'accounts:profile' %}">{% trans "Profile & password" %}</a>
+        <a href="{% url 'core:help' %}">{% trans "Guide" %}</a>
+        {% if request.user.is_workspace_admin %}<a href="{% url 'accounts:user_list' %}">{% trans "Users" %}</a>{% endif %}
+        {% if request.user.is_superuser %}<a href="{% url 'admin:index' %}">{% trans "Django admin" %}</a>{% endif %}
+        <form method="post" action="{% url 'accounts:logout' %}">{% csrf_token %}<button type="submit">{% trans "Log out" %}</button></form>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="app-shell">
+  <aside class="sidebar">
+    {% if project %}
+      <div class="project-head">
+        <span class="project-avatar">{{ project.key|slice:":3" }}</span>
+        <div style="min-width:0"><strong style="display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ project.name }}</strong><span class="muted small">{{ project.key }}</span></div>
+      </div>
+      {% with section=nav_section|default:"" %}
+      <div class="sidebar-section">
+        <div class="sidebar-title">{% trans "Planning" %}</div>
+        <a class="side-link {% if section == 'overview' %}active{% endif %}" href="{% url 'projects:detail' project.key %}"><span class="ico">◎</span>{% trans "Overview" %}</a>
+        <a class="side-link {% if section == 'board' %}active{% endif %}" href="{% url 'agile:board' project.key %}"><span class="ico">▦</span>{% trans "Board" %}</a>
+        <a class="side-link {% if section == 'backlog' %}active{% endif %}" href="{% url 'agile:backlog' project.key %}"><span class="ico">☰</span>{% trans "Backlog & sprints" %}</a>
+        <a class="side-link {% if section == 'issues' %}active{% endif %}" href="{% url 'issues:list' project.key %}"><span class="ico">≡</span>{% trans "Issues" %}</a>
+        <a class="side-link {% if section == 'reports' %}active{% endif %}" href="{% url 'agile:reports' project.key %}"><span class="ico">📉</span>{% trans "Reports" %}</a>
+        <a class="side-link {% if request.resolver_match.url_name == 'releases' %}active{% endif %}" href="{% url 'issues:releases' project.key %}"><span class="ico">🏷</span>{% trans "Releases" %}</a>
+        <a class="side-link {% if request.resolver_match.url_name == 'timeline' %}active{% endif %}" href="{% url 'issues:timeline' project.key %}"><span class="ico">▬</span>{% trans "Timeline" %}</a>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-title">{% trans "Knowledge" %}</div>
+        <a class="side-link {% if section == 'wiki' %}active{% endif %}" href="{% url 'wiki:home' project.key %}"><span class="ico">📘</span>{% trans "Wiki" %}</a>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-title">{% trans "Testing" %}</div>
+        <a class="side-link {% if section == 'plans' %}active{% endif %}" href="{% url 'testmgmt:plan_list' project.key %}"><span class="ico">🗂</span>{% trans "Test plans" %}</a>
+        <a class="side-link {% if section == 'executions' %}active{% endif %}" href="{% url 'testmgmt:execution_list' project.key %}"><span class="ico">▶</span>{% trans "Test executions" %}</a>
+        <a class="side-link {% if section == 'coverage' %}active{% endif %}" href="{% url 'testmgmt:coverage' project.key %}"><span class="ico">✓</span>{% trans "Coverage" %}</a>
+      </div>
+      {% if caps.manage_project %}
+      <div class="sidebar-section">
+        <a class="side-link {% if section == 'settings' %}active{% endif %}" href="{% url 'projects:settings' project.key %}"><span class="ico">⚙</span>{% trans "Project settings" %}</a>
+        <a class="side-link {% if request.resolver_match.url_name == 'webhooks' %}active{% endif %}" href="{% url 'issues:webhooks' project.key %}"><span class="ico">⚡</span>{% trans "Webhooks" %}</a>
+        <a class="side-link {% if request.resolver_match.url_name == 'automation' %}active{% endif %}" href="{% url 'issues:automation' project.key %}"><span class="ico">↻</span>{% trans "Automation" %}</a>
+      </div>
+      {% endif %}
+      {% endwith %}
+      <hr>
+    {% endif %}
+    <div class="sidebar-section">
+      <a class="side-link {% if nav_section == 'dashboard' %}active{% endif %}" href="{% url 'core:dashboard' %}"><span class="ico">⌂</span>{% trans "Dashboard" %}</a>
+      <a class="side-link {% if nav_section == 'projects' %}active{% endif %}" href="{% url 'projects:list' %}"><span class="ico">▣</span>{% trans "All projects" %}</a>
+      <a class="side-link {% if nav_section == 'help' %}active{% endif %}" href="{% url 'core:help' %}"><span class="ico">?</span>{% trans "Guide" %}</a>
+      {% if request.user.is_workspace_admin %}<a class="side-link {% if nav_section == 'users' %}active{% endif %}" href="{% url 'accounts:user_list' %}"><span class="ico">👥</span>{% trans "Users" %}</a>{% endif %}
+    </div>
+    {% if not project and nav_projects %}
+    <div class="sidebar-section">
+      <div class="sidebar-title">{% trans "Projects" %}</div>
+      {% for p in nav_projects %}
+        <a class="side-link" href="{% url 'projects:detail' p.key %}"><span class="ico">•</span>{{ p.name }}</a>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </aside>
+  <dialog class="palette" id="palette" aria-label="{% trans 'Quick jump' %}">
+    <input class="palette-input" type="text" data-palette-input placeholder="{% trans 'Type to jump to a page…' %}" autocomplete="off" aria-label="{% trans 'Quick jump' %}">
+    <ul class="palette-list" role="listbox" data-palette-list></ul>
+    <p class="palette-empty" data-palette-empty hidden>{% trans "No matches" %}</p>
+    <div class="palette-foot">
+      <span><kbd>↑</kbd><kbd>↓</kbd> {% trans "move" %}</span>
+      <span><kbd>Enter</kbd> {% trans "open" %}</span>
+      <span><kbd>Esc</kbd> {% trans "close" %}</span>
+    </div>
+  </dialog>
+  <main class="main">
+    {% if messages %}
+      <ul class="messages">{% for m in messages %}<li class="{{ m.tags }}">{{ m }}</li>{% endfor %}</ul>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+</div>
+{% endblock %}
+<script src="{% static 'js/mpira.js' %}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

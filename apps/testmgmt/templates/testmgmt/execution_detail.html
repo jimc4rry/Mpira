@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load i18n mpira %}
+{% block title %}{{ execution.name }}{% endblock %}
+{% block content %}
+<div class="breadcrumbs"><a href="{% url 'testmgmt:execution_list' project.key %}">{% trans "Test executions" %}</a></div>
+<div class="page-head">
+  <div>
+    <h1>▶ {{ execution.name }}</h1>
+    <div class="muted">{% if execution.plan %}{% trans "Plan" %}: <a href="{{ execution.plan.get_absolute_url }}">{{ execution.plan.name }}</a> · {% endif %}{% if execution.environment %}{{ execution.environment }} · {% endif %}{% if execution.fix_version %}{{ execution.fix_version }} · {% endif %}{{ execution.created_at|date:"d/m/Y" }}</div>
+  </div>
+  <div class="row">
+    {% if caps.execute_tests %}
+      <form method="post" action="{% url 'testmgmt:execution_run_queue' project.key execution.pk %}">{% csrf_token %}
+        <button class="btn btn-primary btn-sm" {% if execution.run_state == "queued" or execution.run_state == "running" %}disabled{% endif %}>▶ {% trans "Run automated tests" %}</button>
+      </form>
+    {% endif %}
+    <span class="pill">{{ execution.get_run_state_display }}</span>
+  </div>
+  {% if caps.manage_tests %}<form method="post" action="{% url 'testmgmt:execution_delete' project.key execution.pk %}" data-confirm="{% trans 'Delete this execution and all its results?' %}">{% csrf_token %}<button class="btn btn-sm btn-danger">{% trans "Delete" %}</button></form>{% endif %}
+</div>
+<div class="card">
+  <div class="row-between"><strong>{% blocktrans with e=summary.executed t=summary.total %}{{ e }} of {{ t }} executed{% endblocktrans %}</strong>
+    <span class="row small"><span class="pill run-pass">{% trans "Pass" %} <span data-sum="pass">{{ summary.pass }}</span></span><span class="pill run-fail">{% trans "Fail" %} <span data-sum="fail">{{ summary.fail }}</span></span><span class="pill run-blocked">{% trans "Blocked" %} <span data-sum="blocked">{{ summary.blocked }}</span></span><span class="pill run-todo">{% trans "To Do" context "test run" %} <span data-sum="todo">{{ summary.todo }}</span></span></span>
+  </div>
+</div>
+<div class="card flush" data-runs data-url="{% url 'api:test_run' project.key 0 %}" data-can-run="{% if caps.execute_tests %}1{% else %}0{% endif %}">
+  <div class="table-wrap"><table class="data-table">
+    <thead><tr><th>{% trans "Test" %}</th><th>{% trans "Result" %}</th><th>{% trans "Comment" %}</th><th>{% trans "Executed" %}</th></tr></thead>
+    <tbody>
+    {% for run in runs %}
+      <tr id="run-{{ run.pk }}" data-run="{{ run.pk }}">
+        <td style="min-width:260px">
+          <a href="{{ run.test.get_absolute_url }}">{{ run.test.key }}</a> {{ run.test.title }}
+          {% with steps=run.test.test_steps.all %}{% if steps %}
+            <details class="disclosure small"><summary>{% blocktrans count n=steps|length %}{{ n }} step{% plural %}{{ n }} steps{% endblocktrans %}</summary>
+              <ol style="padding-left:1.2rem;margin:0.3rem 0">{% for s in steps %}<li><strong>{{ s.action }}</strong>{% if s.data %} <span class="muted">[{{ s.data }}]</span>{% endif %}{% if s.expected_result %}<br><span class="muted">→ {{ s.expected_result }}</span>{% endif %}</li>{% endfor %}</ol>
+            </details>
+          {% endif %}{% endwith %}
+        </td>
+        <td>
+          {% if caps.execute_tests %}
+          <form method="post" action="{% url 'testmgmt:run_update' project.key run.pk %}" class="run-buttons">{% csrf_token %}
+            {% for v, l in run_statuses %}<button class="run-btn s-{{ v }} {% if run.status == v %}active{% endif %}" name="status" value="{{ v }}">{{ l }}</button>{% endfor %}
+          </form>
+          {% else %}<span class="pill run-{{ run.status }}">{{ run.get_status_display }}</span>{% endif %}
+        </td>
+        <td style="min-width:200px">{% if caps.execute_tests %}<input type="text" class="run-comment" value="{{ run.comment }}" placeholder="{% trans 'Optional note…' %}">{% else %}{{ run.comment }}{% endif %}</td>
+        <td class="muted small run-meta">{% if run.executed_at %}{{ run.executed_by.display_name }}<br>{{ run.executed_at|date:"d/m/Y H:i" }}{% endif %}</td>
+      </tr>
+    {% empty %}<tr><td colspan="4" class="empty">{% trans "No tests in this execution." %}</td></tr>{% endfor %}
+    </tbody>
+  </table></div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+(function () {
+  const root = document.querySelector("[data-runs]");
+  if (!root || root.dataset.canRun !== "1") return;
+  const url = (id) => root.dataset.url.replace("/0/", "/" + id + "/");
+  const sums = () => {
+    const counts = { pass: 0, fail: 0, blocked: 0, todo: 0 };
+    root.querySelectorAll(".run-btn.active").forEach((b) => { counts[b.value] += 1; });
+    Object.keys(counts).forEach((k) => { const el = document.querySelector('[data-sum="' + k + '"]'); if (el) el.textContent = counts[k]; });
+  };
+  async function save(row, status) {
+    const comment = row.querySelector(".run-comment").value;
+    const body = { comment: comment };
+    if (status) body.status = status;
+    else body.status = row.querySelector(".run-btn.active") ? row.querySelector(".run-btn.active").value : "todo";
+    try {
+      const data = await Mpira.api(url(row.dataset.run), { method: "PATCH", body: body });
+      row.querySelectorAll(".run-btn").forEach((b) => b.classList.toggle("active", b.value === data.status));
+      row.querySelector(".run-meta").textContent = data.executed_at ? new Date(data.executed_at).toLocaleString() : "";
+      sums();
+    } catch (err) { Mpira.toast(err.message, "error"); }
+  }
+  root.querySelectorAll("tr[data-run]").forEach((row) => {
+    row.querySelectorAll(".run-btn").forEach((btn) => btn.addEventListener("click", (e) => { e.preventDefault(); save(row, btn.value); }));
+    const c = row.querySelector(".run-comment");
+    if (c) c.addEventListener("change", () => save(row, null));
+  });
+})();
+</script>
+{% endblock %}

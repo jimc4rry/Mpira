@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Test plans" %} · {{ project.key }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div><h1>{% trans "Test plans" %}</h1><div class="muted">{% trans "Group tests to run for a release or a feature." %}</div></div>
+  <div class="row">
+    {% if caps.edit_issues %}<a class="btn" href="{% url 'issues:create' project.key %}?type=test">+ {% trans "New test case" %}</a>{% endif %}
+    {% if caps.manage_tests %}<a class="btn btn-primary" href="{% url 'testmgmt:plan_create' project.key %}">+ {% trans "New test plan" %}</a>{% endif %}
+  </div>
+</div>
+<div class="card flush">
+  <div class="table-wrap"><table class="data-table">
+    <thead><tr><th>{% trans "Name" %}</th><th>{% trans "Version" %}</th><th>{% trans "Tests" %}</th><th>{% trans "Created" %}</th><th></th></tr></thead>
+    <tbody>
+    {% for p in plans %}
+      <tr>
+        <td><a href="{{ p.get_absolute_url }}"><strong>{{ p.name }}</strong></a><div class="muted small">{{ p.description|truncatechars:90 }}</div></td>
+        <td>{{ p.fix_version|default:"—" }}</td>
+        <td>{{ p.tests.all|length }}</td>
+        <td class="muted small">{{ p.created_at|date:"d/m/Y" }}</td>
+        <td class="right">{% if caps.manage_tests %}<a class="btn btn-sm" href="{% url 'testmgmt:execution_create' project.key %}?plan={{ p.pk }}">▶ {% trans "Run" %}</a>{% endif %}</td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="5" class="empty">{% trans "No test plans yet." %}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+</div>
+{% endblock %}

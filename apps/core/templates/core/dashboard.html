@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load i18n mpira %}
+{% block title %}{% trans "Dashboard" %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>{% blocktrans with name=request.user.first_name|default:request.user.username %}Hi {{ name }} 👋{% endblocktrans %}</h1>
+    <div class="muted">{% trans "Here is what needs your attention." %}</div>
+  </div>
+</div>
+
+<div class="split">
+  <div>
+    <div class="card flush">
+      <div class="card-head"><h2>{% trans "Assigned to me" %}</h2><span class="muted small">{% trans "open issues" %}</span></div>
+      {% with issues=my_issues show_points=True %}{% include "_issue_table.html" %}{% endwith %}
+    </div>
+    <div class="card flush">
+      <div class="card-head"><h2>{% trans "Reported by me" %}</h2></div>
+      {% with issues=reported %}{% include "_issue_table.html" %}{% endwith %}
+    </div>
+    <div class="card">
+      <h2>{% trans "Recent activity" %}</h2>
+      <ul class="timeline">
+      {% for a in activity %}
+        <li>{% avatar a.actor %}<div><strong>{{ a.actor.display_name|default:_("Someone") }}</strong> {{ a.get_kind_display }}{% if a.kind == "field" %} <em>{{ a.field|field_label }}</em>{% endif %}{% if a.kind == "transition" %} → {% status_pill a.new_value a.new_display %}{% endif %} · <a href="{{ a.issue.get_absolute_url }}">{{ a.issue.key }}</a> <span class="muted">{{ a.issue.title|truncatechars:60 }}</span>
+          <div class="faint small">{{ a.created_at|timesince }} {% trans "ago" %}</div></div></li>
+      {% empty %}
+        <li class="muted">{% trans "Nothing yet." %}</li>
+      {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div>
+    <div class="card">
+      <div class="card-head"><h2>{% trans "Projects" %}</h2>{% if request.user.is_workspace_admin or request.user.role == "pm" %}<a class="btn btn-sm" href="{% url 'projects:create' %}">+ {% trans "New" %}</a>{% endif %}</div>
+      <ul class="list-plain">
+      {% for p in projects %}
+        <li class="row"><span class="project-avatar" style="width:26px;height:26px;font-size:10px">{{ p.key|slice:":3" }}</span><a href="{% url 'projects:detail' p.key %}">{{ p.name }}</a></li>
+      {% empty %}
+        <li class="muted">{% trans "You are not a member of any project yet." %}</li>
+      {% endfor %}
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-head"><h2>{% trans "Notifications" %}</h2><a class="small" href="{% url 'core:notifications' %}">{% trans "All" %}</a></div>
+      {% include "core/_notification_list.html" with items=notifications %}
+    </div>
+  </div>
+</div>
+{% endblock %}

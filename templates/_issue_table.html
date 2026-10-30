@@ -1,0 +1,48 @@
+{% load i18n mpira %}
+<div class="table-wrap">
+<table class="data-table">
+  <thead>
+    <tr>
+      {% if bulk %}<th style="width:28px"><input type="checkbox" aria-label="{% trans 'Select all' %}" onclick="document.querySelectorAll('input[name=issues]').forEach(c => c.checked = this.checked)"></th>{% endif %}
+      <th style="width:28px"></th>
+      <th>{% trans "Key" %}</th>
+      <th>{% trans "Summary" %}</th>
+      <th>{% trans "Status" %}</th>
+      <th>{% trans "Priority" %}</th>
+      <th>{% trans "Assignee" %}</th>
+      {% if show_points %}<th class="right">{% trans "Pts" %}</th>{% endif %}
+    </tr>
+  </thead>
+  <tbody>
+  {% for issue in issues %}
+    <tr>
+      {% if bulk %}<td><input type="checkbox" name="issues" value="{{ issue.number }}" form="bulk-form" aria-label="{{ issue.key }}"></td>{% endif %}
+      <td>{% type_badge issue %}</td>
+      <td><a class="issue-key" href="{{ issue.get_absolute_url }}">{{ issue.key }}</a></td>
+      <td><a href="{{ issue.get_absolute_url }}" style="color:inherit" class="{% if issue.is_done %}is-done-text{% endif %}">{{ issue.title }}</a>
+        {% for l in issue.labels.all %}<span class="label-chip" style="--c:{{ l.color }}">{{ l.name }}</span> {% endfor %}
+      </td>
+      {% if bulk %}
+      <td><select class="inline" data-field="status" data-url="{% url 'issues:inline' issue.project.key issue.number %}" aria-label="{% trans 'Status' %}">
+        {% for v, l in status_choices %}<option value="{{ v }}" {% if v == issue.status %}selected{% endif %}>{{ l }}</option>{% endfor %}
+      </select></td>
+      <td><select class="inline" data-field="priority" data-url="{% url 'issues:inline' issue.project.key issue.number %}" aria-label="{% trans 'Priority' %}">
+        {% for v, l in priority_choices %}<option value="{{ v }}" {% if v == issue.priority %}selected{% endif %}>{{ l }}</option>{% endfor %}
+      </select></td>
+      <td><select class="inline" data-field="assignee" data-url="{% url 'issues:inline' issue.project.key issue.number %}" aria-label="{% trans 'Assignee' %}">
+        <option value="none">{% trans "Unassigned" %}</option>
+        {% for m in members %}<option value="{{ m.pk }}" {% if issue.assignee_id == m.pk %}selected{% endif %}>{{ m.display_name }}</option>{% endfor %}
+      </select></td>
+      {% else %}
+      <td>{% status_pill issue.status issue.get_status_display %}</td>
+      <td class="nowrap" title="{{ issue.get_priority_display }}">{{ issue.priority|priority_icon }} {{ issue.get_priority_display }}</td>
+      <td>{% if issue.assignee %}<span class="user-inline">{% avatar issue.assignee %} {{ issue.assignee.display_name }}</span>{% else %}<span class="faint">{% trans "Unassigned" %}</span>{% endif %}</td>
+      {% endif %}
+      {% if show_points %}<td class="right">{% if issue.story_points is not None %}<span class="points">{{ issue.story_points }}</span>{% endif %}</td>{% endif %}
+    </tr>
+  {% empty %}
+    <tr><td colspan="7" class="empty">{% trans "No issues." %}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>

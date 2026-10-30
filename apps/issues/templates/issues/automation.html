@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Automation" %} · {{ project.key }}{% endblock %}
+{% block content %}
+<div class="page-head"><h1>{% trans "Automation" %}</h1></div>
+<p class="muted">{% trans "A rule runs right after the change that triggers it. If the condition matches, its one action is done on the issue. A change made by a rule does not start other rules." %}</p>
+<div class="card">
+  <h2>{% trans "Add a rule" %}</h2>
+  <form method="post" class="stack">{% csrf_token %}
+    <input type="hidden" name="action" value="add">
+    <label>{% trans "Name" %}<input type="text" name="name" maxlength="80" required></label>
+    <label>{% trans "When" %}
+      <select name="trigger">{% for v, l in trigger_choices %}<option value="{{ v }}">{{ l }}</option>{% endfor %}</select></label>
+    <label>{% trans "If (query, optional)" %}<input type="text" name="condition" placeholder="type = bug AND priority IN (high, highest)"></label>
+    <label>{% trans "Then" %}
+      <select name="rule_action">{% for v, l in action_choices %}<option value="{{ v }}">{{ l }}</option>{% endfor %}</select></label>
+    <label>{% trans "Value" %}<input type="text" name="value" placeholder="{% trans 'status key, priority, member id or none, or comment text' %}"></label>
+    <button class="btn btn-primary">{% trans "Add rule" %}</button>
+  </form>
+</div>
+<div class="card flush">
+  {% if rules %}
+  <table class="table">
+    <thead><tr><th>{% trans "Name" %}</th><th>{% trans "When" %}</th><th>{% trans "If" %}</th><th>{% trans "Then" %}</th><th>{% trans "Last error" %}</th><th></th></tr></thead>
+    <tbody>
+    {% for rule in rules %}
+      <tr>
+        <td>{{ rule.name }} {% if not rule.enabled %}<span class="faint">({% trans "off" %})</span>{% endif %}</td>
+        <td class="small">{{ rule.get_trigger_display }}</td>
+        <td class="small">{{ rule.condition|default:"—" }}</td>
+        <td class="small">{{ rule.get_action_display }}: {{ rule.value }}</td>
+        <td class="small">{{ rule.last_error|default:"—" }}</td>
+        <td class="row">
+          <form method="post">{% csrf_token %}<input type="hidden" name="action" value="toggle"><input type="hidden" name="pk" value="{{ rule.pk }}"><button class="btn btn-sm">{% if rule.enabled %}{% trans "Turn off" %}{% else %}{% trans "Turn on" %}{% endif %}</button></form>
+          <form method="post">{% csrf_token %}<input type="hidden" name="action" value="delete"><input type="hidden" name="pk" value="{{ rule.pk }}"><button class="btn btn-sm btn-ghost">{% trans "Delete" %}</button></form>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="empty">{% trans "No rules yet." %}</p>
+  {% endif %}
+</div>
+{% endblock %}

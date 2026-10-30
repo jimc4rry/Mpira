@@ -1,0 +1,6 @@
+﻿issue_type,title,description,priority,assignee,epic,parent,sprint,story_points,due_date,labels,components,fix_versions
+epic,Checkout redesign,One-page checkout,high,,,,,,,,,
+story,Pay with saved card,"Use PSP tokens, never PANs",medium,nikos@mpira.local,MPR-1,,MPR Sprint 3,5,2026-11-30,ux;security,Payments,1.1
+task,Feature flag for new checkout,,low,,,,,1,,tech-debt,,
+bug,Coupon accepts expired codes,Steps: apply SUMMER23 after 1 Sept,highest,,,,,2,,security,Backend,1.1
+subtask,Mobile layout,,medium,,,MPR-2,,,,,,

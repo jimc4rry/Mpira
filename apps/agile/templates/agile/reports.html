@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load i18n mpira %}
+{% block title %}{% trans "Reports" %} · {{ project.key }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>{% trans "Reports" %}</h1>
+  {% if sprints %}
+  <form method="get" class="row">
+    <label class="muted small" for="sprint-select">{% trans "Sprint" %}</label>
+    <select id="sprint-select" name="sprint" onchange="this.form.submit()" style="width:auto">
+      {% for s in sprints %}<option value="{{ s.pk }}" {% if s.pk == selected.pk %}selected{% endif %}>{{ s.name }} ({{ s.get_state_display }})</option>{% endfor %}
+    </select>
+  </form>
+  {% endif %}
+</div>
+
+{% if not selected %}
+  <div class="card empty"><div class="big">📉</div>{% trans "Start a sprint to see its burndown chart." %} <a href="{% url 'agile:backlog' project.key %}">{% trans "Go to the backlog" %}</a></div>
+{% else %}
+<div class="grid grid-4" style="margin-bottom:1rem">
+  <div class="stat-tile"><div class="label">{% trans "Committed" %}</div><div class="value">{{ burn.committed|default:0 }}</div></div>
+  <div class="stat-tile"><div class="label">{% trans "Current scope" %}</div><div class="value">{{ burn.scope|default:0 }}</div></div>
+  <div class="stat-tile"><div class="label">{% trans "Completed" %}</div><div class="value">{% if selected.state == "closed" %}{{ selected.completed_points }}{% else %}{{ report.completed|length }} {% trans "issues" %}{% endif %}</div></div>
+  <div class="stat-tile"><div class="label">{% trans "Avg. velocity" %}</div><div class="value">{{ velocity.average }}</div></div>
+</div>
+
+<div class="card">
+  <div class="card-head"><h2>{% trans "Burndown" %} — {{ selected.name }}</h2><span class="muted small">{{ selected.start_date|date:"d/m" }} – {{ selected.end_date|date:"d/m/Y" }}</span></div>
+  {% if burn_chart %}
+  <div class="chart">
+    <svg viewBox="0 0 {{ burn_chart.width }} {{ burn_chart.height }}" role="img" aria-label="{% trans 'Burndown chart' %}">
+      {% for t in burn_chart.y_ticks %}
+        <line class="grid-line" x1="{{ burn_chart.pad }}" x2="{{ burn_chart.right_x }}" y1="{{ t.y }}" y2="{{ t.y }}"></line>
+        <text class="axis-label" x="{{ burn_chart.pad|add:'-6' }}" y="{{ t.y }}" text-anchor="end" dominant-baseline="middle">{{ t.label }}</text>
+      {% endfor %}
+      {% for l in burn_chart.x_labels %}
+        <text class="axis-label" x="{{ l.x }}" y="{{ burn_chart.baseline_y|add:'16' }}" text-anchor="middle">{{ l.label }}</text>
+      {% endfor %}
+      <polyline class="ideal" points="{{ burn_chart.ideal }}"></polyline>
+      {% if burn_chart.actual %}<polyline class="actual" points="{{ burn_chart.actual }}"></polyline>{% endif %}
+      {% for d in burn_chart.dots %}<circle class="dot" cx="{{ d.x }}" cy="{{ d.y }}" r="3"></circle>{% endfor %}
+    </svg>
+  </div>
+  <div class="legend"><span><i style="background:var(--faint)"></i>{% trans "Guideline (ideal)" %}</span><span><i style="background:var(--accent)"></i>{% trans "Remaining story points" %}</span></div>
+  {% else %}<p class="muted">{% trans "No dates set for this sprint." %}</p>{% endif %}
+</div>
+
+<div class="grid grid-2">
+  <div class="card">
+    <h3>{% trans "Completed issues" %} ({{ report.completed|length }})</h3>
+    {% for i in report.completed %}<div class="row-between small" style="padding:0.2rem 0"><a href="{{ i.get_absolute_url }}">{{ i.key }} {{ i.title|truncatechars:50 }}</a><span class="points">{{ i.story_points|default:"–" }}</span></div>{% empty %}<p class="muted small">—</p>{% endfor %}
+  </div>
+  <div class="card">
+    <h3>{% trans "Not completed" %} ({{ report.incomplete|length }})</h3>
+    {% for i in report.incomplete %}<div class="row-between small" style="padding:0.2rem 0"><a href="{{ i.get_absolute_url }}">{{ i.key }} {{ i.title|truncatechars:50 }}</a><span class="row">{% status_pill i.status i.get_status_display %}<span class="points">{{ i.story_points|default:"–" }}</span></span></div>{% empty %}<p class="muted small">—</p>{% endfor %}
+    {% if report.added %}<h4 style="margin-top:1rem">{% trans "Added after sprint start" %}</h4>{% for i in report.added %}<div class="small"><a href="{{ i.get_absolute_url }}">{{ i.key }}</a> {{ i.title|truncatechars:50 }}</div>{% endfor %}{% endif %}
+  </div>
+</div>
+{% endif %}
+
+<div class="card">
+  <div class="card-head"><h2>{% trans "Velocity" %}</h2><span class="muted small">{% trans "Open backlog" %}: {{ open_points }} {% trans "pts" %}</span></div>
+  {% if velocity_chart %}
+  <div class="chart">
+    <svg viewBox="0 0 {{ velocity_chart.width }} {{ velocity_chart.height }}" role="img" aria-label="{% trans 'Velocity chart' %}">
+      <line class="grid-line" x1="{{ velocity_chart.pad }}" x2="{{ velocity_chart.right_x }}" y1="{{ velocity_chart.baseline_y }}" y2="{{ velocity_chart.baseline_y }}"></line>
+      {% for b in velocity_chart.bars %}
+        <rect class="bar-{{ b.kind }}" x="{{ b.x }}" y="{{ b.y }}" width="{{ b.w }}" height="{{ b.h }}" rx="3"><title>{{ b.value }}</title></rect>
+        <text class="axis-label" x="{{ b.x }}" y="{{ b.y|add:'-4' }}" dx="{{ b.w|floatformat:0 }}" text-anchor="end">{{ b.value }}</text>
+      {% endfor %}
+      {% for l in velocity_chart.labels %}<text class="axis-label" x="{{ l.x }}" y="{{ velocity_chart.baseline_y|add:'16' }}" text-anchor="middle">{{ l.label|truncatechars:18 }}</text>{% endfor %}
+    </svg>
+  </div>
+  <div class="legend"><span><i style="background:var(--border-strong)"></i>{% trans "Committed" %}</span><span><i style="background:var(--success)"></i>{% trans "Completed" %}</span></div>
+  {% else %}<p class="muted">{% trans "Velocity appears after the first sprint is completed." %}</p>{% endif %}
+</div>
+{% endblock %}

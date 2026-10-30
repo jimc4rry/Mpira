@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Log in" %}{% endblock %}
+{% block body %}
+<div class="auth-wrap">
+  <div class="auth-card">
+    <div class="brand"><span class="brand-mark">M</span>Mpira</div>
+    <div class="card">
+      <h1 style="font-size:1.2rem">{% trans "Log in to your workspace" %}</h1>
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {% include "_form.html" %}
+        <input type="hidden" name="next" value="{{ next }}">
+        <div class="form-actions"><button class="btn btn-primary" type="submit" style="width:100%">{% trans "Log in" %}</button></div>
+      </form>
+    </div>
+    <p class="muted small" style="text-align:center">{% trans "Accounts are created by a workspace admin." %}</p>
+    <form method="post" action="{% url 'accounts:set_language' %}" style="text-align:center">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ request.get_full_path }}">
+      <button class="btn btn-ghost btn-sm" name="language" value="en">English</button>
+      <button class="btn btn-ghost btn-sm" name="language" value="el">Ελληνικά</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

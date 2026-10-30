@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load i18n mpira %}
+{% block title %}{% trans "Statuses & workflow" %} · {{ project.key }}{% endblock %}
+{% block content %}
+<div class="breadcrumbs"><a href="{% url 'agile:board' project.key %}">{% trans "Board" %}</a> / <a href="{% url 'agile:board_settings' project.key %}">{% trans "Columns" %}</a></div>
+<div class="page-head">
+  <div>
+    <h1>{% trans "Statuses & workflow" %}</h1>
+    <div class="muted">{% trans "Add the statuses your team needs, decide which ones count as done, and which status may follow which." %}</div>
+  </div>
+</div>
+
+<div class="card flush">
+    <div class="card-head"><h2>{% trans "Statuses" %}</h2></div>
+    <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th>{% trans "Name" %}</th><th>{% trans "Start" %}</th><th>{% trans "Done" %}</th><th>{% trans "Issues" %}</th><th></th></tr></thead>
+      <tbody>
+      {% for s in statuses %}
+        <tr>
+          <td>
+            <form method="post" class="row" style="flex-wrap:nowrap">{% csrf_token %}
+              <input type="hidden" name="action" value="update"><input type="hidden" name="status" value="{{ s.key }}">
+              <input type="text" name="name" value="{{ s.name }}" maxlength="60" style="width:150px">
+              <label class="small" title="{% trans 'New issues start here' %}"><input type="checkbox" name="is_initial" {% if s.is_initial %}checked{% endif %} {% if s.is_initial %}disabled{% endif %}> {% trans "Start" %}</label>
+              <label class="small"><input type="checkbox" name="counts_as_done" {% if s.counts_as_done %}checked{% endif %}> {% trans "Done" %}</label>
+              <button class="btn btn-sm">{% trans "Save" %}</button>
+            </form>
+          </td>
+          <td>{% if s.is_initial %}<span class="pill status-todo">{% trans "Start" %}</span>{% endif %}</td>
+          <td>{% if s.counts_as_done %}<span class="pill status-done">{% trans "Done" %}</span>{% endif %}</td>
+          <td class="muted">{{ in_use|get_item:s.key }}</td>
+          <td class="right">
+            {% if not s.is_initial %}
+            <form method="post" class="row" style="flex-wrap:nowrap" data-confirm="{% trans 'Delete this status? Its issues move to the status you choose.' %}">{% csrf_token %}
+              <input type="hidden" name="action" value="delete"><input type="hidden" name="status" value="{{ s.key }}">
+              {% if in_use|get_item:s.key %}
+              <select name="move_to" required style="width:auto">
+                <option value="">{% trans "Move issues to…" %}</option>
+                {% for other in statuses %}{% if other.pk != s.pk %}<option value="{{ other.pk }}">{{ other.name }}</option>{% endif %}{% endfor %}
+              </select>
+              {% endif %}
+              <button class="btn btn-sm btn-danger">{% trans "Delete" %}</button>
+            </form>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div style="max-width:460px">
+    <div class="card">
+      <h2>{% trans "Add status" %}</h2>
+      <form method="post">{% csrf_token %}
+        <input type="hidden" name="action" value="add">
+        <div class="form-field"><label>{% trans "Name" %}</label><input type="text" name="name" maxlength="60" required placeholder="{% trans 'e.g. QA' %}"></div>
+        <div class="form-field"><label>{% trans "Board column" %}</label>
+          <select name="column">{% for col in columns %}<option value="{{ col.pk }}" {% if forloop.last %}selected{% endif %}>{{ col.name }}</option>{% endfor %}</select>
+        </div>
+        <label class="small"><input type="checkbox" name="counts_as_done"> {% trans "Counts as done" %}</label>
+        <div class="form-actions"><button class="btn btn-primary">{% trans "Add status" %}</button></div>
+      </form>
+      <p class="muted small" style="margin-top:0.6rem">{% trans "A new status can be reached from and can move to every other status. Adjust that in the transitions table below." %}</p>
+    </div>
+  </div>
+
+<div class="card flush">
+  <div class="card-head"><h2>{% trans "Transitions" %}</h2><span class="muted small">{% trans "Row = from, column = to. Checked boxes are allowed moves." %}</span></div>
+  <form method="post">{% csrf_token %}
+    <input type="hidden" name="action" value="transitions">
+    <div class="table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr><th>{% trans "From \ To" %}</th>{% for t in matrix_targets %}<th class="small">{{ t.name }}</th>{% endfor %}</tr>
+      </thead>
+      <tbody>
+      {% for row in matrix %}
+        <tr>
+          <td><span class="pill status-{{ row.status.key }}">{{ row.status.name }}</span></td>
+          {% for cell in row.cells %}
+            <td class="right">
+              {% if cell.self %}<span class="faint">—</span>{% else %}
+              <input type="checkbox" name="next|{{ row.status.key }}|{{ cell.to }}" {% if cell.checked %}checked{% endif %}>
+              {% endif %}
+            </td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+    <div class="form-actions" style="padding:0 1rem 1rem"><button class="btn btn-primary">{% trans "Save transitions" %}</button></div>
+  </form>
+</div>
+{% endblock %}

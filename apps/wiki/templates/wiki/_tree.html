@@ -1,0 +1,8 @@
+<ul class="page-tree">
+{% for node, children in nodes %}
+  <li>
+    <a href="{% url 'wiki:page' project.key node.pk %}" class="{% if page and page.pk == node.pk %}active{% endif %}" title="{{ node.title }}">{{ node.title }}</a>
+    {% if children %}{% include "wiki/_tree.html" with nodes=children %}{% endif %}
+  </li>
+{% endfor %}
+</ul>

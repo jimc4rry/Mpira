@@ -1,0 +1,47 @@
+{
+  "issues": [
+    {
+      "issue_type": "epic",
+      "title": "Checkout redesign",
+      "description": "One-page checkout",
+      "priority": "high"
+    },
+    {
+      "issue_type": "story",
+      "title": "Pay with saved card",
+      "description": "Use PSP tokens, never PANs",
+      "priority": "medium",
+      "assignee": "nikos@mpira.local",
+      "epic": "MPR-1",
+      "sprint": "MPR Sprint 3",
+      "story_points": "5",
+      "due_date": "2026-11-30",
+      "labels": "ux;security",
+      "components": "Payments",
+      "fix_versions": "1.1"
+    },
+    {
+      "issue_type": "task",
+      "title": "Feature flag for new checkout",
+      "priority": "low",
+      "story_points": "1",
+      "labels": "tech-debt"
+    },
+    {
+      "issue_type": "bug",
+      "title": "Coupon accepts expired codes",
+      "description": "Steps: apply SUMMER23 after 1 Sept",
+      "priority": "highest",
+      "story_points": "2",
+      "labels": "security",
+      "components": "Backend",
+      "fix_versions": "1.1"
+    },
+    {
+      "issue_type": "subtask",
+      "title": "Mobile layout",
+      "priority": "medium",
+      "parent": "MPR-2"
+    }
+  ]
+}

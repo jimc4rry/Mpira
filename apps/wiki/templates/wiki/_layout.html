@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+<div class="wiki-layout">
+  <aside class="card" style="position:sticky;top:calc(var(--header-h) + 1rem)">
+    <div class="row-between" style="margin-bottom:0.6rem">
+      <a href="{% url 'wiki:home' project.key %}"><strong>📘 {{ space.name }}</strong></a>
+      {% if caps.edit_wiki %}<a class="btn btn-sm" href="{% url 'wiki:page_create' project.key %}" title="{% trans 'New page' %}">+</a>{% endif %}
+    </div>
+    <form method="get" action="{% url 'wiki:home' project.key %}" style="margin-bottom:0.7rem"><input type="search" name="q" value="{{ q|default:'' }}" placeholder="{% trans 'Search this space…' %}"></form>
+    {% if tree %}{% include "wiki/_tree.html" with nodes=tree %}{% else %}<p class="muted small">{% trans "No pages yet." %}</p>{% endif %}
+  </aside>
+  <div style="min-width:0">{% block wiki_content %}{% endblock %}</div>
+</div>
+{% endblock %}

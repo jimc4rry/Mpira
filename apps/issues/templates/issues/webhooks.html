@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Webhooks" %} · {{ project.key }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>{% trans "Webhooks" %}</h1>
+</div>
+<p class="muted">{% trans "A signed JSON POST goes to each address when the chosen events happen. The signature is the HMAC-SHA256 of the body, in the X-Mpira-Signature header, with the signing secret." %}</p>
+<div class="card">
+  <h2>{% trans "Add a webhook" %}</h2>
+  <form method="post" class="stack">{% csrf_token %}
+    <input type="hidden" name="action" value="add">
+    <label>{% trans "Address (https only)" %}<input type="url" name="url" maxlength="300" required placeholder="https://"></label>
+    <fieldset>
+      <legend>{% trans "Events" %}</legend>
+      {% for value, label in event_choices %}<label><input type="checkbox" name="events" value="{{ value }}" checked> {{ label }}</label>{% endfor %}
+    </fieldset>
+    <button class="btn btn-primary">{% trans "Add" %}</button>
+  </form>
+</div>
+<div class="card flush">
+  {% if hooks %}
+  <table class="table">
+    <thead><tr><th>{% trans "Address" %}</th><th>{% trans "Events" %}</th><th>{% trans "Last result" %}</th><th></th></tr></thead>
+    <tbody>
+    {% for hook in hooks %}
+      <tr>
+        <td>{{ hook.url }}</td>
+        <td class="small">{{ hook.events }}</td>
+        <td class="small">{% if hook.last_status %}HTTP {{ hook.last_status }}{% elif hook.last_error %}{{ hook.last_error }}{% else %}—{% endif %}</td>
+        <td class="row">
+          <form method="post">{% csrf_token %}<input type="hidden" name="action" value="test"><input type="hidden" name="pk" value="{{ hook.pk }}"><button class="btn btn-sm">{% trans "Test" %}</button></form>
+          <form method="post" onsubmit="return confirm('{% trans 'Delete this webhook?' %}')">{% csrf_token %}<input type="hidden" name="action" value="delete"><input type="hidden" name="pk" value="{{ hook.pk }}"><button class="btn btn-sm btn-ghost">{% trans "Delete" %}</button></form>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="empty">{% trans "No webhooks yet." %}</p>
+  {% endif %}
+</div>
+{% endblock %}

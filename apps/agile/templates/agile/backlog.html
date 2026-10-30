@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load i18n static mpira %}
+{% block title %}{% trans "Backlog" %} · {{ project.key }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>{% trans "Backlog & sprint planning" %}</h1>
+    <div class="muted">{% blocktrans %}Average velocity: {{ velocity }} points per sprint{% endblocktrans %}</div>
+  </div>
+  <div class="row">
+    {% if caps.manage_sprints %}<button class="btn" data-open-dialog="new-sprint-dialog">+ {% trans "Create sprint" %}</button>{% endif %}
+    {% if caps.edit_issues %}<a class="btn btn-primary" href="{% url 'issues:create' project.key %}?type=story">+ {% trans "Create issue" %}</a>{% endif %}
+  </div>
+</div>
+
+<div data-backlog data-can-edit="{% if caps.edit_issues %}1{% else %}0{% endif %}" data-move-url="{% url 'api:issue_move' project.key 0 %}">
+{% for row in sprint_rows %}
+  <section class="sprint-box {% if row.sprint.is_active %}is-active{% endif %}" data-list>
+    <div class="sprint-box-head">
+      <div>
+        <strong>{{ row.sprint.name }}</strong> <span class="pill sprint-{{ row.sprint.state }}">{{ row.sprint.get_state_display }}</span>
+        <span class="muted small"> · <span data-count>{{ row.issues|length }}</span> {% trans "issues" %} · <span data-points>{{ row.points }}</span> {% trans "pts" %}{% if row.sprint.start_date %} · {{ row.sprint.start_date|date:"d/m" }} – {{ row.sprint.end_date|date:"d/m/Y" }}{% endif %}</span>
+        {% if row.sprint.goal %}<div class="muted small">🎯 {{ row.sprint.goal }}</div>{% endif %}
+      </div>
+      {% if caps.manage_sprints %}
+      <div class="row">
+        {% if row.sprint.is_active %}
+          <a class="btn btn-sm" href="{% url 'agile:board' project.key %}">{% trans "Board" %}</a>
+          <button class="btn btn-sm btn-primary" data-open-dialog="complete-{{ row.sprint.pk }}">{% trans "Complete sprint" %}</button>
+        {% elif not has_active %}
+          <button class="btn btn-sm btn-primary" data-open-dialog="start-{{ row.sprint.pk }}">{% trans "Start sprint" %}</button>
+        {% endif %}
+        <a class="btn btn-sm btn-ghost" href="{% url 'agile:sprint_edit' project.key row.sprint.pk %}">✎</a>
+      </div>
+      {% endif %}
+    </div>
+    <div class="issue-rows" data-sprint="{{ row.sprint.pk }}">
+      {% for issue in row.issues %}{% include "agile/_issue_row.html" %}{% endfor %}
+      <div class="empty-hint {% if row.issues %}hidden{% endif %}">{% trans "Drag issues here from the backlog to plan this sprint." %}</div>
+    </div>
+  </section>
+
+  {% if caps.manage_sprints %}
+    {% if row.sprint.is_active %}
+    <dialog id="complete-{{ row.sprint.pk }}">
+      <form method="post" action="{% url 'agile:sprint_complete' project.key row.sprint.pk %}">{% csrf_token %}
+        <h2>{% blocktrans with name=row.sprint.name %}Complete {{ name }}{% endblocktrans %}</h2>
+        <p>{% blocktrans with done=row.done_points total=row.points %}{{ done }} of {{ total }} points done.{% endblocktrans %}</p>
+        <p class="muted">{% trans "Done issues stay in the sprint. Incomplete issues move to:" %}</p>
+        <select name="move_to"><option value="">{% trans "Backlog" %}</option>{% for s in future_sprints %}<option value="{{ s.pk }}">{{ s.name }}</option>{% endfor %}</select>
+        <div class="form-actions"><button class="btn btn-primary">{% trans "Complete sprint" %}</button><button type="button" class="btn btn-ghost" data-close-dialog>{% trans "Cancel" %}</button></div>
+      </form>
+    </dialog>
+    {% else %}
+    <dialog id="start-{{ row.sprint.pk }}">
+      <form method="post" action="{% url 'agile:sprint_start' project.key row.sprint.pk %}">{% csrf_token %}
+        <h2>{% blocktrans with name=row.sprint.name %}Start {{ name }}{% endblocktrans %}</h2>
+        <p class="muted">{% blocktrans with n=row.issues|length pts=row.points %}{{ n }} issues, {{ pts }} story points will be committed.{% endblocktrans %}</p>
+        <div class="grid grid-2">
+          <div class="form-field"><label>{% trans "Start date" %}</label><input type="date" name="start_date" value="{% if row.sprint.start_date %}{{ row.sprint.start_date|date:'Y-m-d' }}{% else %}{{ start_form.start_date.value|date:'Y-m-d' }}{% endif %}" required></div>
+          <div class="form-field"><label>{% trans "End date" %}</label><input type="date" name="end_date" value="{% if row.sprint.end_date %}{{ row.sprint.end_date|date:'Y-m-d' }}{% else %}{{ start_form.end_date.value|date:'Y-m-d' }}{% endif %}" required></div>
+        </div>
+        <div class="form-actions"><button class="btn btn-primary">{% trans "Start sprint" %}</button><button type="button" class="btn btn-ghost" data-close-dialog>{% trans "Cancel" %}</button></div>
+      </form>
+    </dialog>
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+  <section class="sprint-box" data-list>
+    <div class="sprint-box-head">
+      <div><strong>{% trans "Backlog" %}</strong> <span class="muted small">· <span data-count>{{ backlog_items|length }}</span> {% trans "issues" %} · <span data-points>{{ backlog_points }}</span> {% trans "pts" %}</span></div>
+    </div>
+    <div class="issue-rows" data-sprint="">
+      {% for issue in backlog_items %}{% include "agile/_issue_row.html" %}{% endfor %}
+      <div class="empty-hint {% if backlog_items %}hidden{% endif %}">{% trans "The backlog is empty." %}</div>
+    </div>
+  </section>
+</div>
+
+{% if caps.manage_sprints %}
+<dialog id="new-sprint-dialog">
+  <form method="post" action="{% url 'agile:sprint_create' project.key %}" novalidate>{% csrf_token %}
+    <h2>{% trans "Create sprint" %}</h2>
+    {% with form=sprint_form %}{% include "_form.html" %}{% endwith %}
+    <div class="form-actions"><button class="btn btn-primary">{% trans "Create" %}</button><button type="button" class="btn btn-ghost" data-close-dialog>{% trans "Cancel" %}</button></div>
+  </form>
+</dialog>
+{% endif %}
+{% endblock %}
+{% block scripts %}<script src="{% static 'js/backlog.js' %}"></script>{% endblock %}

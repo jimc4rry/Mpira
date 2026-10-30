@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "New project" %}{% endblock %}
+{% block content %}
+<div class="breadcrumbs"><a href="{% url 'projects:list' %}">{% trans "Projects" %}</a></div>
+<div class="page-head"><h1>{% trans "New project" %}</h1></div>
+<div class="card" style="max-width:640px">
+  <form method="post" novalidate>{% csrf_token %}
+    {% include "_form.html" %}
+    <p class="muted small">{% trans "A wiki space is created automatically for every project." %}</p>
+    <div class="form-actions"><button class="btn btn-primary">{% trans "Create project" %}</button><a class="btn btn-ghost" href="{% url 'projects:list' %}">{% trans "Cancel" %}</a></div>
+  </form>
+</div>
+{% endblock %}

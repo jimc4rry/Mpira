@@ -1,0 +1,28 @@
+{% extends "wiki/_layout.html" %}
+{% load i18n mpira %}
+{% block title %}{% trans "History" %} · {{ page.title }}{% endblock %}
+{% block wiki_content %}
+<div class="breadcrumbs"><a href="{{ page.get_absolute_url }}">{{ page.title }}</a></div>
+<div class="page-head"><h1>{% trans "Page history" %}</h1></div>
+<div class="card flush">
+  <div class="table-wrap"><table class="data-table">
+    <thead><tr><th>{% trans "Version" %}</th><th>{% trans "Author" %}</th><th>{% trans "Date" %}</th><th>{% trans "Change note" %}</th><th></th></tr></thead>
+    <tbody>
+    {% for v in versions %}
+      <tr>
+        <td><a href="{% url 'wiki:page_version' project.key page.pk v.version %}">v{{ v.version }}</a>{% if v.version == page.version %} <span class="pill status-done">{% trans "current" %}</span>{% endif %}</td>
+        <td><span class="user-inline">{% avatar v.author %} {{ v.author.display_name|default:"—" }}</span></td>
+        <td class="muted">{{ v.created_at|date:"d/m/Y H:i" }}</td>
+        <td>{{ v.change_note|default:"—" }}</td>
+        <td class="right nowrap">
+          <a class="btn btn-sm" href="{% url 'wiki:page_version' project.key page.pk v.version %}">{% trans "View & diff" %}</a>
+          {% if caps.edit_wiki and v.version != page.version %}
+            <form method="post" action="{% url 'wiki:page_restore' project.key page.pk v.version %}" class="inline-form" data-confirm="{% trans 'Restore this version? A new version will be created.' %}">{% csrf_token %}<button class="btn btn-sm">{% trans "Restore" %}</button></form>
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+</div>
+{% endblock %}

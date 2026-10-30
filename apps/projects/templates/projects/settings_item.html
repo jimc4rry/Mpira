@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Edit" %}{% endblock %}
+{% block content %}
+<div class="breadcrumbs"><a href="{{ back }}">{% trans "Project settings" %}</a></div>
+<div class="page-head"><h1>{% trans "Edit" %}: {{ instance }}</h1></div>
+<div class="card" style="max-width:560px">
+  <form method="post" novalidate>{% csrf_token %}
+    {% include "_form.html" %}
+    <div class="form-actions"><button class="btn btn-primary">{% trans "Save" %}</button><a class="btn btn-ghost" href="{{ back }}">{% trans "Cancel" %}</a></div>
+  </form>
+</div>
+{% endblock %}

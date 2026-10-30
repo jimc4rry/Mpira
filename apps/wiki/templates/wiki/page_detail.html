@@ -1,0 +1,38 @@
+{% extends "wiki/_layout.html" %}
+{% load i18n mpira %}
+{% block title %}{{ page.title }}{% endblock %}
+{% block wiki_content %}
+<div class="breadcrumbs">
+  <a href="{% url 'wiki:home' project.key %}">{{ space.name }}</a>
+  {% for a in page.ancestors %} / <a href="{{ a.get_absolute_url }}">{{ a.title }}</a>{% endfor %}
+</div>
+<div class="page-head">
+  <div>
+    <h1>{{ page.title }}</h1>
+    <div class="muted small">v{{ page.version }} · {% trans "last edited by" %} {{ page.updated_by.display_name|default:"—" }} · {{ page.updated_at|date:"d/m/Y H:i" }}</div>
+  </div>
+  <div class="row">
+    <a class="btn btn-sm" href="{% url 'wiki:page_history' project.key page.pk %}">🕘 {% trans "History" %}</a>
+    {% if caps.edit_wiki %}
+      <a class="btn btn-sm" href="{% url 'wiki:page_create' project.key %}?parent={{ page.pk }}">+ {% trans "Child page" %}</a>
+      <a class="btn btn-sm btn-primary" href="{% url 'wiki:page_edit' project.key page.pk %}">✎ {% trans "Edit" %}</a>
+      {% if page.created_by_id == request.user.pk or caps.manage_project %}
+      <form method="post" action="{% url 'wiki:page_delete' project.key page.pk %}" data-confirm="{% trans 'Delete this page? Child pages move up one level.' %}">{% csrf_token %}<button class="btn btn-sm btn-danger">{% trans "Delete" %}</button></form>
+      {% endif %}
+    {% endif %}
+  </div>
+</div>
+<article class="card prose">{% if page.body %}{% markdown page.body %}{% else %}<p class="muted">{% trans "This page is empty." %}</p>{% endif %}</article>
+{% if children %}
+<div class="card">
+  <h3>{% trans "Child pages" %}</h3>
+  {% for c in children %}<div><a href="{{ c.get_absolute_url }}">📄 {{ c.title }}</a></div>{% endfor %}
+</div>
+{% endif %}
+{% if linked %}
+<div class="card">
+  <h3>{% trans "Linked issues" %}</h3>
+  {% for i in linked %}<div class="row" style="padding:0.2rem 0">{% type_badge i %}<a href="{{ i.get_absolute_url }}">{{ i.key }}</a> {{ i.title }} {% status_pill i.status i.get_status_display %}</div>{% endfor %}
+</div>
+{% endif %}
+{% endblock %}

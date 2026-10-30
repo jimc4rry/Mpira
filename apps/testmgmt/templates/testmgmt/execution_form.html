@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "New execution" %}{% endblock %}
+{% block content %}
+<div class="breadcrumbs"><a href="{% url 'testmgmt:execution_list' project.key %}">{% trans "Test executions" %}</a></div>
+<div class="page-head"><h1>▶ {% trans "New test execution" %}</h1></div>
+<div class="card" style="max-width:760px">
+  <form method="post" novalidate>{% csrf_token %}
+    {% include "_form.html" %}
+    <div class="form-actions"><button class="btn btn-primary">{% trans "Create execution" %}</button><a class="btn btn-ghost" href="{% url 'testmgmt:execution_list' project.key %}">{% trans "Cancel" %}</a></div>
+  </form>
+</div>
+{% endblock %}

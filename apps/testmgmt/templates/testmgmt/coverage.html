@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n mpira %}
+{% block title %}{% trans "Coverage" %} · {{ project.key }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div><h1>✓ {% trans "Requirement coverage" %}</h1><div class="muted">{% trans "Stories, tasks, bugs and epics, with the latest result of the tests linked to them (“tests” link)." %}</div></div>
+  {% if versions %}
+  <form method="get" class="row"><select name="version" onchange="this.form.submit()" style="width:auto"><option value="">{% trans "All versions" %}</option>{% for v in versions %}<option value="{{ v.pk }}" {% if version and version.pk == v.pk %}selected{% endif %}>{{ v.name }}</option>{% endfor %}</select></form>
+  {% endif %}
+</div>
+<div class="card">
+  <div class="row-between" style="margin-bottom:0.6rem"><strong>{% blocktrans with p=report.covered_percent t=report.total %}{{ p }}% of {{ t }} requirements are covered by at least one test{% endblocktrans %}</strong></div>
+  <div class="progress" style="height:14px">{% for t in report.totals %}<span class="p-{{ t.key }}" style="width:{{ t.percent }}%" title="{{ t.label }}: {{ t.count }}"></span>{% endfor %}</div>
+  <div class="row small" style="margin-top:0.6rem">{% for t in report.totals %}<span class="pill cov-{{ t.key }}">{{ t.label }}: {{ t.count }}</span>{% endfor %}</div>
+</div>
+<div class="card flush">
+  <div class="table-wrap"><table class="data-table">
+    <thead><tr><th>{% trans "Requirement" %}</th><th>{% trans "Status" %}</th><th>{% trans "Coverage" %}</th><th>{% trans "Tests" %}</th></tr></thead>
+    <tbody>
+    {% for r in report.rows %}
+      <tr>
+        <td>{% type_badge r.issue %} <a href="{{ r.issue.get_absolute_url }}">{{ r.issue.key }}</a> {{ r.issue.title }}</td>
+        <td>{% status_pill r.issue.status r.issue.get_status_display %}</td>
+        <td><span class="pill cov-{{ r.status }}">{{ r.status_label }}</span></td>
+        <td class="small">{% for t, run in r.tests %}<div><a href="{{ t.get_absolute_url }}">{{ t.key }}</a> {% if run %}<span class="pill run-{{ run.status }}">{{ run.get_status_display }}</span>{% else %}<span class="pill run-todo">{% trans "Not run" %}</span>{% endif %}</div>{% empty %}<span class="faint">—</span>{% endfor %}</td>
+      </tr>
+    {% empty %}<tr><td colspan="4" class="empty">{% trans "No requirements found." %}</td></tr>{% endfor %}
+    </tbody>
+  </table></div>
+</div>
+{% endblock %}

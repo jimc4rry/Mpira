@@ -1,0 +1,16 @@
+{% extends "wiki/_layout.html" %}
+{% load i18n %}
+{% block title %}{% if is_new %}{% trans "New page" %}{% else %}{% trans "Edit" %} {{ page.title }}{% endif %}{% endblock %}
+{% block wiki_content %}
+<div class="page-head"><h1>{% if is_new %}{% trans "New page" %}{% else %}{% trans "Edit" %}: {{ page.title }}{% endif %}</h1></div>
+<div class="card">
+  <form method="post" novalidate>{% csrf_token %}
+    {% if page %}<input type="hidden" name="base_version" value="{{ page.version }}">{% endif %}
+    {% include "_form.html" %}
+    <div class="form-actions">
+      <button class="btn btn-primary">{% if is_new %}{% trans "Create page" %}{% else %}{% trans "Save new version" %}{% endif %}</button>
+      <a class="btn btn-ghost" href="{% if page %}{{ page.get_absolute_url }}{% else %}{% url 'wiki:home' project.key %}{% endif %}">{% trans "Cancel" %}</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

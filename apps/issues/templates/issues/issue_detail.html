@@ -1,0 +1,229 @@
+{% extends "base.html" %}
+{% load i18n mpira %}
+{% block title %}{{ issue.key }} {{ issue.title }}{% endblock %}
+{% block content %}
+<div class="breadcrumbs">
+  <a href="{% url 'issues:list' project.key %}">{{ project.key }}</a>
+  {% if issue.epic %} / <a href="{{ issue.epic.get_absolute_url }}">{{ issue.epic.key }}</a>{% endif %}
+  {% if issue.parent %} / <a href="{{ issue.parent.get_absolute_url }}">{{ issue.parent.key }}</a>{% endif %}
+  / <strong>{{ issue.key }}</strong>
+</div>
+<div class="page-head">
+  <h1 class="row" style="gap:0.6rem">{% type_badge issue %} <span>{{ issue.title }}</span></h1>
+  <div class="row">
+    <form method="post" action="{% url 'issues:watch' project.key issue.number %}">{% csrf_token %}
+      <button class="btn btn-sm">{% if is_watching %}👁 {% trans "Unwatch" %}{% else %}👁 {% trans "Watch" %}{% endif %} <span class="muted">{{ watchers|length }}</span></button>
+    </form>
+    {% if caps.edit_issues %}<a class="btn btn-sm" href="{% url 'issues:edit' project.key issue.number %}">✎ {% trans "Edit" %}</a>{% endif %}
+    {% if caps.edit_issues and issue.issue_type != "subtask" and issue.issue_type != "epic" %}<a class="btn btn-sm" href="{% url 'issues:create' project.key %}?parent={{ issue.number }}">+ {% trans "Sub-task" %}</a>{% endif %}
+    {% if caps.edit_issues and issue.issue_type == "epic" %}<a class="btn btn-sm" href="{% url 'issues:create' project.key %}?type=story&epic={{ issue.number }}">+ {% trans "Issue in epic" %}</a>{% endif %}
+    {% if caps.delete_issues %}
+      <form method="post" action="{% url 'issues:delete' project.key issue.number %}" data-confirm="{% trans 'Delete this issue permanently?' %}">{% csrf_token %}<button class="btn btn-sm btn-danger">{% trans "Delete" %}</button></form>
+    {% endif %}
+  </div>
+</div>
+
+<div class="detail-layout">
+  <div>
+    <div class="card">
+      <h3>{% trans "Description" %}</h3>
+      <div class="prose">{% if issue.description %}{% markdown issue.description %}{% else %}<p class="muted">{% trans "No description." %}</p>{% endif %}</div>
+    </div>
+
+    {% if is_test %}
+    <div class="card">
+      <div class="card-head"><h3>🧪 {% trans "Test steps" %}</h3>{% if caps.manage_tests %}<a class="btn btn-sm" href="{% url 'testmgmt:test_steps' project.key issue.number %}">{% trans "Edit steps" %}</a>{% endif %}</div>
+      {% if test_steps %}
+      <div class="table-wrap"><table class="data-table steps-table">
+        <thead><tr><th>#</th><th>{% trans "Action" %}</th><th>{% trans "Test data" %}</th><th>{% trans "Expected result" %}</th></tr></thead>
+        <tbody>{% for s in test_steps %}<tr><td class="muted">{{ forloop.counter }}</td><td>{{ s.action|linebreaksbr }}</td><td class="muted">{{ s.data|linebreaksbr }}</td><td>{{ s.expected_result|linebreaksbr }}</td></tr>{% endfor %}</tbody>
+      </table></div>
+      {% else %}<p class="muted">{% trans "No steps defined yet." %}</p>{% endif %}
+      <h4 style="margin-top:1rem">{% trans "Covers requirements" %}</h4>
+      {% for r in covers %}<div><a href="{{ r.get_absolute_url }}">{% type_badge r %} {{ r.key }}</a> {{ r.title }} {% status_pill r.status r.get_status_display %}</div>{% empty %}<p class="muted small">{% trans "Link this test to a story with the “tests” link type below." %}</p>{% endfor %}
+      <h4 style="margin-top:1rem">{% trans "Recent runs" %}</h4>
+      {% for run in test_runs %}
+        <div class="row small"><span class="pill run-{{ run.status }}">{{ run.get_status_display }}</span><a href="{{ run.execution.get_absolute_url }}">{{ run.execution.name }}</a><span class="muted">{{ run.executed_at|date:"d/m/Y H:i" }} · {{ run.executed_by.display_name }}</span></div>
+      {% empty %}<p class="muted small">{% trans "Never executed." %}</p>{% endfor %}
+    </div>
+    {% endif %}
+
+    {% if is_requirement %}
+    <div class="card">
+      <div class="card-head"><h3>✓ {% trans "Test coverage" %}</h3><span class="pill cov-{{ coverage_status }}">{{ coverage_label }}</span></div>
+      {% for t, run in covering_tests %}
+        <div class="row-between" style="padding:0.3rem 0"><a href="{{ t.get_absolute_url }}">{% type_badge t %} {{ t.key }} {{ t.title }}</a>{% if run %}<span class="pill run-{{ run.status }}">{{ run.get_status_display }}</span>{% else %}<span class="pill run-todo">{% trans "Not run" %}</span>{% endif %}</div>
+      {% empty %}
+        <p class="muted small">{% trans "No tests cover this issue yet." %}{% if caps.edit_issues %} <a href="{% url 'issues:create' project.key %}?type=test">{% trans "Create a test" %}</a>{% endif %}</p>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if subtasks or issue.issue_type != "subtask" and issue.issue_type != "epic" and issue.issue_type != "test" %}
+    <div class="card">
+      <div class="card-head"><h3>{% trans "Sub-tasks" %}</h3>{% if caps.edit_issues and issue.issue_type != "subtask" %}<a class="btn btn-sm" href="{% url 'issues:create' project.key %}?parent={{ issue.number }}">+ {% trans "Add" %}</a>{% endif %}</div>
+      {% for s in subtasks %}
+        <div class="row-between" style="padding:0.3rem 0"><a href="{{ s.get_absolute_url }}" class="{% if s.is_done %}is-done-text{% endif %}">{{ s.key }} {{ s.title }}</a><span class="row">{% avatar s.assignee %}{% status_pill s.status s.get_status_display %}</span></div>
+      {% empty %}<p class="muted small">{% trans "No sub-tasks." %}</p>{% endfor %}
+    </div>
+    {% endif %}
+
+    {% if issue.issue_type == "epic" %}
+    <div class="card">
+      <h3>{% trans "Issues in this epic" %}</h3>
+      {% for s in epic_children %}
+        <div class="row-between" style="padding:0.3rem 0"><a href="{{ s.get_absolute_url }}" class="{% if s.is_done %}is-done-text{% endif %}">{% type_badge s %} {{ s.key }} {{ s.title }}</a><span class="row">{% if s.story_points is not None %}<span class="points">{{ s.story_points }}</span>{% endif %}{% avatar s.assignee %}{% status_pill s.status s.get_status_display %}</span></div>
+      {% empty %}<p class="muted small">{% trans "No issues yet." %}</p>{% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="card">
+      <div class="card-head"><h3>{% trans "Linked issues" %}</h3></div>
+      {% for l in links_out %}
+        <div class="row-between" style="padding:0.25rem 0">
+          <span><span class="muted small">{{ l.get_link_type_display }}</span> <a href="{{ l.target.get_absolute_url }}">{{ l.target.key }}</a> {{ l.target.title }} {% status_pill l.target.status l.target.get_status_display %}</span>
+          {% if caps.edit_issues %}<form method="post" action="{% url 'issues:link_delete' project.key issue.number l.pk %}">{% csrf_token %}<button class="btn btn-sm btn-ghost" title="{% trans 'Remove link' %}">✕</button></form>{% endif %}
+        </div>
+      {% endfor %}
+      {% for l in links_in %}
+        <div class="row-between" style="padding:0.25rem 0">
+          <span><span class="muted small">{{ l.inward_label }}</span> <a href="{{ l.source.get_absolute_url }}">{{ l.source.key }}</a> {{ l.source.title }} {% status_pill l.source.status l.source.get_status_display %}</span>
+          {% if caps.edit_issues %}<form method="post" action="{% url 'issues:link_delete' project.key issue.number l.pk %}">{% csrf_token %}<button class="btn btn-sm btn-ghost" title="{% trans 'Remove link' %}">✕</button></form>{% endif %}
+        </div>
+      {% endfor %}
+      {% if not links_out and not links_in %}<p class="muted small">{% trans "No links." %}</p>{% endif %}
+      {% if caps.edit_issues %}
+      <form method="post" action="{% url 'issues:link_add' project.key issue.number %}" class="row" style="margin-top:0.6rem">{% csrf_token %}
+        <select name="direction" style="width:auto"><option value="out">{{ issue.key }} →</option><option value="in">→ {{ issue.key }}</option></select>
+        <select name="link_type" style="width:auto">{% for v, l in link_form.link_type.field.choices %}<option value="{{ v }}">{{ l }}</option>{% endfor %}</select>
+        <input type="text" name="target_key" placeholder="{{ project.key }}-1" style="width:120px" required>
+        <button class="btn btn-sm">{% trans "Link" %}</button>
+      </form>
+      {% endif %}
+    </div>
+
+    {% if wiki_pages %}
+    <div class="card">
+      <h3>📘 {% trans "Mentioned in wiki pages" %}</h3>
+      {% for p in wiki_pages %}<div><a href="{{ p.get_absolute_url }}">{{ p.title }}</a> <span class="muted small">· {{ p.space.project.key }}</span></div>{% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="card" id="attachments">
+      <div class="card-head"><h3>📎 {% trans "Attachments" %}</h3></div>
+      {% for a in attachments %}
+        <div class="row-between" style="padding:0.25rem 0">
+          <span><a href="{% url 'issues:attachment_download' project.key issue.number a.pk %}" target="_blank" rel="noopener">{{ a.filename }}</a> <span class="muted small">{{ a.size|filesize }} · {{ a.uploaded_by.display_name }} · {{ a.created_at|date:"d/m/Y" }}</span></span>
+          {% if caps.edit_issues %}<form method="post" action="{% url 'issues:attachment_delete' project.key issue.number a.pk %}" data-confirm="{% trans 'Delete this attachment?' %}">{% csrf_token %}<button class="btn btn-sm btn-ghost">✕</button></form>{% endif %}
+        </div>
+      {% empty %}<p class="muted small">{% trans "No attachments." %}</p>{% endfor %}
+      {% if caps.edit_issues %}
+      <form method="post" enctype="multipart/form-data" action="{% url 'issues:attachment_upload' project.key issue.number %}" class="row" style="margin-top:0.6rem">{% csrf_token %}
+        <input type="file" name="file" required>
+        <button class="btn btn-sm">{% trans "Upload" %}</button>
+      </form>
+      {% endif %}
+    </div>
+
+    <div class="card" id="comments">
+      <nav class="tabs" style="margin-bottom:0.5rem">
+        <a href="#comments" class="active" data-tab-target="tab-comments">{% trans "Comments" %} ({{ comments|length }})</a>
+        <a href="#comments" data-tab-target="tab-activity">{% trans "History" %}</a>
+      </nav>
+      <div id="tab-comments">
+        {% for c in comments %}
+          <div class="comment">
+            {% avatar c.author "md" %}
+            <div class="comment-body">
+              <div class="comment-meta row-between"><span><strong>{{ c.author.display_name|default:_("Deleted user") }}</strong> · {{ c.created_at|date:"d/m/Y H:i" }}</span>
+                {% if c.author_id == request.user.pk or caps.manage_project %}<form method="post" action="{% url 'issues:comment_delete' project.key issue.number c.pk %}" data-confirm="{% trans 'Delete this comment?' %}">{% csrf_token %}<button class="btn btn-sm btn-ghost">✕</button></form>{% endif %}
+              </div>
+              <div class="prose">{% markdown c.body %}</div>
+            </div>
+          </div>
+        {% empty %}<p class="muted">{% trans "No comments yet." %}</p>{% endfor %}
+        {% if caps.comment %}
+        <form method="post" action="{% url 'issues:comment_add' project.key issue.number %}" style="margin-top:0.8rem">{% csrf_token %}
+          <textarea name="body" rows="3" data-markdown="1" placeholder="{% trans 'Add a comment… use @handle to mention someone' %}" required></textarea>
+          <div class="form-actions"><button class="btn btn-primary btn-sm">{% trans "Comment" %}</button></div>
+        </form>
+        {% endif %}
+      </div>
+      <div id="tab-activity" class="hidden">
+        <ul class="timeline">
+        {% for a in activity %}
+          <li>{% avatar a.actor %}<div><strong>{{ a.actor.display_name|default:_("Someone") }}</strong> {{ a.get_kind_display }}
+            {% if a.kind == "field" %}<em>{{ a.field|field_label }}</em>{% if a.field != "description" %}: <span class="muted">{{ a.old_display }}</span> → <strong>{{ a.new_display }}</strong>{% endif %}
+            {% elif a.kind == "transition" %}{% status_pill a.old_value a.old_display %} → {% status_pill a.new_value a.new_display %}
+            {% elif a.kind == "link" %}<em>{{ a.field }}</em> {{ a.new_value }}
+            {% elif a.kind == "attachment" %}{{ a.new_value }}{% endif %}
+            <div class="faint small">{{ a.created_at|date:"d/m/Y H:i" }}</div></div></li>
+        {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <aside>
+    <div class="card">
+      <div class="form-label">{% trans "Status" %}</div>
+      <div class="row" style="margin-bottom:0.8rem">{% status_pill issue.status issue.get_status_display %}</div>
+      {% if caps.edit_issues %}
+      <div class="row">
+        {% for t in transitions %}
+          <form method="post" action="{% url 'issues:transition' project.key issue.number %}">{% csrf_token %}<input type="hidden" name="status" value="{{ t.value }}"><button class="btn btn-sm {% if t.value == 'done' or t.value == 'in_review' or t.value == 'in_progress' and issue.status == 'todo' %}btn-primary{% endif %}">→ {{ t.label }}</button></form>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    <div class="card">
+      <dl class="kv">
+        <dt>{% trans "Assignee" %}</dt><dd>{% if caps.edit_issues %}<select class="inline" data-field="assignee" data-url="{% url 'issues:inline' project.key issue.number %}" aria-label="{% trans 'Assignee' %}" style="width:auto;max-width:100%"><option value="none" {% if not issue.assignee %}selected{% endif %}>{% trans "Unassigned" %}</option>{% for m in members %}<option value="{{ m.pk }}" {% if m.pk == issue.assignee_id %}selected{% endif %}>{{ m.display_name }}</option>{% endfor %}</select>{% elif issue.assignee %}<span class="user-inline">{% avatar issue.assignee %} {{ issue.assignee.display_name }}</span>{% else %}<span class="faint">{% trans "Unassigned" %}</span>{% endif %}</dd>
+        <dt>{% trans "Reporter" %}</dt><dd>{% if issue.reporter %}<span class="user-inline">{% avatar issue.reporter %} {{ issue.reporter.display_name }}</span>{% endif %}</dd>
+        <dt>{% trans "Type" %}</dt><dd>{{ issue.issue_type|type_icon }} {{ issue.get_issue_type_display }}</dd>
+        <dt>{% trans "Priority" %}</dt><dd>{{ issue.priority|priority_icon }} {{ issue.get_priority_display }}</dd>
+        {% if issue.issue_type != "epic" and issue.issue_type != "test" %}<dt>{% trans "Story points" %}</dt><dd>{% if issue.story_points is not None %}<span class="points">{{ issue.story_points }}</span>{% else %}—{% endif %}</dd>{% endif %}
+        <dt>{% trans "Sprint" %}</dt><dd>{% if issue.sprint %}{{ issue.sprint.name }} <span class="pill sprint-{{ issue.sprint.state }}">{{ issue.sprint.get_state_display }}</span>{% else %}<span class="faint">{% trans "Backlog" %}</span>{% endif %}</dd>
+        {% if issue.epic %}<dt>{% trans "Epic" %}</dt><dd><a href="{{ issue.epic.get_absolute_url }}">{{ issue.epic.key }} {{ issue.epic.title|truncatechars:30 }}</a></dd>{% endif %}
+        {% if issue.parent %}<dt>{% trans "Parent" %}</dt><dd><a href="{{ issue.parent.get_absolute_url }}">{{ issue.parent.key }}</a></dd>{% endif %}
+        <dt>{% trans "Labels" %}</dt><dd>{% for l in issue.labels.all %}<span class="label-chip" style="--c:{{ l.color }}">{{ l.name }}</span> {% empty %}—{% endfor %}</dd>
+        <dt>{% trans "Components" %}</dt><dd>{% for c in issue.components.all %}{{ c.name }}{% if not forloop.last %}, {% endif %}{% empty %}—{% endfor %}</dd>
+        <dt>{% trans "Fix versions" %}</dt><dd>{% for v in issue.fix_versions.all %}{{ v.name }}{% if not forloop.last %}, {% endif %}{% empty %}—{% endfor %}</dd>
+        {% if issue.due_date %}<dt>{% trans "Due date" %}</dt><dd>{{ issue.due_date|date:"d/m/Y" }}</dd>{% endif %}
+        {% for defn, value in custom_values %}<dt>{{ defn.name }}</dt><dd>{{ value }}</dd>{% endfor %}
+      </dl>
+    </div>
+    <div class="card small muted">
+      <div>{% trans "Created" %}: {{ issue.created_at|date:"d/m/Y H:i" }}</div>
+      <div>{% trans "Updated" %}: {{ issue.updated_at|date:"d/m/Y H:i" }}</div>
+      {% if issue.resolved_at %}<div>{% trans "Resolved" %}: {{ issue.resolved_at|date:"d/m/Y H:i" }}</div>{% endif %}
+      <div style="margin-top:0.5rem">{% trans "Watchers" %}: {% for w in watchers %}{% avatar w %}{% endfor %}</div>
+    </div>
+  </aside>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+  document.querySelectorAll("[data-tab-target]").forEach((tab) => {
+    tab.addEventListener("click", (e) => {
+      e.preventDefault();
+      document.querySelectorAll("[data-tab-target]").forEach((t) => {
+        t.classList.toggle("active", t === tab);
+        document.getElementById(t.dataset.tabTarget).classList.toggle("hidden", t !== tab);
+      });
+    });
+  });
+  document.querySelectorAll('select.inline').forEach(function (sel) {
+    sel.addEventListener('change', async function () {
+      const token = document.querySelector('input[name=csrfmiddlewaretoken]').value;
+      const body = new URLSearchParams({field: sel.dataset.field, value: sel.value, csrfmiddlewaretoken: token});
+      const response = await fetch(sel.dataset.url, {method: 'POST', body: body, credentials: 'same-origin'});
+      if (!response.ok) {
+        const data = await response.json().catch(function () { return {}; });
+        Mpira.toast(data.error || '{% trans "The change was refused." %}', 'error');
+        location.reload();
+      }
+    });
+  });
+</script>
+{% endblock %}

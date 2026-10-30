@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n mpira %}
+{% block title %}{% trans "Projects" %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>{% trans "Projects" %}</h1>
+  {% if can_create %}<a class="btn btn-primary" href="{% url 'projects:create' %}">+ {% trans "New project" %}</a>{% endif %}
+</div>
+<div class="grid grid-3">
+{% for p in projects %}
+  <a class="card" href="{% url 'projects:detail' p.key %}" style="color:inherit;text-decoration:none;display:block">
+    <div class="row" style="margin-bottom:0.6rem"><span class="project-avatar">{{ p.key|slice:":3" }}</span><div><strong>{{ p.name }}</strong><div class="muted small">{{ p.key }}</div></div></div>
+    <p class="muted small" style="min-height:2.5em">{{ p.description|truncatechars:120|default:"—" }}</p>
+    <div class="row muted small"><span>{% blocktrans count n=p.open_count %}{{ n }} open issue{% plural %}{{ n }} open issues{% endblocktrans %}</span><span>·</span><span>{% blocktrans count n=p.member_count %}{{ n }} member{% plural %}{{ n }} members{% endblocktrans %}</span>{% if p.lead %}<span>·</span><span class="user-inline">{% avatar p.lead %}</span>{% endif %}</div>
+  </a>
+{% empty %}
+  <div class="card empty" style="grid-column:1/-1"><div class="big">📁</div>{% trans "No projects yet." %}{% if can_create %} <a href="{% url 'projects:create' %}">{% trans "Create the first one" %}</a>{% endif %}</div>
+{% endfor %}
+</div>
+{% endblock %}

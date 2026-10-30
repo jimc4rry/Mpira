@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load i18n static mpira %}
+{% block title %}{% trans "Board" %} · {{ project.key }}{% endblock %}
+{% block content %}
+<style>.swimlane-title { margin: 1.2rem 0 0.4rem; font-size: 0.95rem; }</style>
+<div class="page-head">
+  <div>
+    <h1>{% if scope == "sprint" and active_sprint %}{{ active_sprint.name }}{% else %}{% trans "Kanban board" %}{% endif %}</h1>
+    {% if scope == "sprint" and active_sprint %}
+      <div class="muted">{{ active_sprint.start_date|date:"d/m" }} – {{ active_sprint.end_date|date:"d/m/Y" }}{% if active_sprint.goal %} · {{ active_sprint.goal }}{% endif %}</div>
+    {% else %}
+      <div class="muted">{% trans "All open issues, plus anything finished in the last 14 days." %}</div>
+    {% endif %}
+  </div>
+  <div class="row">
+    {% if active_sprint %}
+      <a class="btn btn-sm {% if scope == 'sprint' %}btn-primary{% endif %}" href="?scope=sprint">{% trans "Active sprint" %}</a>
+      <a class="btn btn-sm {% if scope == 'all' %}btn-primary{% endif %}" href="?scope=all">{% trans "All issues" %}</a>
+    {% endif %}
+    {% if active_sprint and caps.manage_sprints %}<button class="btn btn-sm" data-open-dialog="complete-dialog">{% trans "Complete sprint" %}</button>{% endif %}
+    {% if can_configure %}<a class="btn btn-sm" href="{% url 'agile:board_settings' project.key %}" title="{% trans 'Reorder, add or remove columns' %}">⚙ {% trans "Columns" %}</a>{% endif %}
+    {% if caps.edit_issues %}<a class="btn btn-sm" href="{% url 'issues:create' project.key %}{% if scope == 'sprint' and active_sprint %}?sprint={{ active_sprint.pk }}{% endif %}">+ {% trans "Create" %}</a>{% endif %}
+  </div>
+</div>
+
+<div class="filters">
+  <input id="board-filter-q" type="search" placeholder="{% trans 'Filter cards…' %}">
+  <select id="board-filter-assignee"><option value="">{% trans "Everyone" %}</option><option value="none">{% trans "Unassigned" %}</option>{% for m in members %}<option value="{{ m.pk }}">{{ m.display_name }}</option>{% endfor %}</select>
+  <select id="board-filter-type"><option value="">{% trans "All types" %}</option><option value="story">{% trans "Story" %}</option><option value="task">{% trans "Task" %}</option><option value="bug">{% trans "Bug" %}</option><option value="subtask">{% trans "Sub-task" %}</option><option value="test">{% trans "Test" %}</option></select>
+  <select id="board-swimlanes" onchange="const p = new URLSearchParams(location.search); this.value ? p.set('swimlane', this.value) : p.delete('swimlane'); location.search = p.toString();">
+    <option value="" {% if not swimlane %}selected{% endif %}>{% trans "No swimlanes" %}</option>
+    <option value="epic" {% if swimlane == "epic" %}selected{% endif %}>{% trans "Swimlanes by epic" %}</option>
+    <option value="assignee" {% if swimlane == "assignee" %}selected{% endif %}>{% trans "Swimlanes by assignee" %}</option>
+  </select>
+  {% if caps.edit_issues %}<span class="muted small drag-hint">{% trans "Drag cards between columns. Only allowed workflow transitions accept a drop." %}</span>{% endif %}
+</div>
+
+{{ transitions|json_script:"board-transitions" }}
+{% for lane in lanes %}
+{% if lane.name %}<h3 class="swimlane-title">{{ lane.name }}</h3>{% endif %}
+<div class="board" data-board data-can-edit="{% if caps.edit_issues %}1{% else %}0{% endif %}" data-move-url="{% url 'api:issue_move' project.key 0 %}">
+  {% for col in lane.columns %}
+  <section class="board-col">
+    <div class="board-col-head"><span>{{ col.label }} <span class="muted" data-count>{{ col.issues|length }}</span></span><span class="points" title="{% trans 'Story points' %}" data-points>{{ col.points }}</span></div>
+    <div class="board-col-body" data-status="{{ col.status }}" data-column="{{ col.pk }}">
+      {% for issue in col.issues %}
+        <article class="card-issue" data-number="{{ issue.number }}" data-status="{{ issue.status }}" data-priority="{{ issue.priority }}" data-points="{{ issue.story_points|default:0 }}" data-assignee="{{ issue.assignee_id|default:'' }}" data-type="{{ issue.issue_type }}" data-search="{{ issue.key|lower }} {{ issue.title|lower }}">
+          {% if issue.epic %}<span class="epic-tag" title="{{ issue.epic.title }}">{{ issue.epic.title }}</span>{% endif %}
+          <a class="title {% if issue.is_done %}is-done-text{% endif %}" href="{{ issue.get_absolute_url }}" draggable="false">{{ issue.title }}</a>
+          {% if issue.labels.all %}<div style="margin-bottom:0.35rem">{% for l in issue.labels.all %}<span class="label-chip" style="--c:{{ l.color }}">{{ l.name }}</span> {% endfor %}</div>{% endif %}
+          <div class="meta">
+            <span class="meta-left">{% type_badge issue %}<span title="{{ issue.get_priority_display }}">{{ issue.priority|priority_icon }}</span><a class="issue-key small" href="{{ issue.get_absolute_url }}" draggable="false">{{ issue.key }}</a></span>
+            <span class="row" style="gap:0.3rem">{% if issue.story_points is not None %}<span class="points">{{ issue.story_points }}</span>{% endif %}{% if caps.edit_issues %}<select class="card-assignee" draggable="false" data-field="assignee" data-url="{% url 'issues:inline' project.key issue.number %}" aria-label="{% trans 'Assignee' %}"><option value="none" {% if not issue.assignee_id %}selected{% endif %}>{% trans "Unassigned" %}</option>{% for m in members %}<option value="{{ m.pk }}" {% if issue.assignee_id == m.pk %}selected{% endif %}>{{ m.display_name }}</option>{% endfor %}</select>{% else %}{% avatar issue.assignee %}{% endif %}</span>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </section>
+  {% endfor %}
+</div>
+{% endfor %}
+
+{% if active_sprint and caps.manage_sprints %}
+<dialog id="complete-dialog">
+  <form method="post" action="{% url 'agile:sprint_complete' project.key active_sprint.pk %}">{% csrf_token %}
+    <h2>{% blocktrans with name=active_sprint.name %}Complete {{ name }}{% endblocktrans %}</h2>
+    <p class="muted">{% trans "Done issues stay in the sprint. Incomplete issues move to:" %}</p>
+    <select name="move_to">
+      <option value="">{% trans "Backlog" %}</option>
+      {% for s in project.sprints.all %}{% if s.state == "future" %}<option value="{{ s.pk }}">{{ s.name }}</option>{% endif %}{% endfor %}
+    </select>
+    <div class="form-actions"><button class="btn btn-primary">{% trans "Complete sprint" %}</button><button type="button" class="btn btn-ghost" data-close-dialog>{% trans "Cancel" %}</button></div>
+  </form>
+</dialog>
+{% endif %}
+{% endblock %}
+{% block scripts %}<script src="{% static 'js/board.js' %}"></script>{% endblock %}

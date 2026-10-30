@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Guide" %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1>{% trans "Guide" %}</h1>
+    <div class="muted">{% trans "How to work with tickets, boards, imports, API keys and AI assistants in Mpira." %}</div>
+  </div>
+</div>
+
+<nav class="card" style="margin-bottom:1rem">
+  <strong>{% trans "On this page" %}</strong>
+  <ol style="margin:0.4rem 0 0;padding-left:1.2rem;columns:2">
+    <li><a href="#tickets">{% trans "Tickets" %}</a></li>
+    <li><a href="#import">{% trans "Import tickets from a file" %}</a></li>
+    <li><a href="#board">{% trans "Board and columns" %}</a></li>
+    <li><a href="#workflow">{% trans "Statuses and workflow" %}</a></li>
+    <li><a href="#api-keys">{% trans "API keys" %}</a></li>
+    <li><a href="#claude">{% trans "Connect Claude" %}</a></li>
+    <li><a href="#api">{% trans "Using the API directly" %}</a></li>
+    <li><a href="#access">{% trans "Roles and access" %}</a></li>
+  </ol>
+</nav>
+
+<section class="card" id="tickets">
+  <h2>{% trans "Tickets" %}</h2>
+  <ul>
+    <li>{% trans "Every ticket has a key made of the project key and a number, for example MPR-12." %}</li>
+    <li>{% trans "Create a ticket from a project's Issues page with + Create issue. Choose its type: epic, story, task, bug, sub-task or test." %}</li>
+    <li>{% trans "Assign it to a project member, set a priority, story points and a due date, and link it to an epic or a parent." %}</li>
+    <li>{% trans "Comments support Markdown. Type @handle to mention a teammate; they get a notification." %}</li>
+    <li>{% trans "Use the search box at the top (or press /) to find a ticket by text or jump straight to a key such as MPR-12." %}</li>
+  </ul>
+</section>
+
+<section class="card" id="import">
+  <h2>{% trans "Import tickets from a file" %}</h2>
+  <p>{% trans "You can create many tickets at once from Excel, CSV or JSON." %}</p>
+  <ol>
+    <li>{% trans "Open the project and go to Issues → Import CSV." %}</li>
+    <li>{% trans "Download the template in the format you like: Excel (.xlsx), CSV or JSON. The template has the right columns and example rows." %}</li>
+    <li>{% trans "Delete the example rows and fill in one ticket per row." %}</li>
+    <li>{% trans "Upload the file. If any row has a problem, nothing is imported and every problem is listed with its line number. Fix them and upload again." %}</li>
+  </ol>
+  <h3>{% trans "Columns" %}</h3>
+  <ul>
+    <li><code>issue_type</code>, <code>title</code> {% trans "(required)" %}</li>
+    <li><code>description</code>, <code>priority</code> (highest, high, medium, low, lowest), <code>assignee</code> ({% trans "email or handle of a member" %})</li>
+    <li><code>epic</code>, <code>parent</code> ({% trans "issue keys, e.g. MPR-1" %}), <code>sprint</code> ({% trans "name of an open sprint" %})</li>
+    <li><code>story_points</code>, <code>due_date</code> (YYYY-MM-DD)</li>
+    <li><code>labels</code>, <code>components</code>, <code>fix_versions</code> ({% trans "names separated by ;" %})</li>
+    <li><code>cf_&lt;key&gt;</code> ({% trans "a custom field of the project" %})</li>
+  </ul>
+  <p class="muted small">{% trans "Limits: 500 rows and 1 MB per file. Every new ticket starts in the project's starting status." %}</p>
+</section>
+
+<section class="card" id="board">
+  <h2>{% trans "Board and columns" %}</h2>
+  <ul>
+    <li>{% trans "The Board shows the tickets of the active sprint, or all open tickets with ‘All issues’. Drag a card to another column to move it." %}</li>
+    <li>{% trans "Drag and drop only accepts moves the workflow allows. A card dropped on a column moves to that column's first status." %}</li>
+    <li>{% trans "Project managers and admins can change the columns with ⚙ Columns: move a column up or down, rename it, add or delete columns." %}</li>
+    <li>{% trans "Every status belongs to exactly one column. When you delete a column, choose where its statuses go." %}</li>
+  </ul>
+</section>
+
+<section class="card" id="workflow">
+  <h2>{% trans "Statuses and workflow" %}</h2>
+  <p>{% trans "Project managers and admins can change the statuses of a project from ⚙ Columns → Add or change statuses & workflow." %}</p>
+  <ul>
+    <li><strong>{% trans "Add status:" %}</strong> {% trans "give it a name, pick the board column it goes to, and tick ‘Counts as done’ if finished tickets should be marked as done." %}</li>
+    <li><strong>{% trans "Start:" %}</strong> {% trans "the status new tickets begin in. Exactly one status is the start status." %}</li>
+    <li><strong>{% trans "Counts as done:" %}</strong> {% trans "tickets in these statuses are resolved, leave the open lists, and count as completed in sprints and epics." %}</li>
+    <li><strong>{% trans "Transitions table:" %}</strong> {% trans "a checked box means a ticket may move from the row status to the column status. Every status needs at least one exit." %}</li>
+    <li><strong>{% trans "Delete status:" %}</strong> {% trans "its tickets move to the status you choose. The start status can't be deleted." %}</li>
+  </ul>
+</section>
+
+<section class="card" id="api-keys">
+  <h2>{% trans "API keys" %}</h2>
+  <ol>
+    <li>{% trans "Open your profile (your name at the top right) and go to API keys." %}</li>
+    <li>{% trans "Enter a name, for example Claude, and optionally tick Read only or set an expiry in days. Click Create key." %}</li>
+    <li>{% trans "Copy the key right away. It starts with mpk_ and is shown only once. Mpira keeps only a fingerprint of it." %}</li>
+    <li>{% trans "To stop a key from working, click Revoke next to it. Anything using the key stops working immediately." %}</li>
+  </ol>
+  <p class="muted small">{% trans "A key has the same project access you have. Use a read-only key whenever writing isn't needed." %}</p>
+</section>
+
+<section class="card" id="claude">
+  <h2>{% trans "Connect Claude" %}</h2>
+  <p>{% trans "The Mpira MCP server lets Claude read and write tickets for you. It needs Python 3.10 or newer and your API key." %}</p>
+  <h3>{% trans "1. Get the server" %}</h3>
+  <p>{% trans "The server is in the tools/mpira-mcp folder of the project. In that folder run:" %}</p>
+  <pre class="mono small">pip install -r requirements.txt</pre>
+
+  <h3>{% trans "2a. Claude Code" %}</h3>
+  <pre class="mono small">claude mcp add mpira \
+  -e MPIRA_URL={{ base_url }} \
+  -e MPIRA_API_KEY=mpk_your_key_here \
+  -- python "C:/path/to/tools/mpira-mcp/server.py"</pre>
+
+  <h3>{% trans "2b. Claude Desktop" %}</h3>
+  <p>{% trans "Open Settings → Developer → Edit config and add this to claude_desktop_config.json, then restart Claude:" %}</p>
+  <pre class="mono small">{
+  "mcpServers": {
+    "mpira": {
+      "command": "python",
+      "args": ["C:/path/to/tools/mpira-mcp/server.py"],
+      "env": {
+        "MPIRA_URL": "{{ base_url }}",
+        "MPIRA_API_KEY": "mpk_your_key_here"
+      }
+    }
+  }
+}</pre>
+
+  <h3>{% trans "3. Ask Claude" %}</h3>
+  <ul>
+    <li>{% trans "“What are my open tickets?”" %}</li>
+    <li>{% trans "“Create a high priority bug in MPR: the checkout total is off by one cent, assign it to nikos.”" %}</li>
+    <li>{% trans "“Move MPR-14 to in progress and comment that I've started.”" %}</li>
+  </ul>
+  <p class="muted small">{% trans "The key is stored in your own Claude settings file. Don't share that file, and revoke the key if it leaks." %}</p>
+</section>
+
+<section class="card" id="api">
+  <h2>{% trans "Using the API directly" %}</h2>
+  <p>{% trans "Send the key in the Authorization header. The base address is:" %} <code>{{ api_base }}</code></p>
+  <pre class="mono small">curl -H "Authorization: Bearer mpk_your_key_here" {{ api_base }}issues/?assignee=me&amp;open=true
+curl -X POST -H "Authorization: Bearer mpk_your_key_here" -H "Content-Type: application/json" \
+     -d '{"title":"New bug","issue_type":"bug"}' {{ api_base }}projects/MPR/issues/
+curl -X POST -H "Authorization: Bearer mpk_your_key_here" -H "Content-Type: application/json" \
+     -d '{"status":"in_progress"}' {{ api_base }}projects/MPR/issues/14/transition/</pre>
+  <p class="muted small">{% trans "Errors always look like {error: {code, message, details}}. A wrong or revoked key returns 401, and a read-only key that tries to write returns 403." %}</p>
+</section>
+
+<section class="card" id="access">
+  <h2>{% trans "Roles and access" %}</h2>
+  <ul>
+    <li><strong>{% trans "Admin:" %}</strong> {% trans "manages users and can see every project." %}</li>
+    <li><strong>{% trans "Project manager:" %}</strong> {% trans "manages sprints, columns, statuses, project settings and members." %}</li>
+    <li><strong>{% trans "Developer:" %}</strong> {% trans "creates and updates tickets, moves them and comments." %}</li>
+    <li><strong>{% trans "Tester:" %}</strong> {% trans "also manages test plans and executions." %}</li>
+    <li><strong>{% trans "Viewer:" %}</strong> {% trans "can see the project but not change it." %}</li>
+  </ul>
+  <p class="muted small">{% trans "You only see projects you are a member of. Projects you can't see don't appear in lists or search." %}</p>
+</section>
+{% endblock %}

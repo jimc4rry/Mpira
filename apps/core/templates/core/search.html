@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load i18n mpira %}
+{% block title %}{% trans "Search" %}{% endblock %}
+{% block content %}
+<div class="page-head"><h1>{% trans "Search" %}{% if q %}: “{{ q }}”{% endif %}</h1></div>
+<form method="get" class="filters"><input type="search" name="q" value="{{ q }}" class="grow" autofocus><button class="btn btn-primary">{% trans "Search" %}</button></form>
+{% if q %}
+<div class="card flush">
+  <div class="card-head"><h2>{% trans "Issues" %}</h2></div>
+  {% with issues=issues %}{% include "_issue_table.html" %}{% endwith %}
+</div>
+<div class="card">
+  <h2>{% trans "Wiki pages" %}</h2>
+  <ul class="list-plain">
+  {% for p in pages %}
+    <li><a href="{{ p.get_absolute_url }}">📄 {{ p.title }}</a> <span class="muted small">· {{ p.space.project.key }} · {% trans "updated" %} {{ p.updated_at|date:"d/m/Y" }}</span></li>
+  {% empty %}
+    <li class="muted">{% trans "No pages found." %}</li>
+  {% endfor %}
+  </ul>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,33 @@
+{% load i18n %}
+<div class="split">
+  <div class="card flush">
+    <div class="table-wrap"><table class="data-table">
+      <thead><tr><th>{% trans "Name" %}</th><th>{% trans "Details" %}</th><th></th></tr></thead>
+      <tbody>
+      {% for item in items %}
+        <tr>
+          <td>{% if kind == "label" %}<span class="label-chip" style="--c:{{ item.color }}">{{ item.name }}</span>{% else %}<strong>{{ item.name }}</strong>{% endif %}</td>
+          <td class="muted small">
+            {% if kind == "version" %}{{ item.get_status_display }}{% if item.release_date %} · {{ item.release_date|date:"d/m/Y" }}{% endif %}
+            {% elif kind == "customfield" %}<code>{{ item.key }}</code> · {{ item.get_field_type_display }} · {% if item.issue_type %}{{ item.get_issue_type_display }}{% else %}{% trans "All types" %}{% endif %}{% if item.required %} · {% trans "required" %}{% endif %}{% if item.options %} · {{ item.options }}{% endif %}
+            {% else %}{{ item.description }}{% endif %}
+          </td>
+          <td class="right nowrap">
+            <a class="btn btn-sm" href="{% url 'projects:settings_item' project.key kind item.pk %}">{% trans "Edit" %}</a>
+            <form method="post" action="{% url 'projects:settings_item' project.key kind item.pk %}" class="inline-form" data-confirm="{% trans 'Delete this item?' %}">{% csrf_token %}<input type="hidden" name="delete" value="1"><button class="btn btn-sm btn-danger">{% trans "Delete" %}</button></form>
+          </td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="3" class="empty">{% trans "Nothing here yet." %}</td></tr>
+      {% endfor %}
+      </tbody>
+    </table></div>
+  </div>
+  <div class="card">
+    <h3>{% trans "Add" %}</h3>
+    <form method="post" action="{% url 'projects:settings_item_new' project.key kind %}" novalidate>{% csrf_token %}
+      {% include "_form.html" %}
+      <button class="btn btn-primary">{% trans "Add" %}</button>
+    </form>
+  </div>
+</div>

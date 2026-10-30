@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Test steps" %} · {{ test.key }}{% endblock %}
+{% block content %}
+<div class="breadcrumbs"><a href="{{ test.get_absolute_url }}">{{ test.key }}</a></div>
+<div class="page-head"><h1>🧪 {% trans "Test steps" %}: {{ test.title }}</h1></div>
+<form method="post" novalidate>{% csrf_token %}
+  {{ formset.management_form }}
+  {% if formset.non_form_errors %}<ul class="messages"><li class="error">{{ formset.non_form_errors|join:" " }}</li></ul>{% endif %}
+  <div class="card flush">
+    <div class="table-wrap"><table class="data-table steps-table">
+      <thead><tr><th>#</th><th>{% trans "Action" %} *</th><th>{% trans "Test data" %}</th><th>{% trans "Expected result" %}</th><th>{% trans "Delete" %}</th></tr></thead>
+      <tbody>
+      {% for f in formset %}
+        <tr>
+          <td class="muted">{{ f.id }}{% if f.instance.pk %}{{ forloop.counter }}{% else %}+{% endif %}</td>
+          <td>{{ f.action }}{% if f.action.errors %}<div class="errors">{{ f.action.errors|join:" " }}</div>{% endif %}</td>
+          <td>{{ f.data }}</td>
+          <td>{{ f.expected_result }}</td>
+          <td>{% if f.instance.pk %}{{ f.DELETE }}{% endif %}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table></div>
+  </div>
+  <p class="muted small">{% trans "Empty rows are ignored. Save to get two more blank rows." %}</p>
+  <div class="form-actions"><button class="btn btn-primary">{% trans "Save steps" %}</button><a class="btn btn-ghost" href="{{ test.get_absolute_url }}">{% trans "Cancel" %}</a></div>
+</form>
+{% endblock %}

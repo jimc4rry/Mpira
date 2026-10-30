@@ -1,0 +1,24 @@
+{% load i18n %}<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ code }} · Mpira</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #f4f6fb; color: #172033; display: grid; place-items: center; min-height: 100vh; margin: 0; padding: 1rem; }
+    @media (prefers-color-scheme: dark) { body { background: #0d111a; color: #e8ecf5; } }
+    .box { text-align: center; max-width: 420px; }
+    .code { font-size: 4rem; font-weight: 800; background: linear-gradient(135deg, #2f6bff, #7a5cff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    a { color: #2f6bff; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class="code">{{ code }}</div>
+    {% if code == 404 %}<p>{% trans "This page doesn't exist, or you don't have access to it." %}</p>
+    {% elif code == 403 %}<p>{% trans "Your role doesn't allow this action." %}</p>
+    {% else %}<p>{% trans "Something went wrong on our side. Please try again." %}</p>{% endif %}
+    <p><a href="/">{% trans "Back to the dashboard" %}</a></p>
+  </div>
+</body>
+</html>

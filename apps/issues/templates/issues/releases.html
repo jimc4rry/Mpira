@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Releases" %} · {{ project.key }}{% endblock %}
+{% block content %}
+<div class="page-head"><h1>{% trans "Releases" %}</h1></div>
+<div class="card flush">
+  {% if rows %}
+  <table class="table">
+    <thead><tr><th>{% trans "Version" %}</th><th>{% trans "Release date" %}</th><th>{% trans "Status" %}</th><th>{% trans "Progress" %}</th><th></th></tr></thead>
+    <tbody>
+    {% for row in rows %}
+      <tr>
+        <td>{{ row.version.name }}</td>
+        <td>{{ row.version.release_date|default:"—" }}</td>
+        <td>{{ row.version.get_status_display }}</td>
+        <td>
+          <div style="background:#eee;border-radius:4px;width:160px;height:10px;display:inline-block;vertical-align:middle">
+            <div style="background:#2563eb;width:{{ row.percent }}%;height:10px;border-radius:4px"></div>
+          </div>
+          <span class="small">{% if row.total %}{{ row.done }}/{{ row.total }} ({{ row.percent }}%){% else %}—{% endif %}</span>
+        </td>
+        <td><a class="btn btn-sm" href="{% url 'issues:release_notes' project.key row.version.pk %}">{% trans "Release notes" %}</a>
+            <a class="btn btn-sm btn-ghost" href="{% url 'issues:release_notes' project.key row.version.pk %}?download=1">⭳ .md</a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="empty">{% trans "No versions yet. Add them in the project settings." %}</p>
+  {% endif %}
+</div>
+{% endblock %}

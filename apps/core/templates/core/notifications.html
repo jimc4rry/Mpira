@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Notifications" %}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>{% trans "Notifications" %}</h1>
+  <form method="post" action="{% url 'core:notifications_mark_all' %}">{% csrf_token %}<button class="btn">{% trans "Mark all as read" %}</button></form>
+</div>
+<div class="card">{% include "core/_notification_list.html" %}</div>
+{% endblock %}

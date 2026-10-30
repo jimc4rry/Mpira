@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Board columns" %} · {{ project.key }}{% endblock %}
+{% block content %}
+<div class="breadcrumbs"><a href="{% url 'agile:board' project.key %}">{% trans "Board" %}</a></div>
+<div class="page-head">
+  <div>
+    <h1>{% trans "Board columns" %}</h1>
+    <a class="small" href="{% url 'issues:workflow' project.key %}">{% trans "Add or change statuses & workflow →" %}</a>
+    <div class="muted">{% trans "Reorder, add, rename or remove the columns of the Kanban board. Each workflow status must sit in exactly one column." %}</div>
+  </div>
+</div>
+
+<div class="grid grid-2">
+  <div class="card flush">
+    <div class="card-head"><h2>{% trans "Columns" %}</h2></div>
+    <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th>{% trans "Order" %}</th><th>{% trans "Name" %}</th><th>{% trans "Statuses" %}</th><th>{% trans "Actions" %}</th></tr></thead>
+      <tbody>
+      {% for col in columns %}
+        <tr>
+          <td class="nowrap">
+            <form method="post" class="inline-form">{% csrf_token %}
+              <input type="hidden" name="action" value="move"><input type="hidden" name="column" value="{{ col.pk }}">
+              <button name="direction" value="up" class="btn btn-sm btn-ghost" {% if forloop.first %}disabled{% endif %} title="{% trans 'Move up' %}">▲</button>
+              <button name="direction" value="down" class="btn btn-sm btn-ghost" {% if forloop.last %}disabled{% endif %} title="{% trans 'Move down' %}">▼</button>
+            </form>
+          </td>
+          <td>
+            <form method="post" class="row">{% csrf_token %}
+              <input type="hidden" name="action" value="rename"><input type="hidden" name="column" value="{{ col.pk }}">
+              <input type="text" name="name" value="{{ col.name }}" maxlength="60" style="width:180px">
+              <button class="btn btn-sm">{% trans "Save" %}</button>
+            </form>
+          </td>
+          <td class="small">
+            {% for s, label in col.status_pairs %}<span class="pill status-{{ s }}">{{ label }}</span> {% empty %}<span class="faint">{% trans "No statuses - cards can't be dropped here" %}</span>{% endfor %}
+          </td>
+          <td class="right nowrap">
+            <form method="post" class="inline-form" data-confirm="{% trans 'Delete this column? Its statuses move to the column you choose.' %}">{% csrf_token %}
+              <input type="hidden" name="action" value="delete"><input type="hidden" name="column" value="{{ col.pk }}">
+              {% if columns|length > 1 %}
+                {% if col.statuses %}
+                <select name="move_to" required style="width:auto">
+                  <option value="">{% trans "Move statuses to…" %}</option>
+                  {% for other in columns %}{% if other.pk != col.pk %}<option value="{{ other.pk }}">{{ other.name }}</option>{% endif %}{% endfor %}
+                </select>
+                {% endif %}
+                <button class="btn btn-sm btn-danger">{% trans "Delete" %}</button>
+              {% endif %}
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div>
+    <div class="card">
+      <h2>{% trans "Add column" %}</h2>
+      <form method="post" class="row">{% csrf_token %}
+        <input type="hidden" name="action" value="add">
+        <input type="text" name="name" maxlength="60" placeholder="{% trans 'Column name' %}" required>
+        <button class="btn btn-primary">{% trans "Add" %}</button>
+      </form>
+      <p class="muted small" style="margin-top:0.6rem">{% trans "A new column starts empty. Assign statuses to it below." %}</p>
+    </div>
+
+    <div class="card">
+      <h2>{% trans "Statuses" %}</h2>
+      <form method="post">{% csrf_token %}
+        <input type="hidden" name="action" value="assign">
+        <table class="data-table">
+          <thead><tr><th>{% trans "Status" %}</th><th>{% trans "Column" %}</th></tr></thead>
+          <tbody>
+          {% for row in status_rows %}
+            <tr>
+              <td><span class="pill status-{{ row.value }}">{{ row.label }}</span></td>
+              <td>
+                <select name="status_{{ row.value }}" required>
+                  {% for col in columns %}<option value="{{ col.pk }}" {% if row.column and row.column.pk == col.pk %}selected{% endif %}>{{ col.name }}</option>{% endfor %}
+                </select>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+        <div class="form-actions"><button class="btn btn-primary">{% trans "Save statuses" %}</button></div>
+      </form>
+      <p class="muted small" style="margin-top:0.6rem">{% trans "The workflow (which status may follow which) doesn't change here - only how statuses are grouped on the board." %}</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

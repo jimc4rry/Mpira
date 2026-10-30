@@ -1,0 +1,40 @@
+# Optional: a production-like local stack (Postgres + the real Docker image).
+#   docker compose up -d db              -> just Postgres, for DATABASE_URL in .env
+#   docker compose up --build            -> Postgres + app on http://localhost:8000
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: mpira
+      POSTGRES_USER: mpira
+      POSTGRES_PASSWORD: mpira
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mpira"]
+      interval: 3s
+      retries: 10
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://mpira:mpira@db:5432/mpira
+      SECRET_KEY: local-compose-secret-change-me
+      ALLOWED_HOSTS: localhost,127.0.0.1
+      SECURE_SSL_REDIRECT: "False"
+      MEDIA_ROOT: /data/media
+      PORT: "8000"
+    command: sh -c "sh bin/release.sh && gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 2 --access-logfile -"
+    ports:
+      - "8000:8000"
+    volumes:
+      - media:/data
+
+volumes:
+  pgdata:
+  media:

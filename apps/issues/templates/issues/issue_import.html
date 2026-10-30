@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Import issues" %} · {{ project.key }}{% endblock %}
+{% block content %}
+<div class="breadcrumbs"><a href="{% url 'issues:list' project.key %}">{% trans "Issues" %}</a></div>
+<div class="page-head">
+  <div>
+    <h1>{% trans "Import issues from CSV" %}</h1>
+    <div class="muted">{% trans "Bulk-create issues for" %} {{ project.name }}</div>
+  </div>
+  <div class="row">
+    {% for fmt, spec in formats.items %}
+      <a class="btn" href="{% url 'issues:import_template' project.key fmt %}">⭳ {% trans "Template" %} {{ spec.label }}</a>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="grid grid-2">
+  <div class="card">
+    <h2>{% trans "How it works" %}</h2>
+    <ol class="muted" style="padding-left:1.2rem">
+      <li>{% trans "Download the template in the format you like: Excel (.xlsx), CSV or JSON." %}</li>
+      <li>{% trans "Fill one issue per row. Keep the header row. Delete the 5 example rows first - they refer to sample names." %}</li>
+      <li>{% trans "Keep the file format of the template (.xlsx, .csv or .json)." %}</li>
+      <li>{% trans "Upload it here. If any row is wrong, nothing is imported and every error is listed." %}</li>
+    </ol>
+    <h3 style="margin-top:1rem">{% trans "Columns" %}</h3>
+    <table class="data-table small">
+      <thead><tr><th>{% trans "Column" %}</th><th>{% trans "Notes" %}</th></tr></thead>
+      <tbody>
+        <tr><td><code>issue_type</code></td><td>{% trans "epic, story, task, bug, subtask or test" %} · <em>{% trans "required" %}</em></td></tr>
+        <tr><td><code>title</code></td><td>{% trans "Summary, up to 255 characters" %} · <em>{% trans "required" %}</em></td></tr>
+        <tr><td><code>description</code></td><td>{% trans "Markdown is supported" %}</td></tr>
+        <tr><td><code>priority</code></td><td>highest, high, medium, low, lowest ({% trans "default medium" %})</td></tr>
+        <tr><td><code>assignee</code></td><td>{% trans "Email or handle of a project member" %}</td></tr>
+        <tr><td><code>epic</code></td><td>{% trans "Key of an epic in this project, e.g." %} <code>{{ project.key }}-1</code></td></tr>
+        <tr><td><code>parent</code></td><td>{% trans "Key of the parent issue (required for sub-tasks)" %}</td></tr>
+        <tr><td><code>sprint</code></td><td>{% trans "Name of an open sprint" %}</td></tr>
+        <tr><td><code>story_points</code></td><td>0–1000</td></tr>
+        <tr><td><code>due_date</code></td><td>YYYY-MM-DD</td></tr>
+        <tr><td><code>labels</code>, <code>components</code>, <code>fix_versions</code></td><td>{% trans "Names separated by semicolons (;)" %}</td></tr>
+        <tr><td><code>cf_&lt;key&gt;</code></td><td>{% trans "A custom field of this project, e.g. cf_environment" %}</td></tr>
+      </tbody>
+    </table>
+    <p class="muted small" style="margin-top:0.6rem">{% trans "Maximum 500 rows and 1 MB per file. Workflow status always starts as To Do." %}</p>
+  </div>
+
+  <div class="card">
+    <h2>{% trans "Upload" %}</h2>
+    <form method="post" enctype="multipart/form-data">{% csrf_token %}
+      <div class="form-field">
+        <label for="import-file">{% trans "CSV file" %}</label>
+        <input id="import-file" type="file" name="file" accept=".xlsx,.csv,.json,text/csv,application/json" required>
+      </div>
+      <div class="form-actions"><button class="btn btn-primary">{% trans "Import" %}</button></div>
+    </form>
+
+    {% if result %}
+      <h3 style="margin-top:1.4rem;color:var(--danger)">{% blocktrans count n=result.errors|length %}{{ n }} row with errors{% plural %}{{ n }} rows with errors{% endblocktrans %}</h3>
+      <div class="table-wrap">
+      <table class="data-table small">
+        <thead><tr><th>{% trans "Line" %}</th><th>{% trans "Problems" %}</th></tr></thead>
+        <tbody>
+        {% for row in result.errors %}
+          <tr><td class="nowrap">{{ row.line }}</td><td>{% for e in row.errors %}<div>{{ e }}</div>{% endfor %}</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

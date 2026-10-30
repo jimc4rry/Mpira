@@ -1,0 +1,16 @@
+{% load i18n mpira %}
+<ul class="timeline">
+{% for n in items %}
+  <li style="{% if not n.is_read %}font-weight:600{% endif %}">
+    {% avatar n.actor %}
+    <div style="min-width:0">
+      <a href="{% url 'core:notification_open' n.pk %}" style="color:inherit">
+        {{ n.actor.display_name|default:_("Someone") }} {{ n.get_kind_display }} <span style="color:var(--accent)">{{ n.target_label|truncatechars:70 }}</span>
+      </a>
+      <div class="faint small">{{ n.created_at|timesince }} {% trans "ago" %}{% if not n.is_read %} · <span style="color:var(--accent)">{% trans "new" %}</span>{% endif %}</div>
+    </div>
+  </li>
+{% empty %}
+  <li class="muted">{% trans "No notifications." %}</li>
+{% endfor %}
+</ul>
